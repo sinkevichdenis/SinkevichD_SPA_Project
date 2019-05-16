@@ -1,0 +1,97 @@
+{
+    "env": {
+        "browser": true,
+        "es6": false,
+        "jasmine": true
+    },
+    "plugins": [
+        "jasmine"
+    ],
+    "extends": "eslint:recommended",
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly",
+
+        "getNumberApples": "false",
+        "getNumWord": "false",
+        "showWordFormResult": "false",
+        "getNumberApples": "false",
+        "getNumWord": "false",
+        "showWordFormResult": "false",
+        "isPalindrome2": "false",
+        "showResult": "false",
+        "deleteSpaces": "false",
+        "isGoodString": "false",
+        "getString": "false",
+        "showProfile": "false",
+        "createProfile": "false",
+        "isRetired": "false",
+        "showAgeData": "false",
+        "showRetired": "false",
+        "showSex": "false",
+        "getAge": "false",
+        "isMan": "false",
+        "positiveSum": "false",
+        "evenOrOdd": "false",
+        "centuryFromYear": "false",
+        "getNameData": "false",
+        "arrayDiff": "false",
+        "deleteWords": "false",
+        "countVowels": "false",
+        "doDivision": "false"
+
+    },
+    "parserOptions": {
+        "sourceType": "module",
+        "allowImportExportEverywhere": true,
+        "ecmaVersion": 2017
+    },
+    "rules": {
+        "indent": [
+            "error",
+            "tab"
+        ],
+        "linebreak-style": [
+            "error",
+            "windows"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "block-spacing": [
+            "error",
+            "always"
+        ],
+        "no-trailing-spaces": [
+            "error",
+            {
+                "skipBlankLines": false
+            }
+        ],
+        "object-curly-spacing": [
+            "error",
+            "always"
+        ],
+        "camelcase": [
+            "error",
+            { "properties":"always" }
+        ],
+        "comma-spacing": [
+            "error",
+            { "before": false, "after": true }
+        ],
+        "max-len": [
+            "error",
+            { "code": 140 }
+        ],
+        "no-multi-assign": "error",
+        "no-empty-function": "error",
+        "strict": ["error", "global"],
+        "brace-style": "error"
+    }
+}
