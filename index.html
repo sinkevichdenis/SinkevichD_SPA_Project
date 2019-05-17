@@ -3,11 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <title>SPA Project</title>
+    <link rel="stylesheet" type="text/css" href="/node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" type="text/css" href="dist/styles.css">
+
+
+    <script src="node_modules/jquery/dist/jquery.js"></script>
+    <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+
 
 </head>
 <body>
+<div class="container">
+    <div class="header">
+        <nav class="navbar">
+            <div class="navbar-logo">
+                <a class="navbar-brand" href="#">
+                    <img  src="./src/assets/logo.png">
+                </a>
+                <form class="navbar-search form-inline">
+                    <input class="form-control mr-sm-2" type="search"
+                           placeholder="Search" aria-label="Search">
+                </form>
+            </div>
+            <div class="navbar-buttons">
+               <button type="button" class="btn btn-success">+ Подать объявление</button>
+               <button type="button" class="btn btn-light">Вход</button>
+            </div>
+        </nav>
+    </div>
+    <div class="body_content">
+        <div class="sidebar">
+                <div class="sidebar-accordion accordion list-group" id="accordionExample">
+                <div class="card list-group-item list-group-item-action collapsed"
+                         data-toggle="collapse" data-target="#collapse_1" aria-expanded="false">
+                    <img src="\src\assets\icons_svg\estate.svg" alt="estate"/>
+                    <h6>Недвижимость</h6>
+                    <div id="collapse_1" class="collapse">
+                        <div class="card-body">
+                            <a class="sidebar_link" href="#">Квартиры</a>
+                            <a class="sidebar_link" href="#">Дома</a>
+                            <a class="sidebar_link" href="#">Аренда</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card list-group-item list-group-item-action collapsed"
+                     data-toggle="collapse" data-target="#collapse_2" aria-expanded="false">
+                    <img src="\src\assets\icons_svg\transport.svg" alt="transport"/>
+                    <h6> Транспорт</h6>
+                    <div id="collapse_2" class="collapse">
+                        <div class="card-body">
+                            <a class="sidebar_link" href="#">Легковый автомобили</a>
+                            <a class="sidebar_link" href="#">Грузовые автомобили</a>
+                            <a class="sidebar_link" href="#">Мотоциклы</a>
+                            <a class="sidebar_link" href="#">Аренда</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card list-group-item list-group-item-action collapsed"
+                     data-toggle="collapse" data-target="#collapse_3" aria-expanded="false">
+                    <img src="\src\assets\icons_svg\technics.svg" alt="technics"/>
+                    <h6>Техника</h6>
+                    <div id="collapse_3" class="collapse">
+                        <div class="card-body">
+                            <a class="sidebar_link" href="#">Аудиотехника</a>
+                            <a class="sidebar_link" href="#">ТВ и видеотехника</a>
+                            <a class="sidebar_link" href="#">Фототехника и оптика</a>
+                            <a class="sidebar_link" href="#">Компьютеры и комплектующие</a>
+                            <a class="sidebar_link" href="#">Игры и приставки</a>
+                            <a class="sidebar_link" href="#">Телефоны</a>
+                            <a class="sidebar_link" href="#">Оргтехника</a>
+                            <a class="sidebar_link" href="#">Планшеты и электронные книги</a>
+                            <a class="sidebar_link" href="#">Бытовая техника</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar_choice">
+                sidebar_choice
+            </div>
+        </div>
+        <div class="board">
+            content
+        </div>
+        <div class="advert">
+                    advertisement
+        </div>
+    </div>
+
+</div>
 
 <script src="dist/bundle.js"></script>
+
+
 </body>
 </html>

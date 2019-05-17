@@ -1,0 +1,32 @@
+.sidebar
+  background-color: yellow
+  display: flex
+  flex-direction: column
+
+  width: 200px
+
+  &-accordion .card
+    padding: 5px
+    text-indent: 20px
+    cursor: pointer
+
+    & .card-body
+      padding: 0
+
+    & img
+      float: left
+
+    & h6
+      line-height: 30px
+
+  &_link
+    display: block
+    margin: 10px
+    line-height: 20px
+    text-decoration: none
+    text-indent: 0
+    color: black
+    cursor: pointer
+
+    &:hover
+      text-decoration: none

@@ -1,5 +1,63 @@
 body {
-  background: blue;
-  padding: 0; }
+  margin-right: auto;
+  margin-left: auto; }
+  body .container {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); }
+  body .body_content {
+    display: flex;
+    height: 100%;
+    max-width: 1900px;
+    min-width: 500px;
+    width: 100%;
+    background-color: #ffffff; }
 
-/*# sourceMappingURL=styles.css.map */
+.header {
+  background-color: white;
+  min-width: 500px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4); }
+
+.navbar {
+  display: flex;
+  justify-content: space-around; }
+  .navbar-logo {
+    display: flex; }
+  .navbar-brand img {
+    width: 250px;
+    height: 100px; }
+  .navbar-buttons button {
+    margin: 10px 0; }
+  .navbar-search .form-control {
+    width: 200px; }
+
+.sidebar {
+  background-color: yellow;
+  display: flex;
+  flex-direction: column;
+  width: 200px; }
+  .sidebar-accordion .card {
+    padding: 5px;
+    text-indent: 20px;
+    cursor: pointer; }
+    .sidebar-accordion .card .card-body {
+      padding: 0; }
+    .sidebar-accordion .card img {
+      float: left; }
+    .sidebar-accordion .card h6 {
+      line-height: 30px; }
+  .sidebar_link {
+    display: block;
+    margin: 10px;
+    line-height: 20px;
+    text-decoration: none;
+    text-indent: 0;
+    color: black;
+    cursor: pointer; }
+    .sidebar_link:hover {
+      text-decoration: none; }
+
+.content {
+  background-color: red; }
+
+.advert {
+  background-color: brown; }
