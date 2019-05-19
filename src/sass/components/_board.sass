@@ -1,0 +1,104 @@
+.board
+  padding: 0 10px
+  width: calc(100% - 400px)
+
+  @media(max-width: 1000px)
+    width: calc(100% - 200px)
+
+  &_product
+    display: flex
+    flex-direction: column
+    margin-bottom: 5px
+
+    width: 100%
+    height: 220px
+    padding: 10px 10px 0 10px
+    border: 1px solid rgba(0, 0, 0, 0.5)
+
+    @media(max-width: 768px)
+      height: 250px
+
+  &_header
+    display: flex
+    justify-content: space-around
+
+    width: 100%
+
+    @media(max-width: 768px)
+      flex-direction: column
+
+  &_image
+    box-sizing: border-box
+    width: 50%
+    height: 150px
+
+    float: left
+    margin: 5px
+
+    @media(max-width: 768px)
+      margin: 0 auto
+      height: 100px
+
+    & img
+      display: block
+      margin: 0 auto
+
+      width: auto
+      height: auto
+      max-width: 100%
+      max-height: 100%
+
+
+  &_title
+    box-sizing: border-box
+    width: 50%
+    height: 100%
+
+    text-align: center
+    overflow: hidden
+    text-overflow: ellipsis
+
+    @media(max-width: 768px)
+      width: 100%
+      height: 90px
+      max-height: 100%
+
+      & h3
+        font-size: 18px
+
+    @media(max-width: 992px)
+      & h3
+        display: inline-block
+        font-size: 22px
+        height: 100%
+
+  &_content
+    height: 100px
+
+    & p
+      font-size: 12px
+      overflow: hidden
+      text-overflow: ellipsis
+
+  &_footer
+    display: flex
+    justify-content: space-between
+    padding: 7px
+
+  &_price
+    flex-grow: 10
+
+  &_place
+    display: inline-block
+    flex-grow: 1
+
+    @media(max-width: 768px)
+      width: 100px
+      overflow: hidden
+      text-overflow: ellipsis
+
+  &_time
+    flex-grow: 1
+    text-align: right
+    @media(max-width: 768px)
+      display: none

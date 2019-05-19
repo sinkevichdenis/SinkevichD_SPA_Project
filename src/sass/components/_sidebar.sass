@@ -1,17 +1,16 @@
 .sidebar
-  background-color: yellow
   display: flex
   flex-direction: column
 
   width: 200px
 
-  &-accordion .card
+  &_accordion .card
     padding: 5px
     text-indent: 20px
     cursor: pointer
 
     & .card-body
-      padding: 0
+      padding: 5px
 
     & img
       float: left
@@ -30,3 +29,13 @@
 
     &:hover
       text-decoration: none
+
+  &_form
+    padding: 30px 0 15px 0
+
+  &_buttons
+    margin: 10px 0
+
+    & button
+      width: 100%
+      margin: 5px 0

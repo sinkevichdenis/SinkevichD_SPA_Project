@@ -1,2 +1,21 @@
 .advert
-  background-color: brown
+  width: 200px
+
+  @media (max-width: 1000px)
+    display: none
+
+  &_place
+    display: flex
+    flex-direction: column
+    text-align: center
+    justify-content: center
+
+    height: 200px
+    margin-bottom: 10px
+
+    background-color: #73dd92
+
+    box-sizing: border-box
+    border: 1px solid black
+    border-radius: 7px
+

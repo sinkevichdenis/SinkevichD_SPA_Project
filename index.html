@@ -33,7 +33,21 @@
     </div>
     <div class="body_content">
         <div class="sidebar">
-                <div class="sidebar-accordion accordion list-group" id="accordionExample">
+            <div class="sidebar_accordion accordion list-group" id="accordionExample">
+
+                <script id="sidebar_list-template" type="x-handlebars-template">​
+                    <div class="card list-group-item list-group-item-action collapsed"
+                         data-toggle="collapse" data-target="#collapse_{{id}}" aria-expanded="false">
+                        <img src="\src\assets\icons_svg\{{image}}" alt="estate"/>
+                        <h6>Недвижимость</h6>
+                        <div id="collapse_{{id}}" class="collapse">
+                            <div class="card-body">
+                                <a class="sidebar_link" href="{{id}}/{{subtitle}}">{{subtitle}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </script>
+
                 <div class="card list-group-item list-group-item-action collapsed"
                          data-toggle="collapse" data-target="#collapse_1" aria-expanded="false">
                     <img src="\src\assets\icons_svg\estate.svg" alt="estate"/>
@@ -78,22 +92,120 @@
                     </div>
                 </div>
             </div>
-
             <div class="sidebar_choice">
-                sidebar_choice
+                <form class="sidebar_form" id="sidebar_form">
+                    <div class="form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="condition" value="new-condition">
+                            Новое
+                        </label><br />
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="condition" value="used-condition">
+                            Б/у
+                        </label><br />
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="radio" name="condition" value="any-condition" checked>
+                            Любое
+                        </label><br /><br />
+
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="only-with-photo" value="only-with-photo">
+                            Только с фотографией
+                        </label><br />
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="exchange" value="exchange">
+                            Возможен обмен
+                        </label><br />
+                    </div>
+                    <div class="sidebar_buttons">
+                        <button type="button" class="btn btn-success">Показать результаты</button><br />
+                        <button type="button" class="btn btn-light">Очистить форму</button>
+                    </div>
+
+
+                </form>
             </div>
         </div>
         <div class="board">
-            content
+            <div class="board_product">
+                <div class="board_header">
+                    <div class="board_image">
+                        <img src="\src\assets\no_photo.png" alt="transport"/>
+                    </div>
+                    <div class="board_title">
+                        <h3> Тестовый продукт </h3>
+                    </div>
+                </div>
+                <div class="board_footer">
+                    <h5 class="board_price">1000 p</h5>
+                    <p class="board_place">Гродно</p>
+                    <p class="board_time">15 сентября</p>
+                </div>
+            </div>
+            <div class="board_product">
+            <div class="board_header">
+                <div class="board_image">
+                    <img src="\src\assets\test.jpg" alt="transport"/>
+                </div>
+                <div class="board_title">
+                    <h3> Тестовый продуктТестовый продуктТест </h3>
+                </div>
+            </div>
+            <div class="board_footer">
+                <h5 class="board_price">1000 p</h5>
+                <p class="board_place">ГродноГродноГродноГродно</p>
+                <p class="board_time">15 сентября</p>
+            </div>
+        </div>
+            <div class="board_product">
+                <div class="board_header">
+                    <div class="board_image">
+                        <img src="\src\assets\test.jpg" alt="transport"/>
+                    </div>
+                    <div class="board_title">
+                        <h3> Тестовый продуктТестовый продуктТест </h3>
+                    </div>
+                </div>
+                <div class="board_footer">
+                    <h5 class="board_price">1000 p</h5>
+                    <p class="board_place">ГродноГродноГродноГродно</p>
+                    <p class="board_time">15 сентября</p>
+                </div>
+            </div>
+            <div class="board_product">
+                <div class="board_header">
+                    <div class="board_image">
+                        <img src="\src\assets\test.jpg" alt="transport"/>
+                    </div>
+                    <div class="board_title">
+                        <h3> Тестовый продуктТестовый продуктТест </h3>
+                    </div>
+                </div>
+                <div class="board_footer">
+                    <h5 class="board_price">1000 p</h5>
+                    <p class="board_place">ГродноГродноГродноГродно</p>
+                    <p class="board_time">15 сентября</p>
+                </div>
+            </div>
         </div>
         <div class="advert">
-                    advertisement
+            <div class="advert_place">
+                <h4> Здесь может быть Ваша реклама</h4>
+            </div>
+            <div class="advert_place">
+                <h4> Здесь может быть Ваша реклама</h4>
+            </div>
+            <div class="advert_place">
+                <h4> Здесь может быть Ваша реклама</h4>
+            </div>
         </div>
     </div>
+
 
 </div>
 
 <script src="dist/bundle.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
 
 
 </body>
