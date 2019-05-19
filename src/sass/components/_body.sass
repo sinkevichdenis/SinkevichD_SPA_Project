@@ -6,14 +6,16 @@ body
     box-shadow: 0 0 20px rgba(0,0,0,0.7)
 
   .#{&}_content
-
     display: flex
     height: 100%
+    margin-top: 125px
+    padding-top: 10px
 
     max-width: 1900px
     min-width: 500px
     width: 100%
 
-
     background-color: #ffffff
 
+    @media(max-width: 780px)
+      margin-top: 185px

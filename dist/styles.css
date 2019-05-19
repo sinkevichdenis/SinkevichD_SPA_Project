@@ -9,10 +9,15 @@ body {
   body .body_content {
     display: flex;
     height: 100%;
+    margin-top: 125px;
+    padding-top: 10px;
     max-width: 1900px;
     min-width: 500px;
     width: 100%;
     background-color: #ffffff; }
+    @media (max-width: 780px) {
+      body .body_content {
+        margin-top: 185px; } }
 
 .header {
   background-color: white;
