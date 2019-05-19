@@ -9,7 +9,7 @@
 
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
-
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
 
 </head>
 <body>
@@ -38,59 +38,16 @@
                 <script id="sidebar_list-template" type="x-handlebars-template">​
                     <div class="card list-group-item list-group-item-action collapsed"
                          data-toggle="collapse" data-target="#collapse_{{id}}" aria-expanded="false">
-                        <img src="\src\assets\icons_svg\{{image}}" alt="estate"/>
-                        <h6>Недвижимость</h6>
+                        <img src="./src/assets/icons_svg/{{image}}" alt="{{direction}}"/>
+                        <h6>{{direction}}</h6>
                         <div id="collapse_{{id}}" class="collapse">
-                            <div class="card-body">
-                                <a class="sidebar_link" href="{{id}}/{{subtitle}}">{{subtitle}}</a>
+                            <div class="card-body" >
+
                             </div>
                         </div>
                     </div>
                 </script>
 
-                <div class="card list-group-item list-group-item-action collapsed"
-                         data-toggle="collapse" data-target="#collapse_1" aria-expanded="false">
-                    <img src="\src\assets\icons_svg\estate.svg" alt="estate"/>
-                    <h6>Недвижимость</h6>
-                    <div id="collapse_1" class="collapse">
-                        <div class="card-body">
-                            <a class="sidebar_link" href="#">Квартиры</a>
-                            <a class="sidebar_link" href="#">Дома</a>
-                            <a class="sidebar_link" href="#">Аренда</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card list-group-item list-group-item-action collapsed"
-                     data-toggle="collapse" data-target="#collapse_2" aria-expanded="false">
-                    <img src="\src\assets\icons_svg\transport.svg" alt="transport"/>
-                    <h6> Транспорт</h6>
-                    <div id="collapse_2" class="collapse">
-                        <div class="card-body">
-                            <a class="sidebar_link" href="#">Легковый автомобили</a>
-                            <a class="sidebar_link" href="#">Грузовые автомобили</a>
-                            <a class="sidebar_link" href="#">Мотоциклы</a>
-                            <a class="sidebar_link" href="#">Аренда</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card list-group-item list-group-item-action collapsed"
-                     data-toggle="collapse" data-target="#collapse_3" aria-expanded="false">
-                    <img src="\src\assets\icons_svg\technics.svg" alt="technics"/>
-                    <h6>Техника</h6>
-                    <div id="collapse_3" class="collapse">
-                        <div class="card-body">
-                            <a class="sidebar_link" href="#">Аудиотехника</a>
-                            <a class="sidebar_link" href="#">ТВ и видеотехника</a>
-                            <a class="sidebar_link" href="#">Фототехника и оптика</a>
-                            <a class="sidebar_link" href="#">Компьютеры и комплектующие</a>
-                            <a class="sidebar_link" href="#">Игры и приставки</a>
-                            <a class="sidebar_link" href="#">Телефоны</a>
-                            <a class="sidebar_link" href="#">Оргтехника</a>
-                            <a class="sidebar_link" href="#">Планшеты и электронные книги</a>
-                            <a class="sidebar_link" href="#">Бытовая техника</a>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="sidebar_choice">
                 <form class="sidebar_form" id="sidebar_form">
@@ -126,67 +83,26 @@
                 </form>
             </div>
         </div>
-        <div class="board">
-            <div class="board_product">
-                <div class="board_header">
-                    <div class="board_image">
-                        <img src="\src\assets\no_photo.png" alt="transport"/>
+        <div id="board" class="board">
+
+            <script  id="board_list-template" type="x-handlebars-template">
+                <div class="board_product" data-href="product{{id}}" >
+                    <div class="board_header">
+                        <div class="board_image">
+                            <img src="./src/assets/product_images/{{images}}" alt="{{title}}"/>
+                        </div>
+                        <div class="board_title">
+                            <h3> {{title}}</h3>
+                        </div>
                     </div>
-                    <div class="board_title">
-                        <h3> Тестовый продукт </h3>
-                    </div>
-                </div>
-                <div class="board_footer">
-                    <h5 class="board_price">1000 p</h5>
-                    <p class="board_place">Гродно</p>
-                    <p class="board_time">15 сентября</p>
-                </div>
-            </div>
-            <div class="board_product">
-            <div class="board_header">
-                <div class="board_image">
-                    <img src="\src\assets\test.jpg" alt="transport"/>
-                </div>
-                <div class="board_title">
-                    <h3> Тестовый продуктТестовый продуктТест </h3>
-                </div>
-            </div>
-            <div class="board_footer">
-                <h5 class="board_price">1000 p</h5>
-                <p class="board_place">ГродноГродноГродноГродно</p>
-                <p class="board_time">15 сентября</p>
-            </div>
-        </div>
-            <div class="board_product">
-                <div class="board_header">
-                    <div class="board_image">
-                        <img src="\src\assets\test.jpg" alt="transport"/>
-                    </div>
-                    <div class="board_title">
-                        <h3> Тестовый продуктТестовый продуктТест </h3>
+                    <div class="board_footer">
+                        <h5 class="board_price">{{price}}</h5>
+                        <p class="board_place">{{place}}</p>
+                        <p class="board_time">{{date}}</p>
                     </div>
                 </div>
-                <div class="board_footer">
-                    <h5 class="board_price">1000 p</h5>
-                    <p class="board_place">ГродноГродноГродноГродно</p>
-                    <p class="board_time">15 сентября</p>
-                </div>
-            </div>
-            <div class="board_product">
-                <div class="board_header">
-                    <div class="board_image">
-                        <img src="\src\assets\test.jpg" alt="transport"/>
-                    </div>
-                    <div class="board_title">
-                        <h3> Тестовый продуктТестовый продуктТест </h3>
-                    </div>
-                </div>
-                <div class="board_footer">
-                    <h5 class="board_price">1000 p</h5>
-                    <p class="board_place">ГродноГродноГродноГродно</p>
-                    <p class="board_time">15 сентября</p>
-                </div>
-            </div>
+            </script>
+
         </div>
         <div class="advert">
             <div class="advert_place">
@@ -205,7 +121,6 @@
 </div>
 
 <script src="dist/bundle.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
 
 
 </body>
