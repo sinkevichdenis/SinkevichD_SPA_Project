@@ -1,6 +1,7 @@
 .board
-  padding: 0 10px
   width: calc(100% - 400px)
+  padding: 0 10px
+
 
   @media(max-width: 1000px)
     width: calc(100% - 200px)
@@ -14,6 +15,8 @@
     height: 220px
     padding: 10px 10px 0 10px
     border: 1px solid rgba(0, 0, 0, 0.5)
+
+    cursor: pointer
 
     @media(max-width: 768px)
       height: 250px
@@ -102,3 +105,7 @@
     text-align: right
     @media(max-width: 768px)
       display: none
+
+  &_empty h2
+    text-align: center
+    padding: 100px 20px
