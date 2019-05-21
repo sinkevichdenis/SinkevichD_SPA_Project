@@ -3,6 +3,7 @@ body
   margin-left: auto
 
   & .container
+    display: none
     box-shadow: 0 0 20px rgba(0,0,0,0.7)
 
   .#{&}_content
@@ -19,3 +20,13 @@ body
 
     @media(max-width: 776px)
       margin-top: 195px
+
+  & .page
+    display: none
+
+  & .visible
+    display: block
+
+  & .error img
+    width: 100%
+    height: 100%

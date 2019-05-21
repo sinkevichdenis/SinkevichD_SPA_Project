@@ -31,5 +31,18 @@ export class BoardView extends  EventEmiter {
         });
         list.innerHTML = html;
 
+
+        this.addHashLinks(list, '.board_product', '/product');
+    }
+
+    addHashLinks(elem, selector, prefix) {
+        elem.querySelectorAll(selector).forEach((item) => {
+            item.addEventListener('click', (event) => {
+                event.preventDefault();
+                if (event.currentTarget.classList.contains('board_product')){
+                    window.location.hash = `${prefix}${event.currentTarget.dataset.href}`;
+                }
+            });
+        });
     }
 }

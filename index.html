@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>SPA Project</title>
@@ -13,7 +13,7 @@
 
 </head>
 <body>
-<div class="container">
+<div class="container visible">
     <div class="header fixed-top">
         <nav class="navbar">
             <div class="navbar-logo">
@@ -83,41 +83,91 @@
                 </form>
             </div>
         </div>
-        <div id="board" class="board">
+        <div class="board visible">
+            <div id="board" class="page board_list">
 
-            <script  id="board_list-template" type="x-handlebars-template">
-                <div class="board_product" data-href="product{{id}}" >
-                    <div class="board_header">
-                        <div class="board_image">
-                            <img src="./src/assets/product_images/{{images}}" alt="{{title}}"/>
+                <script  id="board_list-template" type="x-handlebars-template">
+                    <div class="board_product" data-href="{{id}}" >
+                        <div class="board_header">
+                            <div class="board_image">
+                                <img src="./src/assets/product_images/{{images}}" alt="{{title}}"/>
+                            </div>
+                            <div class="board_title">
+                                <h3> {{title}}</h3>
+                            </div>
                         </div>
-                        <div class="board_title">
-                            <h3> {{title}}</h3>
+                        <div class="board_footer">
+                            <h5 class="board_price">{{price}}</h5>
+                            <p class="board_place">{{place}}</p>
+                            <p class="board_time">{{date}}</p>
                         </div>
                     </div>
-                    <div class="board_footer">
-                        <h5 class="board_price">{{price}}</h5>
-                        <p class="board_place">{{place}}</p>
-                        <p class="board_time">{{date}}</p>
+                </script>
+
+            </div>
+
+            <div class="page board_empty">
+                <h2>По вашему запросу ничего не найдено.</h2>
+            </div>
+
+            <div class="page product_single ">
+                <div class="product_overlay"></div>
+
+                <div class="product_definition">
+                    <div class="product_header">
+                        <img class="product_image" src="./src/assets/product_images/test.jpg" alt="test"/>
+                        <div>
+                            <button type="button" class="btn btn-dark product_close">X</button>
+                            <h3 class="product_title">Калина малина непоймикакущая</h3>
+                            <div class="product_info">
+                                <p class="product_price">100 р</p>
+                                <p class="product_user">Иван</p>
+                                <p class="product_number">+375 29 88 88 888</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="product_content">werhjgewfesgergerherh gergerh rger eye   erherhyer eryeyer eryeyery eyeyrtye eryrttu eueturt eyerue rtkuyfwertyulktfgjdtrhjtjtrjduegr ,hjk.hgefrtykulkjhgwfertuy ,hjk.hgefrtykulkjhgwfertuy ,hjk.hgefrtykulkjhgwfertuy ikjhgeafgrhtukyukjhg fertjykuykjhrgehrjt kytjhewghrjtykyjhegwhr
+
+                    </p>
+                    <div class="product_footer">
+                        <p class="product_place">Дрогичин</p>
+                        <p class="product_date">15 марта 2017</p>
+                    </div>
+
                     </div>
                 </div>
-            </script>
+            </div>
 
-        </div>
-        <div class="advert">
-            <div class="advert_place">
-                <h4> Здесь может быть Ваша реклама</h4>
+            <div class="page user_office">
             </div>
-            <div class="advert_place">
-                <h4> Здесь может быть Ваша реклама</h4>
+
+            <div class="page user_room">
             </div>
-            <div class="advert_place">
-                <h4> Здесь может быть Ваша реклама</h4>
+
+            <div class="page user_registration">
+            </div>
+
+            <div class="page user_product-add">
+            </div>
+
+            <div class="advert">
+                <div class="advert_place">
+                    <h4> Здесь может быть Ваша реклама</h4>
+                </div>
+                <div class="advert_place">
+                    <h4> Здесь может быть Ваша реклама</h4>
+                </div>
+                <div class="advert_place">
+                    <h4> Здесь может быть Ваша реклама</h4>
+                </div>
             </div>
         </div>
     </div>
 
 
+</div>
+<div class="page error">
+    <img src="./src/assets/error.png" alt="error"/>
 </div>
 
 <script src="dist/bundle.js"></script>

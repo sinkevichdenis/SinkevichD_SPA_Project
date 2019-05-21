@@ -63,7 +63,7 @@ export class SidebarView extends  EventEmiter {
         });
 
         list.forEach(item => {
-            this.processingLinks(item, 'a', '/dir');
+            this.addHashLinks(item, 'a', '/dir');
         })
     }
 
@@ -73,7 +73,7 @@ export class SidebarView extends  EventEmiter {
      * @param {string} selector - goal selector in element
      * @param {string} prefix - prefix for hash address
      */
-    processingLinks(elem, selector, prefix) {
+    addHashLinks(elem, selector, prefix) {
         elem.querySelectorAll(selector).forEach((item) => {
             item.addEventListener('click', (event) => {
                 event.preventDefault();
