@@ -11,6 +11,9 @@ button.btn.btn-light {
   opacity: .7;
   z-index: 50; }
 
+.validation-error {
+  border: 1px solid red; }
+
 body {
   margin-right: auto;
   margin-left: auto; }
@@ -181,6 +184,9 @@ body {
   .board_empty h2 {
     text-align: center;
     padding: 100px 20px; }
+  .board_add-product {
+    width: 100%;
+    padding: 10px; }
 
 .advert {
   width: 200px; }
@@ -312,3 +318,59 @@ body {
 
 .user_login h1 {
   margin: 30px auto; }
+
+.add_title-product, .add_title-info {
+  margin-top: 20px;
+  text-align: center;
+  opacity: .8; }
+
+.add_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3px;
+  margin: 15px 0; }
+  .add_form input {
+    height: 48px; }
+  .add_form > div.input-group {
+    width: 100%;
+    margin: 7px 0; }
+    .add_form > div.input-group textarea {
+      height: 100px; }
+    .add_form > div.input-group div {
+      width: 100px; }
+      .add_form > div.input-group div span {
+        width: 100%; }
+  .add_form select {
+    width: 49%; }
+
+.add_image input {
+  cursor: pointer; }
+
+.add_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-around;
+  margin-top: 10px; }
+  @media (max-width: 767px) {
+    .add_container {
+      flex-wrap: nowrap;
+      flex-direction: column; }
+      .add_container select {
+        width: 100%; } }
+
+.add_price {
+  width: 49%;
+  height: 48px; }
+  @media (max-width: 767px) {
+    .add_price {
+      width: 100%; } }
+
+.add_image {
+  margin: 10px 0; }
+
+.add_btn-add button {
+  height: 100px;
+  margin: 10px auto;
+  font-size: 24px; }
