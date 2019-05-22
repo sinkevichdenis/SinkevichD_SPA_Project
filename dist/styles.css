@@ -1,6 +1,16 @@
 button.btn.btn-light {
   border: 1px solid #28a745; }
 
+.overlay {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #282b2c;
+  opacity: .7;
+  z-index: 50; }
+
 body {
   margin-right: auto;
   margin-left: auto; }
@@ -189,16 +199,6 @@ body {
     border: 1px solid black;
     border-radius: 7px; }
 
-.product_overlay {
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #282b2c;
-  opacity: 0.5;
-  z-index: 50; }
-
 .product_definition {
   box-sizing: border-box;
   width: 960px;
@@ -269,3 +269,46 @@ body {
 .product_footer {
   display: flex;
   justify-content: flex-end; }
+
+.user_login, .user_registration {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 960px;
+  height: 550px;
+  position: fixed;
+  left: 50%;
+  margin-left: -475px;
+  top: 50%;
+  margin-top: -275px;
+  border-radius: 6px;
+  background-color: #ffffff;
+  z-index: 100;
+  opacity: 1;
+  transition: 0.4s; }
+  .user_login.visible, .user_registration.visible {
+    display: flex; }
+  .user_login h1, .user_registration h1 {
+    margin: 0 auto;
+    font-weight: bold;
+    font-family: "Tahoma";
+    opacity: .8; }
+  .user_login form, .user_registration form {
+    height: 300px;
+    margin-top: 15px; }
+    .user_login form div.input-group, .user_registration form div.input-group {
+      display: flex;
+      justify-content: center;
+      width: 600px;
+      margin: 10px auto; }
+      .user_login form div.input-group div, .user_registration form div.input-group div {
+        width: 200px; }
+        .user_login form div.input-group div span, .user_registration form div.input-group div span {
+          width: 100%; }
+      .user_login form div.input-group button, .user_registration form div.input-group button {
+        width: 140px;
+        margin: 20px; }
+
+.user_login h1 {
+  margin: 30px auto; }

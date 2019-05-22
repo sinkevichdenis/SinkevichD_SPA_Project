@@ -1,0 +1,55 @@
+.user
+
+  &_login, &_registration
+    display: none
+    flex-direction: column
+    justify-content: center
+
+    box-sizing: border-box
+    width: 960px
+    height: 550px
+
+    position: fixed
+    left: 50%
+    margin-left: -475px
+    top: 50%
+    margin-top: -275px
+
+    border-radius: 6px
+    background-color:  #ffffff
+
+    z-index: 100
+    opacity: 1
+    transition: 0.4s
+
+    &.visible
+      display: flex
+
+    & h1
+      margin: 0 auto
+
+      font-weight: bold
+      font-family: "Tahoma"
+      opacity: .8
+
+    & form
+      height: 300px
+      margin-top: 15px
+
+      & div.input-group
+        display: flex
+        justify-content: center
+        width: 600px
+        margin: 10px auto
+
+        & div
+          width: 200px
+          & span
+            width: 100%
+
+        & button
+          width: 140px
+          margin: 20px
+
+  &_login h1
+    margin: 30px auto
