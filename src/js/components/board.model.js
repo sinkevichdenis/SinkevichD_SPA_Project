@@ -11,13 +11,19 @@ export class BoardModel extends  EventEmiter {
         this._items = null;
         this._url = url;
         this._eventName = eventName;
+        this.serverConnect();
         this.init();
+    }
+
+    init() {
+        this.on('hashChanged', () => this.serverConnect());
     }
 
     /**
      * get data from server
      */
-    init() {
+    serverConnect() {
+        console.log('test connect');
         fetch(this._url, { headers: {
                 'Content-Type': 'application/json'
             }})
@@ -25,6 +31,7 @@ export class BoardModel extends  EventEmiter {
             .then(data => {
                 this._items = data;
                 this.emit(this._eventName, this._items);
+                console.log('test connect2');
             })
             .catch(error => console.error(error));
     }
@@ -33,7 +40,7 @@ export class BoardModel extends  EventEmiter {
      * get data from model
      * @returns {null|*}
      */
-    getItems () {
+    getItems() {
         return this._items;
     }
 }

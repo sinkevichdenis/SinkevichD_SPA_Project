@@ -6,11 +6,22 @@ export class BoardView extends  EventEmiter {
         super();
         this._template = null;
         this._model = new BoardModel('http://localhost:3006/products', 'getProductsList');
+        this._products = null;
         this.init();
     }
 
     init() {
-        this._model.on('getProductsList', data => this.renderProductsList(data));
+        this._model.on('getProductsList', data => this.renderAll(data));
+    }
+
+    renderAll(data){
+        console.log('где данные, лебовски?', data);
+        try {
+            this._products = data;
+            this.renderProductsList();
+        } catch(e) {
+
+        }
     }
 
     getTemplate() {
@@ -19,18 +30,28 @@ export class BoardView extends  EventEmiter {
         }
     }
 
-    renderProductsList(data) {
-        this.getTemplate();
+    test() {
+        alert('STOP');
+    }
+    test2() {
+        alert('STOP DIR');
+    }
+
+    renderProductsList() {
+        if (document.getElementById('board_list-template')) {
+            this._template = document.getElementById('board_list-template').innerHTML;
+        }
+        console.log('board render', this._template);
 
         let list = document.getElementById('board');
+        list.classList.add('visible');
         const template = Handlebars.compile(this._template);
         let html = '';
 
-        data.forEach(item => {
+        this._products.forEach(item => {
             html += template(item);
         });
         list.innerHTML = html;
-
 
         this.addHashLinks(list, '.board_product', '/product');
     }
