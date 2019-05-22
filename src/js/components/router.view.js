@@ -21,8 +21,8 @@ export class RouterView extends EventEmiter {
 
     initRoutes(){
         this._model.addRoute('', this._board.renderAll);
-        this._model.addRoute('404', this._board.test);
-        this._model.addRoute('dir0', this._board.test);
+        //this._model.addRoute('404', this._board.test);
+        //this._model.addRoute('dir0', this._board.test);
     }
 
     init(){
