@@ -84,7 +84,7 @@
             </div>
         </div>
         <div class="board">
-            <div id="board" class="page board_list">
+            <div id="board" class="page board_list visible">
 
                 <script  id="board_list-template" type="x-handlebars-template">
                     <div class="board_product" data-href="{{id}}" >
@@ -110,7 +110,7 @@
                 <h2>По вашему запросу ничего не найдено.</h2>
             </div>
 
-            <div class="page board_add-product visible">
+            <div class="page board_add-product">
                 <h3 class="add_title-product text-uppercase">Добавить новое объявление</h3>
                 <form class="add_form">
                     <div class="custom-file add_image">
@@ -202,8 +202,7 @@
             </div>
         </div>
         <div class="page product_single">
-            <div class="product_overlay overlay">
-            </div>
+            <div class="overlay"></div>
             <div class="product_definition">
                 <div class="product_header">
                     <img class="product_image" src="./src/assets/product_images/test.jpg" alt="test"/>
@@ -226,9 +225,9 @@
                 </div>
             </div>
         </div>
-        <div class="page user_login-page">
+        <div class="page user_login">
             <div class="overlay"></div>
-            <div class="user_login">
+            <div class="user_container">
                 <h1 class="user_title text-uppercase">Вход</h1>
                 <form>
                     <div class="input-group input-group-lg user_field-login">
@@ -250,7 +249,10 @@
                     </div>
                 </form>
             </div>
-            <div class="user_registration">
+        </div>
+        <div class="page user_registration">
+            <div class="overlay"></div>
+            <div class="user_container">
                 <h1 class="user_title text-uppercase">Регистрация</h1>
                 <form>
                     <div class="input-group input-group-lg user_field-login">

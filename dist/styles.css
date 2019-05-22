@@ -276,8 +276,8 @@ body {
   display: flex;
   justify-content: flex-end; }
 
-.user_login, .user_registration {
-  display: none;
+.user_container {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   box-sizing: border-box;
@@ -293,26 +293,24 @@ body {
   z-index: 100;
   opacity: 1;
   transition: 0.4s; }
-  .user_login.visible, .user_registration.visible {
-    display: flex; }
-  .user_login h1, .user_registration h1 {
+  .user_container h1 {
     margin: 0 auto;
     font-weight: bold;
     font-family: "Tahoma";
     opacity: .8; }
-  .user_login form, .user_registration form {
+  .user_container form {
     height: 300px;
     margin-top: 15px; }
-    .user_login form div.input-group, .user_registration form div.input-group {
+    .user_container form div.input-group {
       display: flex;
       justify-content: center;
       width: 600px;
       margin: 10px auto; }
-      .user_login form div.input-group div, .user_registration form div.input-group div {
+      .user_container form div.input-group div {
         width: 200px; }
-        .user_login form div.input-group div span, .user_registration form div.input-group div span {
+        .user_container form div.input-group div span {
           width: 100%; }
-      .user_login form div.input-group button, .user_registration form div.input-group button {
+      .user_container form div.input-group button {
         width: 140px;
         margin: 20px; }
 
