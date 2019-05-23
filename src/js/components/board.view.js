@@ -1,6 +1,7 @@
 import { EventEmiter } from './event-emiter.service';
 import { Router } from './router.service'
-import { Ajax } from "./ajax.service";
+import { Ajax } from './ajax.service';
+import { renderMixin } from '../render.mixin';
 
 export class BoardView extends  EventEmiter {
     constructor() {
@@ -9,10 +10,14 @@ export class BoardView extends  EventEmiter {
         this._ajax = new Ajax('http://localhost:3006/products', 'getProductsList', this.ajaxAddEvents);
         this._router = new Router();
         this._products = null;
-        this.init();
+
+        this.initAjax();
         this.initRoutes();
+
+        this.addMixin();
     }
 
+    /* Service part */
     ajaxAddEvents() {
         // add subscriber on hashChange event in Ajax
         return () => {
@@ -20,7 +25,7 @@ export class BoardView extends  EventEmiter {
         }
     }
 
-    init() {
+    initAjax() {
         this._ajax.on('getProductsList', data => {
             this._products = data;
         });
@@ -34,26 +39,42 @@ export class BoardView extends  EventEmiter {
     initRoutes() {
         this._router.addRoute('', () => this.renderProductsList());
         this._router.addRoute('404', () => this.renderOtherPage('.error'));
-        this._router.addRoute('#product', () => this.renderOtherPage('.error'));
+        this._router.addRoute('#product', (id) => this.renderSinglePage(id));
     }
 
-    renderOtherPage(selector) {
-        document.querySelector(selector).classList.add('visible');
-        document.getElementById('main-container').classList.remove('visible');
-
-    }
-
-    getTemplate() {
-        if (document.getElementById('board_list-template')) {
-            this._template = document.getElementById('board_list-template').innerHTML;
+    addMixin() {
+        for (let key in renderMixin) {
+            BoardView.prototype[key] = renderMixin[key];
         }
+    }
+
+    /* Render pages part */
+    renderOtherPage(selector) {
+        this.show(this.find(selector));
+        this.hide(this.findId('main-container'));
+    }
+
+    renderSinglePage(id) {
+        const product = this._products[id];
+
+        this.find('.product_image').src = `./src/assets/product_images/${product.images}`;
+        this.find('.product_image').alt = product.title;
+        this.find('.product_title').innerHTML = product.title;
+        this.find('.product_content').innerHTML = product.content;
+        this.find('.product_price').innerHTML = product.price;
+        this.find('.product_user').innerHTML = product.userName;
+        this.find('.product_number').innerHTML = product.userPhone;
+        this.find('.product_place').innerHTML = product.place;
+        this.find('.product_date').innerHTML = product.date;
+
+        this.show(this.find('.product_single'));
     }
 
     renderProductsList() {
         this.getTemplate();
 
-        let list = document.getElementById('board');
-        list.classList.add('visible');
+        let list = this.findId('board');
+        this.show(list);
         const template = Handlebars.compile(this._template);
         let html = '';
 
@@ -63,6 +84,12 @@ export class BoardView extends  EventEmiter {
         list.innerHTML = html;
 
         this.addHashLinks(list, '.board_product', 'product/');
+    }
+
+    getTemplate() {
+        if (this.findId('board_list-template')) {
+            this._template = this.findId('board_list-template').innerHTML;
+        }
     }
 
     addHashLinks(elem, selector, prefix) {

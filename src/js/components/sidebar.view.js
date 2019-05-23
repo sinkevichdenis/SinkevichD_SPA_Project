@@ -1,5 +1,5 @@
 import { EventEmiter } from './event-emiter.service';
-import { Ajax } from "./ajax.service";
+import { Ajax } from './ajax.service';
 
 export class SidebarView extends  EventEmiter {
     constructor() {
