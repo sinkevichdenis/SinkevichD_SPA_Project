@@ -1,11 +1,11 @@
-import { EventEmiter } from './event-emiter';
-import { SidebarModel } from "./sidebar.model";
+import { EventEmiter } from './event-emiter.service';
+import { Ajax } from "./ajax.service";
 
 export class SidebarView extends  EventEmiter {
     constructor() {
         super();
         this._template = null;
-        this._model = new SidebarModel('http://localhost:3006/sidebar', 'getSidebarList');
+        this._ajax = new Ajax('http://localhost:3006/sidebar', 'getSidebarList');
         this.init();
     }
 
@@ -13,7 +13,8 @@ export class SidebarView extends  EventEmiter {
      * subscribe at server data
      */
     init() {
-        this._model.on('getSidebarList', data => this.renderSidebar(data));
+        this._ajax.on('getSidebarList', data => this.renderSidebar(data));
+        this._ajax.get();
     }
 
     /**

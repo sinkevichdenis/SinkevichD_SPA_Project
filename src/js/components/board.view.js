@@ -1,22 +1,34 @@
-import { EventEmiter } from './event-emiter';
-import { BoardModel } from './board.model';
-import { Router } from './router'
+import { EventEmiter } from './event-emiter.service';
+import { Router } from './router.service'
+import { Ajax } from "./ajax.service";
 
 export class BoardView extends  EventEmiter {
     constructor() {
         super();
         this._template = null;
-        this._model = new BoardModel('http://localhost:3006/products', 'getProductsList');
+        this._ajax = new Ajax('http://localhost:3006/products', 'getProductsList', this.ajaxAddEvents);
         this._router = new Router();
         this._products = null;
         this.init();
         this.initRoutes();
     }
 
+    ajaxAddEvents() {
+        // add subscriber on hashChange event in Ajax
+        return () => {
+            this.on('hashChanged', () => this.serverConnect());
+        }
+    }
+
     init() {
-        this._model.on('getProductsList', data => {
+        this._ajax.on('getProductsList', data => {
             this._products = data;
         });
+
+        // get data from json-server and then create event
+        this._ajax.get(() => {
+            window.dispatchEvent(new HashChangeEvent('hashchange'));
+        })
     }
 
     initRoutes() {

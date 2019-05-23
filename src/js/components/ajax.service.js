@@ -1,23 +1,26 @@
-import { EventEmiter } from './event-emiter';
+import { EventEmiter } from './event-emiter.service';
 
-export class SidebarModel extends  EventEmiter {
+export class Ajax extends  EventEmiter {
     /**
-     * get JSON data from server
+     * create ajax connection with server
      * @param {string} url - url address
      * @param {string} eventName - event name of getting data
+     * @param {undefined, function} onEvent - add events to subscribe
      */
-    constructor (url, eventName) {
+
+   constructor (url, eventName, onEvent = undefined) {
         super();
         this._items = null;
         this._url = url;
         this._eventName = eventName;
-        this.serverConnect();
-    }
+        !!onEvent && onEvent();
+   }
 
     /**
      * get data from server
+     * @param {undefined, function} func - add addition function
      */
-    serverConnect() {
+    get(func = undefined) {
         fetch(this._url, { headers: {
                 'Content-Type': 'application/json'
             }})
@@ -25,12 +28,14 @@ export class SidebarModel extends  EventEmiter {
             .then(data => {
                 this._items = data;
                 this.emit(this._eventName, this._items);
+
+                !!func && func();
             })
             .catch(error => console.error(error));
     }
 
     /**
-     * get data from model
+     * get data from property-storage
      * @returns {null|*}
      */
     getItems () {

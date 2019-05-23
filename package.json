@@ -5,10 +5,10 @@
 	"main": "app.js",
 	"scripts": {
 		"start": "./node_modules/.bin/http-server -a localhost -p 8082 -c-1",
-		"start-json": "./node_modules/.bin/json-server --watch src/data/db.json --port 3006",
+		"j": "./node_modules/.bin/json-server --watch src/data/db.json --port 3006",
 		"build": "webpack --progress -p",
-		"watch": "webpack --progress --watch",
-		"sync": "browser-sync start -s -f ./",
+		"w": "webpack --progress --watch",
+		"s": "browser-sync start -s -f ./",
 		"test": "jasmine",
 		"sass": "node-sass --watch src/sass -o dist"
 	},
