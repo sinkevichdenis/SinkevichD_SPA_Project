@@ -1,27 +1,28 @@
-import { EventEmiter } from './event-emiter';
-
-export class RouterModel extends EventEmiter{
+export class Router {
     constructor() {
-        super();
         this.routes = {};
         this.pages = document.querySelectorAll('.page');
         this.init();
     }
 
     init() {
-        this.on('hashChanged', (hash) => this.render(hash));
+        window.addEventListener('hashchange', () => {
+            this.render(decodeURI(window.location.hash));
+            window.scrollTo(0, 0);
+        });
     }
 
     addRoute(route, action) {
         this.routes[route] = action;
-        console.log('rote', this.routes);
+        console.log('routes', this.routes)
     }
 
     render(hash) {
-        console.log('router render hash', hash);
+        console.log('hash', hash);
         let temp = hash.split('/')[0];
-        console.log('router render temp', temp);
+        console.log('temp', temp);
 
+        document.getElementById('main-container').classList.add('visible');
         this.pages.forEach((page) => {
             page.classList.remove('visible');
         });

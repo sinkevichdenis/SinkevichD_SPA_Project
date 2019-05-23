@@ -23,7 +23,7 @@ export class BoardModel extends  EventEmiter {
      * get data from server
      */
     serverConnect() {
-        console.log('test connect');
+        console.log('test connect count');
         fetch(this._url, { headers: {
                 'Content-Type': 'application/json'
             }})
@@ -31,6 +31,7 @@ export class BoardModel extends  EventEmiter {
             .then(data => {
                 this._items = data;
                 this.emit(this._eventName, this._items);
+                window.dispatchEvent(new HashChangeEvent('hashchange'));
                 console.log('test connect2');
             })
             .catch(error => console.error(error));

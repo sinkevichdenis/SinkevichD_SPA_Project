@@ -63,7 +63,7 @@ export class SidebarView extends  EventEmiter {
         });
 
         list.forEach(item => {
-            this.addHashLinks(item, 'a', '/dir');
+            this.addHashLinks(item, 'a', 'dir/');
         })
     }
 

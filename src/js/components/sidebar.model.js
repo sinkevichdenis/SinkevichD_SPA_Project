@@ -11,13 +11,13 @@ export class SidebarModel extends  EventEmiter {
         this._items = null;
         this._url = url;
         this._eventName = eventName;
-        this.init();
+        this.serverConnect();
     }
 
     /**
      * get data from server
      */
-    init() {
+    serverConnect() {
         fetch(this._url, { headers: {
                 'Content-Type': 'application/json'
             }})
