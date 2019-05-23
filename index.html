@@ -26,8 +26,12 @@
                 </form>
             </div>
             <div class="navbar-buttons">
-               <button type="button" class="btn btn-success">+ Подать объявление</button>
-               <button type="button" class="btn btn-light">Вход</button>
+               <button id="navbar_btn-add-product" data-href="add" type="button" class="btn btn-success">
+                   + Подать объявление
+               </button>
+               <button id="navbar_btn-login" data-href="login" type="button" class="btn btn-light">
+                   Вход
+               </button>
             </div>
         </nav>
     </div>
@@ -75,8 +79,12 @@
                         </label><br />
                     </div>
                     <div class="sidebar_buttons">
-                        <button type="button" class="btn btn-success">Показать результаты</button><br />
-                        <button type="button" class="btn btn-light">Очистить форму</button>
+                        <button type="button" id="sidebar_btn-result" data-href="#" class="btn btn-success">
+                            Показать результаты
+                        </button><br />
+                        <button type="button" id="sidebar_btn-clear" data-href="#" class="btn btn-light">
+                            Очистить форму
+                        </button>
                     </div>
 
 
@@ -181,7 +189,7 @@
                     </div>
 
                     <div class="input-group user_field-buttons add_btn-add">
-                        <button id="add_btn-add" type="button" class="btn btn-success text-uppercase"> Добавить объявление</button>
+                        <button id="add_btn-add" data-href="#" type="button" class="btn btn-success text-uppercase"> Добавить объявление</button>
                     </div>
                 </form>
             </div>
@@ -207,7 +215,7 @@
                 <div class="product_header">
                     <img class="product_image" src="" alt=""/>
                     <div>
-                        <button type="button" class="btn btn-dark product_close close">X</button>
+                        <button type="button" data-href="" class="btn btn-dark product_close close">X</button>
                         <h3 class="product_title"></h3>
                         <div class="product_info">
                             <p class="product_price"></p>
@@ -243,8 +251,12 @@
                     </div>
 
                     <div class="input-group user_field-buttons">
-                        <button id="user_btn-enter" type="button" class="btn btn-success text-uppercase">Войти</button>
-                        <button id="user_btn-registration" type="button" class="btn btn-info text-uppercase">Регистрация</button>
+                        <button id="user_btn-enter" data-href="room" type="button" class="btn btn-success text-uppercase">
+                            Войти
+                        </button>
+                        <button id="user_btn-registration" data-href="registration" type="button" class="btn btn-info text-uppercase">
+                            Регистрация
+                        </button>
                     </div>
                 </form>
             </div>
@@ -280,7 +292,7 @@
                     </div>
 
                     <div class="input-group user_field-buttons">
-                        <button type="button" class="btn btn-info text-uppercase">Регистрация</button>
+                        <button type="button" id="user_btn-registration-end" data-href="room" class="btn btn-info text-uppercase">Закончить регистрацию</button>
                     </div>
                 </form>
             </div>

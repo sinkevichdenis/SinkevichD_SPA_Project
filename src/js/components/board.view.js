@@ -38,7 +38,11 @@ export class BoardView extends  EventEmiter {
 
     initRoutes() {
         this._router.addRoute('', () => this.renderProductsList());
-        this._router.addRoute('404', () => this.renderOtherPage('.error'));
+        this._router.addRoute('404', () => this.renderErrorPage());
+        this._router.addRoute('#login', () => this.renderLoginPage());
+        this._router.addRoute('#registration', () => this.renderRegistrationPage());
+        this._router.addRoute('#empty', () => this.renderEmptyPage());
+        this._router.addRoute('#add', () => this.renderAddProductPage());
         this._router.addRoute('#product', (id) => this.renderSinglePage(id));
     }
 
@@ -49,12 +53,32 @@ export class BoardView extends  EventEmiter {
     }
 
     /* Render pages part */
-    renderOtherPage(selector) {
-        this.show(this.find(selector));
+    renderErrorPage() {
+        this.show(this.find('.error'));
         this.hide(this.findId('main-container'));
     }
 
+    renderEmptyPage(){
+        this.show(this.find('.board_empty'));
+    }
+
+    renderLoginPage() {
+        this.show(this.find('.user_login'));
+    }
+
+    renderRegistrationPage() {
+        this.show(this.find('.user_registration'));
+    }
+
+    renderAddProductPage() {
+        this.show(this.find('.board_add-product'));
+    }
+
     renderSinglePage(id) {
+        //check product's id in hash
+        if (id >= this._products.length) {
+            this.renderEmptyPage();
+        }
         const product = this._products[id];
 
         this.find('.product_image').src = `./src/assets/product_images/${product.images}`;

@@ -311,7 +311,8 @@ body {
         .user_container form div.input-group div span {
           width: 100%; }
       .user_container form div.input-group button {
-        width: 140px;
+        width: 250px;
+        height: 50px;
         margin: 20px; }
 
 .user_login h1 {
