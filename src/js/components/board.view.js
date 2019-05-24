@@ -7,7 +7,7 @@ export class BoardView extends  EventEmiter {
     constructor() {
         super();
         this._template = null;
-        this._ajax = new Ajax('http://localhost:3006/products', 'getProductsList', this.ajaxAddEvents);
+        this._ajax = new Ajax('http://localhost:3006/products', 'getProductsList', true);
         this._router = new Router();
         this._products = null;
 
@@ -18,13 +18,6 @@ export class BoardView extends  EventEmiter {
     }
 
     /* Service part */
-    ajaxAddEvents() {
-        // add subscriber on hashChange event in Ajax
-        return () => {
-            this.on('hashChanged', () => this.serverConnect());
-        }
-    }
-
     initAjax() {
         this._ajax.on('getProductsList', data => {
             this._products = data;
@@ -37,13 +30,15 @@ export class BoardView extends  EventEmiter {
     }
 
     initRoutes() {
-        this._router.addRoute('', () => this.renderProductsList());
-        this._router.addRoute('404', () => this.renderErrorPage());
-        this._router.addRoute('#login', () => this.renderLoginPage());
-        this._router.addRoute('#registration', () => this.renderRegistrationPage());
-        this._router.addRoute('#empty', () => this.renderEmptyPage());
-        this._router.addRoute('#add', () => this.renderAddProductPage());
-        this._router.addRoute('#product', (id) => this.renderSinglePage(id));
+        this._router.addRoute('', () => this.renderProductsList(), false);
+        this._router.addRoute('#', () => this.renderProductsList(), false);
+        this._router.addRoute('404', () => this.renderErrorPage(), true);
+        this._router.addRoute('#login', () => this.renderOtherPage('.user_login'), true);
+        this._router.addRoute('#registration', () => this.renderOtherPage('.user_registration'), true);
+        this._router.addRoute('#empty', () => this.renderOtherPage('.board_empty'), false);
+        this._router.addRoute('#add', () => this.renderOtherPage('.board_add-product'), false);
+        this._router.addRoute('#room', () => this.renderErrorPage(), false);
+        this._router.addRoute('#product', (id) => this.renderSinglePage(id), true);
     }
 
     addMixin() {
@@ -58,26 +53,17 @@ export class BoardView extends  EventEmiter {
         this.hide(this.findId('main-container'));
     }
 
-    renderEmptyPage(){
-        this.show(this.find('.board_empty'));
-    }
-
-    renderLoginPage() {
-        this.show(this.find('.user_login'));
-    }
-
-    renderRegistrationPage() {
-        this.show(this.find('.user_registration'));
-    }
-
-    renderAddProductPage() {
-        this.show(this.find('.board_add-product'));
+    renderOtherPage(selector) {
+        this.show(this.find(selector));
     }
 
     renderSinglePage(id) {
         //check product's id in hash
         if (id >= this._products.length) {
-            this.renderEmptyPage();
+            window.history.replaceState({}, 'start page', '#empty');
+            //replace don't call hashchange event
+            window.dispatchEvent(new HashChangeEvent('hashchange'));
+            return;
         }
         const product = this._products[id];
 

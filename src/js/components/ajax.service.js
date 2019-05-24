@@ -5,16 +5,29 @@ export class Ajax extends  EventEmiter {
      * create ajax connection with server
      * @param {string} url - url address
      * @param {string} eventName - event name of getting data
-     * @param {undefined, function} onEvent - add events to subscribe
+     * @param {boolean} isAddEvents - add events
      */
-
-   constructor (url, eventName, onEvent = undefined) {
+    constructor (url, eventName, isAddEvents = false) {
         super();
         this._items = null;
         this._url = url;
         this._eventName = eventName;
-        !!onEvent && onEvent();
-   }
+
+        isAddEvents && this.initEvent();
+    }
+
+    /**
+     * add Events (repeat getting data from server)
+     */
+    initEvent() {
+        let setId = setInterval(()=> {
+            try {
+                this.get();
+            } catch (e) {
+                console.log('Server isn\'t available');
+            }
+        }, 180000);
+    }
 
     /**
      * get data from server
@@ -28,6 +41,7 @@ export class Ajax extends  EventEmiter {
             .then(data => {
                 this._items = data;
                 this.emit(this._eventName, this._items);
+                console.log('server connected');
 
                 !!func && func();
             })

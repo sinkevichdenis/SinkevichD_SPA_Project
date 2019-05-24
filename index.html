@@ -13,7 +13,8 @@
 
 </head>
 <body>
-<div id="main-container" class="container visible">
+<div id="main-container" class="container">
+    <!--NAVBAR AREA-->
     <div class="header fixed-top">
         <nav class="navbar">
             <div class="navbar-logo">
@@ -35,8 +36,12 @@
             </div>
         </nav>
     </div>
+    <!--CONTENT AREA-->
     <div class="body_content">
+
+        <!--SIDEBAR AREA-->
         <div class="sidebar">
+            <!--sidebar direction's links-->
             <div class="sidebar_accordion accordion list-group" id="accordionExample">
 
                 <script id="sidebar_list-template" type="x-handlebars-template">​
@@ -53,6 +58,8 @@
                 </script>
 
             </div>
+
+            <!--sidebar filter area-->
             <div class="sidebar_choice">
                 <form class="sidebar_form" id="sidebar_form">
                     <div class="form-check">
@@ -91,8 +98,11 @@
                 </form>
             </div>
         </div>
+        <!--MAIN (CENTRAL) AREA-->
         <div class="board">
-            <div id="board" class="page board_list">
+
+            <!--products list page-->
+            <div class="page page-bottom board_list" id="board" >
 
                 <script  id="board_list-template" type="x-handlebars-template">
                     <div class="board_product" data-href="{{id}}" >
@@ -113,12 +123,12 @@
                 </script>
 
             </div>
-
-            <div class="page board_empty">
+            <!--empty list page-->
+            <div class="page page-bottom board_empty">
                 <h2>По вашему запросу ничего не найдено.</h2>
             </div>
-
-            <div class="page board_add-product">
+            <!--add product page-->
+            <div class="page page-bottom board_add-product">
                 <h3 class="add_title-product text-uppercase">Добавить новое объявление</h3>
                 <form class="add_form">
                     <div class="custom-file add_image">
@@ -193,11 +203,11 @@
                     </div>
                 </form>
             </div>
-
-            <div class="page user_room">
-            </div>
+            <!--user room page-->
+            <div class="page page-bottom user_room"></div>
 
         </div>
+        <!--side adverts-->
         <div class="advert">
             <div class="advert_place">
                 <h4> Здесь может быть Ваша реклама</h4>
@@ -209,7 +219,9 @@
                 <h4> Здесь может быть Ваша реклама</h4>
             </div>
         </div>
-        <div class="page product_single">
+
+        <!--single product page-->
+        <div class="page page-top product_single">
             <div class="overlay"></div>
             <div class="product_definition">
                 <div class="product_header">
@@ -232,7 +244,8 @@
                 </div>
             </div>
         </div>
-        <div class="page user_login">
+        <!--login page-->
+        <div class="page page-top user_login">
             <div class="overlay"></div>
             <div class="user_container">
                 <h1 class="user_title text-uppercase">Вход</h1>
@@ -261,7 +274,8 @@
                 </form>
             </div>
         </div>
-        <div class="page user_registration">
+        <!--registration page-->
+        <div class="page page-top user_registration">
             <div class="overlay"></div>
             <div class="user_container">
                 <h1 class="user_title text-uppercase">Регистрация</h1>
