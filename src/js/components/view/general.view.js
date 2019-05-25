@@ -1,4 +1,4 @@
-import { renderMixin } from '../render.mixin';
+import { renderMixin } from '../mixins/render.mixin';
 
 export class GeneralView {
     constructor() {

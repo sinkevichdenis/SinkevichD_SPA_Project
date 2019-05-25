@@ -1,7 +1,7 @@
-import { EventEmiter } from './event-emiter.service';
-import { Router } from './router.service'
-import { Ajax } from './ajax.service';
-import { renderMixin } from '../render.mixin';
+import { EventEmiter } from '../service/event-emiter.service';
+import { Router } from '../service/router.service'
+import { Ajax } from '../service/ajax.service';
+import { renderMixin } from '../mixins/render.mixin';
 
 export class BoardView extends  EventEmiter {
     constructor() {

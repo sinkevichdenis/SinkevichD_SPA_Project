@@ -1,6 +1,6 @@
 import { EventEmiter } from './event-emiter.service';
 import { Ajax } from './ajax.service';
-import { renderMixin } from '../render.mixin';
+import { renderMixin } from '../mixins/render.mixin';
 
 export class AddDataService extends EventEmiter {
     constructor() {
@@ -56,6 +56,7 @@ export class AddDataService extends EventEmiter {
     codeProductImage() {
         let file = this.findId('add_image').files[0];
         if (file) {
+            this.emit('startLoadingImage', file.name);
             let reader = new FileReader();
             reader.readAsDataURL(file);
 

@@ -136,8 +136,9 @@
                 <h3 class="add_title-product text-uppercase">Добавить новое объявление</h3>
                 <form id="form-add-product" class="add_form" >
                     <div class="custom-file add_image">
-                        <label class="custom-file-label" for="add_image">Добавить изображение</label>
-                        <input id="add_image" type="file" class="custom-file-input">
+                        <label id="add_image-label" class="custom-file-label" for="add_image">
+                            Добавить изображение</label>
+                        <input id="add_image" type="file" class="custom-file-input" accept=".jpg,.jpeg,.png">
                     </div>
 
                     <div class="input-group input-group-default add_title">
@@ -150,16 +151,11 @@
                     <div class="add_container">
                         <select id="add_dir" class="add_dir custom-select custom-select-lg mb-3">
                             <option selected>Раздел</option>
-                            <option value="1">Здесь</option>
-                            <option value="2">будет</option>
-                            <option value="3">JS</option>
                         </select>
 
                         <select id="add_subdir" class="add_subdir custom-select custom-select-lg mb-3">
                             <option selected>Категория</option>
-                            <option value="1">Здесь</option>
-                            <option value="2">будет</option>
-                            <option value="3">JS</option>
+
                         </select>
 
                         <select id="add_condition" class="add_condition custom-select custom-select-lg mb-3">
