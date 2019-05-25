@@ -20,13 +20,21 @@ export class Ajax extends  EventEmiter {
      * add Events (repeat getting data from server)
      */
     initEvent() {
-        let setId = setInterval(()=> {
+        setInterval(()=> {
             try {
                 this.get();
             } catch (e) {
                 console.log('Server isn\'t available');
             }
         }, 180000);
+    }
+
+    /**
+     * get data from property-storage
+     * @returns {null|*}
+     */
+    getItems () {
+        return this._items;
     }
 
     /**
@@ -41,7 +49,6 @@ export class Ajax extends  EventEmiter {
             .then(data => {
                 this._items = data;
                 this.emit(this._eventName, this._items);
-                console.log('server connected');
 
                 !!func && func();
             })
@@ -49,10 +56,19 @@ export class Ajax extends  EventEmiter {
     }
 
     /**
-     * get data from property-storage
-     * @returns {null|*}
+     * send data to server
+     * @param {object} formData - data object
      */
-    getItems () {
-        return this._items;
+    post(formData) {
+         fetch(this._url, {
+             method: 'POST',
+             headers : {'Content-Type': 'application/json'},
+             body: JSON.stringify(formData)
+         })
+             .then(response => response.json())
+             .then(data => console.log('DATA', data))
+             .catch(error => console.error('ERROR',error));
     }
+
+
 }

@@ -108,7 +108,7 @@
                     <div class="board_product" data-href="{{id}}" >
                         <div class="board_header">
                             <div class="board_image">
-                                <img src="./src/assets/product_images/{{images}}" alt="{{title}}"/>
+                                <img src="{{images}}" alt="{{title}}"/>
                             </div>
                             <div class="board_title">
                                 <h3> {{title}}</h3>
@@ -130,7 +130,7 @@
             <!--add product page-->
             <div class="page page-bottom board_add-product">
                 <h3 class="add_title-product text-uppercase">Добавить новое объявление</h3>
-                <form class="add_form">
+                <form id="form-add-product" class="add_form" >
                     <div class="custom-file add_image">
                         <label class="custom-file-label" for="add_image">Добавить изображение</label>
                         <input id="add_image" type="file" class="custom-file-input">
@@ -199,7 +199,7 @@
                     </div>
 
                     <div class="input-group user_field-buttons add_btn-add">
-                        <button id="add_btn-add" data-href="#" type="button" class="btn btn-success text-uppercase"> Добавить объявление</button>
+                        <button id="add_btn-add" data-href="#" type="submit" class="btn btn-success text-uppercase"> Добавить объявление</button>
                     </div>
                 </form>
             </div>

@@ -23,9 +23,6 @@ export class Router {
     render(hash) {
         hash = hash.split('/');
         let temp = hash[0];
-        console.log(temp);
-        console.log(this.routesBottom);
-        console.log(this.routesBottom.includes(temp));
         let index = hash[1];
 
         document.getElementById('main-container').classList.add('visible');

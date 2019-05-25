@@ -20,7 +20,7 @@ export class BoardView extends  EventEmiter {
     /* Service part */
     initAjax() {
         this._ajax.on('getProductsList', data => {
-            this._products = data;
+            this._products = data.reverse();
         });
 
         // get data from json-server and then create event
@@ -57,20 +57,28 @@ export class BoardView extends  EventEmiter {
         this.show(this.find(selector));
     }
 
-    renderSinglePage(id) {
+    checkProductsId(id) {
         //check product's id in hash
-        if (id >= this._products.length) {
+        let isRealId = this._products.some((item) => {
+            return id === item.id;
+        });
+
+        if (!isRealId) {
             window.history.replaceState({}, 'start page', '#empty');
             //replace don't call hashchange event
             window.dispatchEvent(new HashChangeEvent('hashchange'));
-            return;
         }
+    }
+
+    renderSinglePage(id) {
+        this.checkProductsId(id);
+
         const product = this._products[id];
 
         this.find('.product_image').src = `./src/assets/product_images/${product.images}`;
         this.find('.product_image').alt = product.title;
         this.find('.product_title').innerHTML = product.title;
-        this.find('.product_content').innerHTML = product.content;
+        this.find('.product_text').innerHTML = product.content;
         this.find('.product_price').innerHTML = product.price;
         this.find('.product_user').innerHTML = product.userName;
         this.find('.product_number').innerHTML = product.userPhone;
