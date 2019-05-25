@@ -56,7 +56,6 @@ export class AddDataService extends EventEmiter {
     codeProductImage() {
         let file = this.findId('add_image').files[0];
         if (file) {
-            this.emit('startLoadingImage', file.name);
             let reader = new FileReader();
             reader.readAsDataURL(file);
 

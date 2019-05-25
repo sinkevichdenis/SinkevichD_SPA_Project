@@ -1,0 +1,100 @@
+import { EventEmiter } from '../service/event-emiter.service';
+import { renderMixin } from '../mixins/render.mixin';
+import { Ajax } from '../service/ajax.service';
+
+export class AddProductView extends EventEmiter {
+    constructor() {
+        super();
+        this._ajax = new Ajax('http://localhost:3006/sidebar', 'getSidebarList');
+        this._menuItems = [];
+
+        this.addMixin();
+        this.init();
+        this.events();
+
+    }
+
+    addMixin() {
+        for (let key in renderMixin) {
+            AddProductView.prototype[key] = renderMixin[key];
+        }
+    }
+
+    init() {
+        this._ajax.on('getSidebarList', (data) => {
+            this._menuItems = [...data];
+            this.createDirSelect();
+        });
+        this._ajax.get();
+    }
+
+    events() {
+        this.showImageName();
+        this.changeTextarea();
+        this.changeSelect();
+
+    }
+
+    createDirSelect () {
+        const elem = this.findId('add_dir');
+        this._menuItems.forEach((item,index) => {
+            let option = new Option(item.direction, index);
+            option.classList.add('font-italic');
+            elem.appendChild(option);
+        })
+    }
+
+    createSubdirSelect(selectIndex) {
+        const elem = this.findId('add_subdir');
+        this._menuItems[selectIndex - 1].subdirection.forEach((item,index) => {
+            let option = new Option(item, index);
+            option.classList.add('font-italic');
+            elem.appendChild(option);
+        })
+    }
+
+    changeSelect(){
+        const dirElem = this.findId('add_dir');
+        const subdirElem = this.findId('add_subdir');
+
+        dirElem.addEventListener('change', () => {
+            this._indexSelected = dirElem.selectedIndex;
+            this.createSubdirSelect(this._indexSelected);
+            subdirElem.options[0].selected = true;
+        })
+    }
+
+    /**
+     * show image name before loading
+     */
+    showImageName() {
+        this.findId('add_image').addEventListener('change', (event) => {
+            let imageName = event.target.value.split('\\');
+            imageName = imageName[imageName.length - 1];
+            this.findId('add_image-label').innerHTML = imageName;
+        })
+    }
+
+    /**
+     * change text in textArea
+     */
+    changeTextarea() {
+        const field = this.findId('add_text');
+        let textTemplate = field.value;
+        let text = '';
+
+        field.addEventListener('focus', () => {
+            text = field.value.trim();
+            if (text === textTemplate) {
+                field.value = '';
+            }
+        });
+
+        field.addEventListener('blur', () => {
+           if (field.value.trim() === textTemplate || field.value.trim()  === '') {
+               field.value = textTemplate;
+           }
+        });
+    }
+
+}
