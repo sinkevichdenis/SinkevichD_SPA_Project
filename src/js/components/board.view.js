@@ -72,13 +72,12 @@ export class BoardView extends  EventEmiter {
 
     renderSinglePage(id) {
         this.checkProductsId(id);
+        const product = this._products.filter(item => item.id === id)[0];
 
-        const product = this._products[id];
-
-        this.find('.product_image').src = `./src/assets/product_images/${product.images}`;
+        this.find('.product_image').src = product.images;
         this.find('.product_image').alt = product.title;
         this.find('.product_title').innerHTML = product.title;
-        this.find('.product_text').innerHTML = product.content;
+        this.find('.product_content').innerHTML = product.text;
         this.find('.product_price').innerHTML = product.price;
         this.find('.product_user').innerHTML = product.userName;
         this.find('.product_number').innerHTML = product.userPhone;

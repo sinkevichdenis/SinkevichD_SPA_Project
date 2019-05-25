@@ -222,12 +222,15 @@ body {
 
 .product_header {
   display: flex;
+  justify-content: space-between;
   height: 60%; }
+  .product_header > div {
+    margin: 0 15px; }
 
 .product_image {
   max-width: 100%;
   max-height: 100%;
-  margin: 20px; }
+  margin: 20px auto; }
 
 .product_title {
   width: 300px;
@@ -256,7 +259,8 @@ body {
   margin: 10px auto;
   word-wrap: break-word;
   text-align: justify;
-  text-indent: 25px; }
+  text-indent: 25px;
+  font-size: 20px; }
 
 .product_info {
   display: flex;

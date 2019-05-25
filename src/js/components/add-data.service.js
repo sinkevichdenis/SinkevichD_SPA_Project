@@ -55,17 +55,20 @@ export class AddDataService extends EventEmiter {
 
     codeProductImage() {
         let file = this.findId('add_image').files[0];
-        let reader = new FileReader();
-        reader.readAsDataURL(file);
+        if (file) {
+            let reader = new FileReader();
+            reader.readAsDataURL(file);
 
-        reader.onloadend = () => {
-            console.log(reader.result);
-            this._formData.images = reader.result;
-            this._ajax.post(this._formData);
-        };
+            reader.onloadend = () => {
+                this._formData.images = reader.result;
+                this._ajax.post(this._formData);
+            };
 
-        reader.onerror = (error) => {
-            console.log('Error: ', error);
-        };
+            reader.onerror = (error) => {
+                console.log('Error: ', error);
+            };
+        } else {
+            this._formData.images = "./src/assets/product_images/no_photo.png";
+        }
     }
 }

@@ -60,14 +60,15 @@ export class Ajax extends  EventEmiter {
      * @param {object} formData - data object
      */
     post(formData) {
-         fetch(this._url, {
+        console.log('start sending data');
+        fetch(this._url, {
              method: 'POST',
              headers : {'Content-Type': 'application/json'},
              body: JSON.stringify(formData)
          })
              .then(response => response.json())
              .then(data => console.log('DATA', data))
-             .catch(error => console.error('ERROR',error));
+             .catch(error => console.error(error));
     }
 
 
