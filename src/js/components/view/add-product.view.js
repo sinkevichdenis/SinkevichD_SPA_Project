@@ -14,6 +14,9 @@ export class AddProductView extends EventEmiter {
 
     }
 
+    /**
+     * add mixin to make easier looking at elements
+     */
     addMixin() {
         for (let key in renderMixin) {
             AddProductView.prototype[key] = renderMixin[key];
@@ -32,7 +35,6 @@ export class AddProductView extends EventEmiter {
         this.showImageName();
         this.changeTextarea();
         this.changeSelect();
-
     }
 
     createDirSelect () {
@@ -96,5 +98,4 @@ export class AddProductView extends EventEmiter {
            }
         });
     }
-
 }
