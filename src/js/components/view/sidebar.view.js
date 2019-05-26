@@ -1,11 +1,12 @@
 import { EventEmiter } from '../service/event-emiter.service';
 import { Ajax } from '../service/ajax.service';
+import { CONFIG } from '../../config';
 
 export class SidebarView extends  EventEmiter {
     constructor() {
         super();
         this._template = null;
-        this._ajax = new Ajax('http://localhost:3006/sidebar', 'getSidebarList');
+        this._ajax = new Ajax(CONFIG.jsonServer + 'sidebar', 'getSidebarList');
         this.init();
     }
 

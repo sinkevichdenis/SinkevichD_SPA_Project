@@ -65,15 +65,15 @@
                     <div class="form-check">
                         <label class="form-check-label">
                             <input class="form-check-input" type="radio" name="condition" value="new-condition">
-                            Новое
+                            Новые товары
                         </label><br />
                         <label class="form-check-label">
                             <input class="form-check-input" type="radio" name="condition" value="used-condition">
-                            Б/у
+                            Б/у товары
                         </label><br />
                         <label class="form-check-label">
                             <input class="form-check-input" type="radio" name="condition" value="any-condition" checked>
-                            Любое
+                            Все товары
                         </label><br /><br />
 
                         <label class="form-check-label">
@@ -81,17 +81,17 @@
                             Только с фотографией
                         </label><br />
                         <label class="form-check-label">
-                            <input class="form-check-input" type="checkbox" name="exchange" value="exchange">
-                            Возможен обмен
+                            <input class="form-check-input" type="checkbox" name="only-new" value="exchange">
+                            Новые объявления
                         </label><br />
                     </div>
                     <div class="sidebar_buttons">
                         <button type="button" id="sidebar_btn-result" data-href="#" class="btn btn-success">
                             Показать результаты
                         </button><br />
-                        <button type="button" id="sidebar_btn-clear" data-href="#" class="btn btn-light">
+                        <!--<button type="button" id="sidebar_btn-clear" data-href="#" class="btn btn-light">
                             Очистить форму
-                        </button>
+                        </button>-->
                     </div>
 
 
@@ -195,7 +195,7 @@
                     </div>
 
                     <div class="input-group user_field-buttons add_btn-add">
-                        <button id="add_btn-add" data-href="#" type="submit" class="btn btn-success text-uppercase"> Добавить объявление</button>
+                        <button id="add_btn-add" data-href="#" type="submit" class="btn btn-success text-uppercase btn-validate"> Добавить объявление</button>
                     </div>
                 </form>
             </div>
@@ -302,7 +302,7 @@
                     </div>
 
                     <div class="input-group user_field-buttons">
-                        <button type="button" id="user_btn-registration-end" data-href="room" class="btn btn-info text-uppercase">Закончить регистрацию</button>
+                        <button type="button" id="user_btn-registration-end" data-href="room" class="btn btn-info text-uppercase btn-validate">Закончить регистрацию</button>
                     </div>
                 </form>
             </div>
@@ -311,14 +311,14 @@
         <div class="page page-top board_loaded-product">
             <div class="overlay"></div>
             <div class="user_container">
-                <h2 class="user_title text-uppercase">Ваше объявление успешно добавлено</h2>
+                <h2 id="title_loaded-page" class="user_title text-uppercase"></h2>
             </div>
         </div>
     </div>
 
 
 </div>
-<div class="page error">
+<div class="page page-top error">
     <img src="./src/assets/error.png" alt="error"/>
 </div>
 

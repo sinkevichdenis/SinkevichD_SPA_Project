@@ -5,7 +5,6 @@ import { AddDataService } from './components/service/add-data.service';
 import { AddProductView } from './components/view/add-product.view';
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log('DOM loaded');
     new SidebarView();
     new BoardView();
     new GeneralView();

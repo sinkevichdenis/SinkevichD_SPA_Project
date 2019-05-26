@@ -1,14 +1,15 @@
 import { EventEmiter } from './event-emiter.service';
 import { Ajax } from './ajax.service';
 import { renderMixin } from '../mixins/render.mixin';
+import { CONFIG } from '../../config';
 
 export class AddDataService extends EventEmiter {
     constructor() {
         super();
-        this._ajax = new Ajax('http://localhost:3006/products', 'postNewProduct', false);
-        this._form = document.getElementById('form-add-product');
-        this._formData = null;
         this.addMixin();
+        this._ajax = null;
+        this._forms = Array.from(this.findAll('form'));
+        this._formData = null;
         this.events();
     }
 
@@ -21,22 +22,50 @@ export class AddDataService extends EventEmiter {
         }
     }
 
-    events() {
-        this._form.addEventListener('submit', (event) => {
-            event.preventDefault();
+    postData(path, eventName) {
+        this._ajax = new Ajax(CONFIG.jsonServer + path, eventName, false);
+        this._ajax.post(this._formData);
+    }
 
-            switch (event.target.id) {
-                case 'form-add-product':
-                    this.createProductData();
-                    this.codeProductImage();
-                    break;
-                default:
-                    window.location.hash = '#error';
-            }
-        })
+    showSuccessfulPage(text){
+        let page = this.find('.board_loaded-product');
+        this.findId('title_loaded-page').innerHTML = text;
+        this.show(page);
+
+        setTimeout(() => {
+            this.hide(page);
+        }, 2000);
+    }
+
+    events() {
+        this._forms = this._forms.filter(item => {
+            let collection = item.getElementsByClassName('btn-validate');
+            return !!(collection.length);
+        });
+
+        this._forms.forEach(item => {
+            let validateButton = item.getElementsByClassName('btn-validate')[0];
+            validateButton.addEventListener('click', (event) => {
+                    event.preventDefault();
+                    this.validateData(item);
+                    this.createData(item);
+            })
+        });
+    }
+
+    createData(form) {
+        switch (form.id) {
+            case 'form-add-product':
+                this.createProductData();
+                this.codeProductImage();
+                break;
+            default:
+                window.location.hash = '#error';
+        }
     }
 
     createProductData() {
+        console.log('productData');
         this._formData = {
             "userId": null,
             "userName": this.findId('add_name').value,
@@ -61,14 +90,21 @@ export class AddDataService extends EventEmiter {
 
             reader.onloadend = () => {
                 this._formData.images = reader.result;
-                this._ajax.post(this._formData);
+                this.postData('products', 'postNewProduct');
+                this.showSuccessfulPage('Ваше объявление успешно добавлено.');
             };
 
             reader.onerror = (error) => {
-                console.log('Error: ', error);
+                console.error(error);
             };
         } else {
-            this._formData.images = "./src/assets/product_images/no_photo.png";
+            this._formData.images = CONFIG.defaultProductImage;
+            this.postData('products', 'postNewProduct');
+            this.showSuccessfulPage('Ваше объявление успешно добавлено.');
         }
+    }
+
+    validateData(form) {
+        console.log('validation');
     }
 }

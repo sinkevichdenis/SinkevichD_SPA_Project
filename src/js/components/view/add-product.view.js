@@ -1,11 +1,12 @@
 import { EventEmiter } from '../service/event-emiter.service';
 import { renderMixin } from '../mixins/render.mixin';
 import { Ajax } from '../service/ajax.service';
+import { CONFIG } from '../../config';
 
 export class AddProductView extends EventEmiter {
     constructor() {
         super();
-        this._ajax = new Ajax('http://localhost:3006/sidebar', 'getSidebarList');
+        this._ajax = new Ajax(CONFIG.jsonServer + 'sidebar', 'getSidebarList');
         this._menuItems = [];
 
         this.addMixin();

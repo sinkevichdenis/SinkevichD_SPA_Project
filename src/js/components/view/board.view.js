@@ -2,12 +2,13 @@ import { EventEmiter } from '../service/event-emiter.service';
 import { Router } from '../service/router.service'
 import { Ajax } from '../service/ajax.service';
 import { renderMixin } from '../mixins/render.mixin';
+import { CONFIG } from '../../config';
 
 export class BoardView extends  EventEmiter {
     constructor() {
         super();
         this._template = null;
-        this._ajax = new Ajax('http://localhost:3006/products', 'getProductsList', true);
+        this._ajax = new Ajax(CONFIG.jsonServer + 'products', 'getProductsList', true);
         this._router = new Router();
         this._products = null;
 
