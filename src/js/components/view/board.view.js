@@ -6,11 +6,11 @@ import { CONFIG } from '../../config';
 import { FilterView } from './filter.view';
 
 export class BoardView extends  EventEmiter {
-    constructor() {
+    constructor(filterView) {
         super();
         this._template = null;
         this._ajax = new Ajax(CONFIG.serverJsonProducts, 'getProductsList', true);
-        this._filter = new FilterView();
+        this._filter = filterView;
         this._filterTemp = null;
         this._router = new Router();
         this._products = null;
@@ -30,11 +30,6 @@ export class BoardView extends  EventEmiter {
         // get data from json-server and then create event
         this._ajax.get(() => {
             window.dispatchEvent(new HashChangeEvent('hashchange'));
-        });
-
-        this._filter.on('changedFilter', data => {
-            this._filterTemp = data;
-            this.renderProductsList();
         });
     }
 
@@ -129,11 +124,12 @@ export class BoardView extends  EventEmiter {
             return (!this._filterTemp.onlyNew)
                 ? true : (Date.now() - Number(item.date) <= 432000000)
         });
-
+        console.log('filteredProducts', filteredProducts);
         return filteredProducts;
     }
 
     renderProductsList() {
+        this._filterTemp = this._filter.getFilter();
         console.log('renderTempl', this._filterTemp);
         const filteredProducts = (this._filterTemp) ? this.filterProducts(): this._products;
 

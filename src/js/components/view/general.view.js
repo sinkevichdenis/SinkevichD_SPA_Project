@@ -43,7 +43,7 @@ export class GeneralView {
      */
     initAllButtons() {
         this.findAll('button').forEach(item => {
-            if (item.type !== 'submit') {
+            if (item.type !== 'submit' && item.dataset.href) {
                 item.addEventListener('click', () => {
                     event.preventDefault();
                     window.location.hash = item.dataset.href;

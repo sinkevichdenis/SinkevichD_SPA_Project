@@ -11,7 +11,7 @@ export class FilterView extends EventEmiter {
             onlyImage: false,
             onlyNew: false
         };
-        this._filter = {};
+        this._filter = Object.assign({}, this._filterTemp );
 
         this.changeFilter();
         this.init();
@@ -43,6 +43,7 @@ export class FilterView extends EventEmiter {
         this._filter.onlyImage = data.onlyImage;
         this._filter.onlyNew = data.onlyNew;
         this.emit('changedFilter', this._filter);
+        console.log('filter filter', this._filter);
     }
 
     changeSidebarFilter(data) {
@@ -57,5 +58,9 @@ export class FilterView extends EventEmiter {
         this._filter.dir = data[0];
         this._filter.subdir = data[1];
         this.emit('changedFilter', this._filter);
+    }
+
+    getFilter() {
+        return this._filter;
     }
 }

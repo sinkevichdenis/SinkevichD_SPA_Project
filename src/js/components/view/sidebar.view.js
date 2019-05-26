@@ -4,11 +4,12 @@ import { CONFIG } from '../../config';
 import { FilterView } from './filter.view';
 
 export class SidebarView extends  EventEmiter {
-    constructor() {
+    constructor(filterView) {
         super();
         this._template = null;
         this._ajax = new Ajax(CONFIG.serverJsonSidebar, 'getSidebarList');
-        this._filter = new FilterView();
+        this._filter = filterView;
+        this._filterForm = document.getElementById('sidebar_form');
         this.initAjax();
         this.initFilter();
     }
@@ -22,26 +23,26 @@ export class SidebarView extends  EventEmiter {
     }
 
     initFilter(){
-        let form = document.getElementById('sidebar_form');
         let filter = {
             condition: 'all',
             onlyImage: false,
             onlyNew: false
         };
 
-        form.addEventListener('change', () => {
-            filter.condition = Array.from(form.condition).filter(item => item.checked)[0].value;
-            filter.onlyImage = form.onlyImage.checked;
-            filter.onlyNew = form.onlyNew.checked;
+        this._filterForm.addEventListener('change', () => {
+            filter.condition = Array.from(this._filterForm.condition).filter(item => item.checked)[0].value;
+            filter.onlyImage = this._filterForm.onlyImage.checked;
+            filter.onlyNew = this._filterForm.onlyNew.checked;
         });
 
-        form.elements[5].addEventListener('click', () => {
+        this._filterForm.elements[5].addEventListener('click', () => {
             this._filter.emit('usedFilter', filter);
+            window.dispatchEvent(new HashChangeEvent('hashchange'));
         });
 
-        form.elements[6].addEventListener('click', () => {
+        this._filterForm.elements[6].addEventListener('click', () => {
             this._filter.emit('clearedFilter');
-            form.reset();
+            this._filterForm.reset();
         });
     };
 
@@ -70,8 +71,8 @@ export class SidebarView extends  EventEmiter {
         });
         list.innerHTML = html;
 
-        this.renderSubtitles(data)
-    }
+        this.renderSubtitles(data);
+     }
 
     /**
      * create subdirection's lists
@@ -107,6 +108,8 @@ export class SidebarView extends  EventEmiter {
             item.addEventListener('click', (event) => {
                 event.preventDefault();
                 window.location.hash = `${prefix}${item.dataset.href}`;
+                this._filter.emit('clearedFilter');
+                this._filterForm.reset();
             });
         });
     }
