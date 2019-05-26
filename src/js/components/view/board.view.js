@@ -8,7 +8,7 @@ export class BoardView extends  EventEmiter {
     constructor() {
         super();
         this._template = null;
-        this._ajax = new Ajax(CONFIG.jsonServer + 'products', 'getProductsList', true);
+        this._ajax = new Ajax(CONFIG.serverJsonProducts, 'getProductsList', true);
         this._router = new Router();
         this._products = null;
 

@@ -6,7 +6,7 @@ import { CONFIG } from '../../config';
 export class AddProductView extends EventEmiter {
     constructor() {
         super();
-        this._ajax = new Ajax(CONFIG.jsonServer + 'sidebar', 'getSidebarList');
+        this._ajax = new Ajax(CONFIG.serverJsonSidebar, 'getSidebarList');
         this._menuItems = [];
 
         this.addMixin();

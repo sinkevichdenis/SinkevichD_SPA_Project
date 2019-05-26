@@ -22,8 +22,8 @@ export class AddDataService extends EventEmiter {
         }
     }
 
-    postData(path, eventName) {
-        this._ajax = new Ajax(CONFIG.jsonServer + path, eventName, false);
+    postData(url, eventName) {
+        this._ajax = new Ajax(url, eventName, false);
         this._ajax.post(this._formData);
     }
 

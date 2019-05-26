@@ -6,7 +6,7 @@ export class SidebarView extends  EventEmiter {
     constructor() {
         super();
         this._template = null;
-        this._ajax = new Ajax(CONFIG.jsonServer + 'sidebar', 'getSidebarList');
+        this._ajax = new Ajax(CONFIG.serverJsonSidebar, 'getSidebarList');
         this.init();
     }
 
