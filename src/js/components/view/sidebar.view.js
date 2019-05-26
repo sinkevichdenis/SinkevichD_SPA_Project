@@ -1,22 +1,49 @@
 import { EventEmiter } from '../service/event-emiter.service';
 import { Ajax } from '../service/ajax.service';
 import { CONFIG } from '../../config';
+import { FilterView } from './filter.view';
 
 export class SidebarView extends  EventEmiter {
     constructor() {
         super();
         this._template = null;
         this._ajax = new Ajax(CONFIG.serverJsonSidebar, 'getSidebarList');
-        this.init();
+        this._filter = new FilterView();
+        this.initAjax();
+        this.initFilter();
     }
 
     /**
      * subscribe at server data
      */
-    init() {
+    initAjax() {
         this._ajax.on('getSidebarList', data => this.renderSidebar(data));
         this._ajax.get();
     }
+
+    initFilter(){
+        let form = document.getElementById('sidebar_form');
+        let filter = {
+            condition: 'all',
+            onlyImage: false,
+            onlyNew: false
+        };
+
+        form.addEventListener('change', () => {
+            filter.condition = Array.from(form.condition).filter(item => item.checked)[0].value;
+            filter.onlyImage = form.onlyImage.checked;
+            filter.onlyNew = form.onlyNew.checked;
+        });
+
+        form.elements[5].addEventListener('click', () => {
+            this._filter.emit('usedFilter', filter);
+        });
+
+        form.elements[6].addEventListener('click', () => {
+            this._filter.emit('clearedFilter');
+            form.reset();
+        });
+    };
 
     /**
      * get Html template

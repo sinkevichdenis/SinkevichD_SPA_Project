@@ -3,23 +3,26 @@ import { Router } from '../service/router.service'
 import { Ajax } from '../service/ajax.service';
 import { renderMixin } from '../mixins/render.mixin';
 import { CONFIG } from '../../config';
+import { FilterView } from './filter.view';
 
 export class BoardView extends  EventEmiter {
     constructor() {
         super();
         this._template = null;
         this._ajax = new Ajax(CONFIG.serverJsonProducts, 'getProductsList', true);
+        this._filter = new FilterView();
+        this._filterTemp = null;
         this._router = new Router();
         this._products = null;
 
-        this.initAjax();
+        this.init();
         this.initRoutes();
 
         this.addMixin();
     }
 
     /* Service part */
-    initAjax() {
+    init() {
         this._ajax.on('getProductsList', data => {
             this._products = data.reverse();
         });
@@ -27,19 +30,24 @@ export class BoardView extends  EventEmiter {
         // get data from json-server and then create event
         this._ajax.get(() => {
             window.dispatchEvent(new HashChangeEvent('hashchange'));
-        })
+        });
+
+        this._filter.on('changedFilter', data => {
+            this._filterTemp = data;
+            this.renderProductsList();
+        });
     }
 
     initRoutes() {
-        this._router.addRoute('', () => this.renderProductsList(), false);
-        this._router.addRoute('#', () => this.renderProductsList(), false);
-        this._router.addRoute('404', () => this.renderErrorPage(), true);
-        this._router.addRoute('#login', () => this.renderOtherPage('.user_login'), true);
-        this._router.addRoute('#registration', () => this.renderOtherPage('.user_registration'), true);
-        this._router.addRoute('#empty', () => this.renderOtherPage('.board_empty'), false);
-        this._router.addRoute('#add', () => this.renderOtherPage('.board_add-product'), false);
-        this._router.addRoute('#room', () => this.renderErrorPage(), false);
-        this._router.addRoute('#product', (id) => this.renderSinglePage(id), true);
+        this._router.addRoute('', () => this.renderProductsList());
+        this._router.addRoute('#dir', () => this.renderProductsList());
+        this._router.addRoute('404', () => this.renderErrorPage(), 'TopPage');
+        this._router.addRoute('#login', () => this.renderOtherPage('.user_login'), 'TopPage');
+        this._router.addRoute('#registration', () => this.renderOtherPage('.user_registration'), 'TopPage');
+        this._router.addRoute('#empty', () => this.renderOtherPage('.board_empty'));
+        this._router.addRoute('#add', () => this.renderOtherPage('.board_add-product'));
+        this._router.addRoute('#room', () => this.renderErrorPage());
+        this._router.addRoute('#product', (id) => this.renderSinglePage(id), 'TopPage');
     }
 
     addMixin() {
@@ -88,15 +96,58 @@ export class BoardView extends  EventEmiter {
         this.show(this.find('.product_single'));
     }
 
+    filterProducts(){
+/*        this._filterTemp = {
+            dir: null,
+            subdir: null,
+            condition: 'all',
+            onlyImage: false,
+            onlyNew: false
+        };*/
+        let filteredProducts = this._products.filter(item => {
+            return (this._filterTemp.dir === null || this._filterTemp.subdir === null)
+                ? true : (this._filterTemp.dir === item.direction);
+        });
+
+        filteredProducts = filteredProducts.filter(item => {
+            return (this._filterTemp.dir === null || this._filterTemp.subdir === null)
+                ? true : (this._filterTemp.subdir === item.subdirection);
+        });
+
+        filteredProducts = filteredProducts.filter(item => {
+            return (this._filterTemp.condition === item.condition
+                || this._filterTemp.condition === 'all');
+        });
+
+        filteredProducts = filteredProducts.filter(item => {
+            return (!this._filterTemp.onlyImage)
+                ? true : (item.images !== CONFIG.defaultProductImage);
+        });
+
+        // count time through milliseconds
+        filteredProducts = filteredProducts.filter(item => {
+            return (!this._filterTemp.onlyNew)
+                ? true : (Date.now() - Number(item.date) <= 432000000)
+        });
+
+        return filteredProducts;
+    }
+
     renderProductsList() {
+        console.log('renderTempl', this._filterTemp);
+        const filteredProducts = (this._filterTemp) ? this.filterProducts(): this._products;
+
+        if (!filteredProducts.length) {
+            window.location.hash = '#empty';
+        }
+
         this.getTemplate();
 
         let list = this.findId('board');
         this.show(list);
         const template = Handlebars.compile(this._template);
         let html = '';
-
-        this._products.forEach(item => {
+        filteredProducts.forEach(item => {
             html += template(item);
         });
         list.innerHTML = html;

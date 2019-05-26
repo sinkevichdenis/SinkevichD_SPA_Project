@@ -34,7 +34,7 @@ export class AddDataService extends EventEmiter {
 
         setTimeout(() => {
             this.hide(page);
-        }, 2000);
+        }, 3000);
     }
 
     events() {
@@ -90,7 +90,7 @@ export class AddDataService extends EventEmiter {
 
             reader.onloadend = () => {
                 this._formData.images = reader.result;
-                this.postData('products', 'postNewProduct');
+                this.postData(CONFIG.serverJsonProducts, 'postNewProduct');
                 this.showSuccessfulPage('Ваше объявление успешно добавлено.');
             };
 
@@ -99,7 +99,7 @@ export class AddDataService extends EventEmiter {
             };
         } else {
             this._formData.images = CONFIG.defaultProductImage;
-            this.postData('products', 'postNewProduct');
+            this.postData(CONFIG.serverJsonProducts, 'postNewProduct');
             this.showSuccessfulPage('Ваше объявление успешно добавлено.');
         }
     }
