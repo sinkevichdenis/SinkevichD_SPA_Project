@@ -28,7 +28,7 @@ export class AddDataService extends EventEmiter {
     }
 
     showSuccessfulPage(text){
-        let page = this.find('.board_loaded-product');
+        let page = this.find('.product_loaded');
         this.findId('title_loaded-page').innerHTML = text;
         this.show(page);
 

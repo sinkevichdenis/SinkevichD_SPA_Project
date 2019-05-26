@@ -205,6 +205,10 @@ body {
     border: 1px solid black;
     border-radius: 7px; }
 
+.product_loaded h2 {
+  line-height: 550px;
+  text-align: center; }
+
 .product_definition {
   box-sizing: border-box;
   width: 960px;
