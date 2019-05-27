@@ -3,7 +3,6 @@ import { Router } from '../service/router.service'
 import { Ajax } from '../service/ajax.service';
 import { renderMixin } from '../mixins/render.mixin';
 import { CONFIG } from '../../config';
-import { FilterView } from './filter.view';
 
 export class BoardView extends  EventEmiter {
     constructor(filterView) {
@@ -92,13 +91,6 @@ export class BoardView extends  EventEmiter {
     }
 
     filterProducts(){
-/*        this._filterTemp = {
-            dir: null,
-            subdir: null,
-            condition: 'all',
-            onlyImage: false,
-            onlyNew: false
-        };*/
         let filteredProducts = this._products.filter(item => {
             return (this._filterTemp.dir === null || this._filterTemp.subdir === null)
                 ? true : (this._filterTemp.dir === item.direction);
@@ -124,13 +116,12 @@ export class BoardView extends  EventEmiter {
             return (!this._filterTemp.onlyNew)
                 ? true : (Date.now() - Number(item.date) <= 432000000)
         });
-        console.log('filteredProducts', filteredProducts);
+
         return filteredProducts;
     }
 
     renderProductsList() {
         this._filterTemp = this._filter.getFilter();
-        console.log('renderTempl', this._filterTemp);
         const filteredProducts = (this._filterTemp) ? this.filterProducts(): this._products;
 
         if (!filteredProducts.length) {

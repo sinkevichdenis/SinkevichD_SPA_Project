@@ -1,7 +1,6 @@
 import { EventEmiter } from '../service/event-emiter.service';
 import { Ajax } from '../service/ajax.service';
 import { CONFIG } from '../../config';
-import { FilterView } from './filter.view';
 
 export class SidebarView extends  EventEmiter {
     constructor(filterView) {
@@ -22,6 +21,9 @@ export class SidebarView extends  EventEmiter {
         this._ajax.get();
     }
 
+    /**
+     * init filter area
+     */
     initFilter(){
         let filter = {
             condition: 'all',
@@ -41,6 +43,11 @@ export class SidebarView extends  EventEmiter {
         });
 
         this._filterForm.elements[6].addEventListener('click', () => {
+            filter = {
+                condition: 'all',
+                onlyImage: false,
+                onlyNew: false
+            };
             this._filter.emit('clearedFilter');
             this._filterForm.reset();
         });
@@ -72,6 +79,19 @@ export class SidebarView extends  EventEmiter {
         list.innerHTML = html;
 
         this.renderSubtitles(data);
+        this.addSidebarEvent(list);
+     }
+
+    /**
+     * add closing event in sidebar
+     * @param {array} list - sidebar list
+     */
+    addSidebarEvent(list) {
+         window.addEventListener('hashchange', () => {
+             list.querySelectorAll('.collapse').forEach(item => {
+                 item.classList.remove('show');
+             })
+         })
      }
 
     /**
