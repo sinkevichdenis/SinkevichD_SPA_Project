@@ -5,6 +5,10 @@ export class SearchView{
         this.events();
     }
 
+
+    /**
+     * init changes from input to hash
+     */
     init() {
         this._input.addEventListener('input', (event) => {
             let timerId = null;
@@ -16,6 +20,9 @@ export class SearchView{
         });
     }
 
+    /**
+     * init changes from hash to input
+     */
     events() {
         window.addEventListener('hashchange', () => {
             if (!window.location.hash.includes('#search')) {

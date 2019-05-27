@@ -10,7 +10,7 @@ export class AddProductView extends EventEmiter {
         this._menuItems = [];
 
         this.addMixin();
-        this.init();
+        this.initAjax();
         this.events();
 
     }
@@ -24,7 +24,10 @@ export class AddProductView extends EventEmiter {
         }
     }
 
-    init() {
+    /**
+     * init Ajax processes
+     */
+    initAjax() {
         this._ajax.on('getSidebarList', (data) => {
             this._menuItems = [...data];
             this.createDirSelect();
@@ -32,12 +35,18 @@ export class AddProductView extends EventEmiter {
         this._ajax.get();
     }
 
+    /**
+     * add events on page
+     */
     events() {
         this.showImageName();
         this.changeTextarea();
         this.changeSelect();
     }
 
+    /**
+     * create direction's select
+     */
     createDirSelect () {
         const elem = this.findId('add_dir');
         this._menuItems.forEach((item,index) => {
@@ -47,6 +56,9 @@ export class AddProductView extends EventEmiter {
         })
     }
 
+    /**
+     * create subdirection's select
+     */
     createSubdirSelect(selectIndex) {
         const elem = this.findId('add_subdir');
         this._menuItems[selectIndex - 1].subdirection.forEach((item,index) => {
@@ -56,6 +68,9 @@ export class AddProductView extends EventEmiter {
         })
     }
 
+    /**
+     * manage select's changing
+     */
     changeSelect(){
         const dirElem = this.findId('add_dir');
         const subdirElem = this.findId('add_subdir');

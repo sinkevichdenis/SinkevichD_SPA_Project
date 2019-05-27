@@ -14,14 +14,17 @@ export class BoardView extends  EventEmiter {
         this._router = new Router();
         this._products = null;
 
-        this.init();
+        this.initAjax();
         this.initRoutes();
 
         this.addMixin();
     }
 
     /* Service part */
-    init() {
+    /**
+     * init Ajax processes
+     */
+    initAjax() {
         this._ajax.on('getProductsList', data => {
             this._products = data.reverse();
         });
@@ -32,6 +35,9 @@ export class BoardView extends  EventEmiter {
         });
     }
 
+    /**
+     * init routing pathes
+     */
     initRoutes() {
         this._router.addRoute('', () => this.renderProductsList(this._products));
         this._router.addRoute('#dir', () => this.renderProductsList(this._products));
@@ -45,6 +51,9 @@ export class BoardView extends  EventEmiter {
         this._router.addRoute('#product', (id) => this.renderSinglePage(id), 'TopPage');
     }
 
+    /**
+     * add mixin to make easier looking at elements
+     */
     addMixin() {
         for (let key in renderMixin) {
             BoardView.prototype[key] = renderMixin[key];
@@ -57,10 +66,18 @@ export class BoardView extends  EventEmiter {
         this.hide(this.findId('main-container'));
     }
 
+    /**
+     * render template page
+     * @param {string} selector - css selector
+     */
     renderOtherPage(selector) {
         this.show(this.find(selector));
     }
 
+    /**
+     * check product's id truthy
+     * @param {string} id - product's id
+     */
     checkProductsId(id) {
         //check product's id in hash
         let isRealId = this._products.some((item) => {
@@ -74,6 +91,10 @@ export class BoardView extends  EventEmiter {
         }
     }
 
+    /**
+     * render single product page
+     * @param {string} id - product's id
+     */
     renderSinglePage(id) {
         this.checkProductsId(id);
         const product = this._products.filter(item => item.id === id)[0];
@@ -91,6 +112,11 @@ export class BoardView extends  EventEmiter {
         this.show(this.find('.product_single'));
     }
 
+    /**
+     * product's direct/checkbox-filter
+     * @param {array} allProducts - product's list
+     * @returns {array} - filtered list
+     */
     filterProducts(allProducts){
         allProducts = (allProducts) ? allProducts : this._products;
 
@@ -123,6 +149,10 @@ export class BoardView extends  EventEmiter {
         return filteredProducts;
     }
 
+    /**
+     * product's search-filter
+     * @param {string} value - search query
+     */
     renderSearchList(value) {
         let filteredProducts = this._products.filter(item => {
             return item.title.toLowerCase().includes(value.toLowerCase());
@@ -131,6 +161,11 @@ export class BoardView extends  EventEmiter {
         this.renderProductsList(filteredProducts);
     }
 
+    /**
+     * render product's list page
+     * @param {array} allProducts - product's list
+     * @returns {boolean}
+     */
     renderProductsList(allProducts) {
         this._filterTemp = this._filter.getFilter();
         const filteredProducts = (this._filterTemp) ? this.filterProducts(allProducts) : this._products;
@@ -154,12 +189,21 @@ export class BoardView extends  EventEmiter {
         this.addHashLinks(list, '.board_product', 'product/');
     }
 
+    /**
+     * get Html template
+     */
     getPageTemplate() {
         if (this.findId('board_list-template')) {
             this._template = this.findId('board_list-template').innerHTML;
         }
     }
 
+    /**
+     * add click-events on new links
+     * @param {object} elem - element
+     * @param {string} selector - css selector
+     * @param {string} prefix - adding hash prefix
+     */
     addHashLinks(elem, selector, prefix) {
         elem.querySelectorAll(selector).forEach((item) => {
             item.addEventListener('click', (event) => {

@@ -11,7 +11,6 @@ export class Router {
     init() {
         window.addEventListener('hashchange', () => {
             this.render(decodeURI(window.location.hash));
-            window.scrollTo(0, 0);
         });
     }
 

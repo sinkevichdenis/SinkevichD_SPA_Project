@@ -133,5 +133,4 @@ export class SidebarView extends  EventEmiter {
             });
         });
     }
-
 }

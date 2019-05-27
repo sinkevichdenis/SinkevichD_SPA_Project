@@ -27,16 +27,27 @@ export class FilterView extends EventEmiter {
         }
     }
 
+    /**
+     * subsribe on async actions
+     */
     init() {
         this.on('clearedFilter', () => this.changeFilter());
         this.on('usedFilter', (data) => this.changeFilter(data));
     }
 
+    /**
+     * add events
+     */
     events() {
         window.addEventListener('hashchange', () =>{
             this.changeSidebarFilter(window.location.hash);
         })
     }
+
+    /**
+     * change filter object by checkboxs
+     * @param {object} data - filter object
+     */
 
     changeFilter(data=this._filterTemp) {
         this._filter.condition = data.condition;
@@ -45,6 +56,10 @@ export class FilterView extends EventEmiter {
         this.emit('changedFilter', this._filter);
     }
 
+    /**
+     * change filter object by directions
+     * @param {object} data - filter object
+     */
     changeSidebarFilter(data) {
         if (!data.includes('#dir')){
             this._filter.dir = null;
@@ -59,6 +74,10 @@ export class FilterView extends EventEmiter {
         this.emit('changedFilter', this._filter);
     }
 
+    /**
+     * return filter object
+     * @returns {({} & {dir: null, subdir: null, condition: string, onlyImage: boolean, onlyNew: boolean}) | *}
+     */
     getFilter() {
         return this._filter;
     }
