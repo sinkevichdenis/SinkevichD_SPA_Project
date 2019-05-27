@@ -33,8 +33,9 @@ export class BoardView extends  EventEmiter {
     }
 
     initRoutes() {
-        this._router.addRoute('', () => this.renderProductsList());
-        this._router.addRoute('#dir', () => this.renderProductsList());
+        this._router.addRoute('', () => this.renderProductsList(this._products));
+        this._router.addRoute('#dir', () => this.renderProductsList(this._products));
+        this._router.addRoute('#search', (data) => this.renderSearchList(data));
         this._router.addRoute('404', () => this.renderErrorPage(), 'TopPage');
         this._router.addRoute('#login', () => this.renderOtherPage('.user_login'), 'TopPage');
         this._router.addRoute('#registration', () => this.renderOtherPage('.user_registration'), 'TopPage');
@@ -90,8 +91,10 @@ export class BoardView extends  EventEmiter {
         this.show(this.find('.product_single'));
     }
 
-    filterProducts(){
-        let filteredProducts = this._products.filter(item => {
+    filterProducts(allProducts){
+        allProducts = (allProducts) ? allProducts : this._products;
+
+        let filteredProducts = allProducts.filter(item => {
             return (this._filterTemp.dir === null || this._filterTemp.subdir === null)
                 ? true : (this._filterTemp.dir === item.direction);
         });
@@ -120,15 +123,24 @@ export class BoardView extends  EventEmiter {
         return filteredProducts;
     }
 
-    renderProductsList() {
+    renderSearchList(value) {
+        let filteredProducts = this._products.filter(item => {
+            return item.title.toLowerCase().includes(value.toLowerCase());
+        });
+
+        this.renderProductsList(filteredProducts);
+    }
+
+    renderProductsList(allProducts) {
         this._filterTemp = this._filter.getFilter();
-        const filteredProducts = (this._filterTemp) ? this.filterProducts(): this._products;
+        const filteredProducts = (this._filterTemp) ? this.filterProducts(allProducts) : this._products;
 
         if (!filteredProducts.length) {
-            window.location.hash = '#empty';
+            this.renderOtherPage('.board_empty');
+            return false;
         }
 
-        this.getTemplate();
+        this.getPageTemplate();
 
         let list = this.findId('board');
         this.show(list);
@@ -142,7 +154,7 @@ export class BoardView extends  EventEmiter {
         this.addHashLinks(list, '.board_product', 'product/');
     }
 
-    getTemplate() {
+    getPageTemplate() {
         if (this.findId('board_list-template')) {
             this._template = this.findId('board_list-template').innerHTML;
         }
