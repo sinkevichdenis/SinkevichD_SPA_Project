@@ -216,7 +216,7 @@
       "condition": "used",
       "price": "14500 p",
       "place": "Минск",
-      "date": 1558884033274
+      "date": 1558036960232
     },
     {
       "id": "bbb",
@@ -231,7 +231,7 @@
       "condition": "new",
       "price": "25500 p",
       "place": "Брест",
-      "date": 155884033274
+      "date": 1558136960232
     },
     {
       "id": "ccc",
@@ -246,7 +246,7 @@
       "condition": "new",
       "price": "10700 p",
       "place": "Гродно",
-      "date": 155888403274
+      "date": 1558236960232
     },
     {
       "userId": null,
@@ -260,7 +260,7 @@
       "condition": "all",
       "price": "45000 p",
       "place": "Борисов",
-      "date": 15584033274,
+      "date": 1558336960232,
       "id": "DPMeIgR"
     },
     {
@@ -275,7 +275,7 @@
       "condition": "гыув",
       "price": "2000 p",
       "place": "Минск",
-      "date": 158936954481,
+      "date": 1558436960232,
       "id": "Cwe8wX3"
     },
     {
@@ -290,7 +290,7 @@
       "condition": "all",
       "price": "10000 p",
       "place": "Гродно",
-      "date": 1558936960232,
+      "date": 1558836960232,
       "id": "BWXHUNN11"
     },
     {

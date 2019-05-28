@@ -4,8 +4,8 @@
 	"description": "",
 	"main": "app.js",
 	"scripts": {
-		"start": "./node_modules/.bin/http-server -a localhost -p 8082 -c-1",
-		"j": "./node_modules/.bin/json-server --watch src/data/db.json --port 3006",
+		"start": "./node_modules/.bin/http-server -a localhost -p 8088 -c-1",
+		"j": "./node_modules/.bin/json-server --watch src/data/db.json --port 3016",
 		"build": "webpack --progress -p",
 		"w": "webpack --progress --watch",
 		"s": "browser-sync start -s -f ./",
@@ -31,6 +31,7 @@
 		"bootstrap": "^4.1.3",
 		"http-server": "0.9.0",
 		"jquery": "^3.3.1",
-		"jquery-ui": "^1.12.1"
+		"jquery-ui": "^1.12.1",
+		"moment": "^2.24.0"
 	}
 }

@@ -13,11 +13,15 @@ export class BoardView extends  EventEmiter {
         this._filterTemp = null;
         this._router = new Router();
         this._products = null;
+        this._moment = moment;
 
+        this._moment.locale('ru');
+        console.log(this._moment);
         this.initAjax();
         this.initRoutes();
 
         this.addMixin();
+
     }
 
     /* Service part */
@@ -107,7 +111,7 @@ export class BoardView extends  EventEmiter {
         this.find('.product_user').innerHTML = product.userName;
         this.find('.product_number').innerHTML = product.userPhone;
         this.find('.product_place').innerHTML = product.place;
-        this.find('.product_date').innerHTML = product.date;
+        this.find('.product_date').innerHTML = this._moment(product.date).fromNow();
 
         this.show(this.find('.product_single'));
     }
@@ -186,7 +190,14 @@ export class BoardView extends  EventEmiter {
         });
         list.innerHTML = html;
 
+        this.humanizeDate('.board_time');
         this.addHashLinks(list, '.board_product', 'product/');
+    }
+
+    humanizeDate(selector) {
+        document.querySelectorAll(selector).forEach(item => {
+            item.innerHTML = this._moment(parseInt(item.innerHTML)).fromNow();
+        });
     }
 
     /**
