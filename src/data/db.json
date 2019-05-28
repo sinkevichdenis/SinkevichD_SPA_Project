@@ -337,6 +337,21 @@
       "place": "Гомель",
       "date": 1558936960232,
       "id": "BWXH55UNN"
+    },
+    {
+      "userId": null,
+      "userName": "1",
+      "userPhone": "",
+      "direction": "Раздел",
+      "subdirection": "Категория",
+      "images": "./src/assets/product_images/no_photo.png",
+      "title": "11111111",
+      "text": "Описание товара...",
+      "condition": "Состояние",
+      "price": " p",
+      "place": "1",
+      "date": 1559022460255,
+      "id": "01zox-V"
     }
   ],
   "users": [

@@ -4,14 +4,15 @@ import { GeneralView } from './components/view/general.view';
 import { AddDataService } from './components/service/add-data.service';
 import { AddProductView } from './components/view/add-product.view';
 import { FilterView } from './components/view/filter.view';
-import {SearchView} from "./components/view/search.view";
+import { SearchView } from './components/view/search.view';
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
     const filterView = new FilterView();
     new SidebarView(filterView);
     new BoardView(filterView);
     new GeneralView();
     new AddProductView();
     new AddDataService();
-    new SearchView()
+    new SearchView();
+
 });

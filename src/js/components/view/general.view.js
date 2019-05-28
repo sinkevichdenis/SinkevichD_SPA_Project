@@ -5,7 +5,6 @@ export class GeneralView {
         this.addMixin();
         this.closeWindowEvent();
         this.initAllButtons();
-        this.initNavbarSearch();
     }
 
     /**
@@ -50,12 +49,5 @@ export class GeneralView {
                 })
             }
         })
-    }
-
-    /**
-     * initiate search process
-     */
-    initNavbarSearch() {
-
     }
 }

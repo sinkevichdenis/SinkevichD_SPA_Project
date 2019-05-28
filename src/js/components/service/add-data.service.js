@@ -2,6 +2,7 @@ import { EventEmiter } from './event-emiter.service';
 import { Ajax } from './ajax.service';
 import { renderMixin } from '../mixins/render.mixin';
 import { CONFIG } from '../../config';
+import { ValidatorView } from '../view/validator.view';
 
 export class AddDataService extends EventEmiter {
     constructor() {
@@ -10,6 +11,7 @@ export class AddDataService extends EventEmiter {
         this._ajax = null;
         this._forms = Array.from(this.findAll('form'));
         this._formData = null;
+        this._validator = new ValidatorView();
         this.events();
     }
 
@@ -34,7 +36,7 @@ export class AddDataService extends EventEmiter {
 
         setTimeout(() => {
             this.hide(page);
-        }, 3000);
+        }, 2500);
     }
 
     events() {
@@ -45,12 +47,29 @@ export class AddDataService extends EventEmiter {
 
         this._forms.forEach(item => {
             let validateButton = item.getElementsByClassName('btn-validate')[0];
+            this.addValidator(item);
+
             validateButton.addEventListener('click', (event) => {
-                    event.preventDefault();
-                    this.validateData(item);
-                    this.createData(item);
+                event.preventDefault();
+
+                console.log('END');
             })
         });
+    }
+
+    addValidator(form) {
+        switch (form.id) {
+            case 'form-add-product':
+                this._validator.validateProductForm();
+                this._validator.on('validatedForm', isFormValid => {
+                    console.log('ONisFormValid', isFormValid);
+                    if (isFormValid) {
+                        this.createProductData();
+                        this.codeProductImage();
+                    }
+                });
+                break;
+        }
     }
 
     createData(form) {
@@ -65,7 +84,6 @@ export class AddDataService extends EventEmiter {
     }
 
     createProductData() {
-        console.log('productData');
         this._formData = {
             "userId": null,
             "userName": this.findId('add_name').value,
@@ -104,7 +122,4 @@ export class AddDataService extends EventEmiter {
         }
     }
 
-    validateData(form) {
-        console.log('validation');
-    }
 }

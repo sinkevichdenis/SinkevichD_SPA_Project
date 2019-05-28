@@ -10,6 +10,7 @@
     <script src="node_modules/jquery/dist/jquery.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery-validation@1.19.0/dist/jquery.validate.min.js"></script>
 
 </head>
 <body>
@@ -141,8 +142,9 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text text-center"><span>Название</span></span>
                         </div>
-                        <input id="add_title" type="text" class="form-control">
+                        <input id="add_title" name="title" type="text" class="form-control">
                     </div>
+                    <div id="add_title-error" class="error-list"></div>
 
                     <div class="add_container">
                         <select id="add_dir" class="add_dir custom-select custom-select-lg mb-3">
@@ -167,10 +169,15 @@
                             <input id="add_price" type="number" class="form-control">
                         </div>
                     </div>
+                    <div id="add_dir-error" class="error-list"></div>
+                    <div id="add_subdir-error" class="error-list"></div>
+                    <div id="add_condition-error" class="error-list"></div>
+                    <div id="add_price-error" class="error-list"></div>
 
                     <div class="input-group input-group-default add_text">
                         <textarea id="add_text" type="text" class="form-control">Описание товара...</textarea>
                     </div>
+                    <div id="add_text-error" class="error-list"></div>
 
                     <h5 class="text-uppercase add_title-info">Контактная информация</h5>
                     <div class="input-group input-group-default add_place">
@@ -179,6 +186,7 @@
                         </div>
                         <input id="add_place" type="text" class="form-control">
                     </div>
+                    <div id="add_place-error" class="error-list"></div>
 
                     <div class="input-group input-group-default add_name">
                         <div class="input-group-prepend">
@@ -186,6 +194,7 @@
                         </div>
                         <input id="add_name" type="text" class="form-control">
                     </div>
+                    <div id="add_name-error" class="error-list"></div>
 
                     <div class="input-group input-group-default add_phone">
                         <div class="input-group-prepend">
@@ -193,10 +202,14 @@
                         </div>
                         <input id="add_phone" type="number" class="form-control">
                     </div>
+                    <div id="add_phone-error" class="error-list"></div>
+                    <div id="add_btn-error" class="error-list"></div>
 
                     <div class="input-group user_field-buttons add_btn-add">
-                        <button id="add_btn-add" data-href="#" type="submit" class="btn btn-success text-uppercase btn-validate"> Добавить объявление</button>
+                        <button id="add_btn-add" data-href="#" type="submit" class="btn btn-success text-uppercase btn-validate">
+                            Добавить объявление</button>
                     </div>
+
                 </form>
             </div>
             <!--user room page-->

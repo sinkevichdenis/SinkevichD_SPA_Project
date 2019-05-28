@@ -12,7 +12,13 @@ button.btn.btn-light {
   z-index: 50; }
 
 .validation-error {
-  border: 1px solid red; }
+  border: 1px solid red !important; }
+
+div.error-list {
+  display: block;
+  height: 0;
+  width: 100%;
+  transition: height .5s; }
 
 body {
   margin-right: auto;
