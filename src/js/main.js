@@ -7,12 +7,12 @@ import { FilterView } from './components/view/filter.view';
 import { SearchView } from './components/view/search.view';
 
 document.addEventListener('DOMContentLoaded', () => {
-    const filterView = new FilterView();
-    new SidebarView(filterView);
-    new BoardView(filterView);
-    new GeneralView();
-    new AddProductView();
-    new AddDataService();
-    new SearchView();
+	const filterView = new FilterView();
+	new SidebarView(filterView);
+	new BoardView(filterView);
+	new GeneralView();
+	new AddProductView();
+	new AddDataService();
+	new SearchView();
 
 });
