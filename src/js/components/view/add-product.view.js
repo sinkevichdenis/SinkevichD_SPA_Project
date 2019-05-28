@@ -61,11 +61,16 @@ export class AddProductView extends EventEmiter {
      */
     createSubdirSelect(selectIndex) {
         const elem = this.findId('add_subdir');
-        this._menuItems[selectIndex - 1].subdirection.forEach((item,index) => {
-            let option = new Option(item, index);
-            option.classList.add('font-italic');
-            elem.appendChild(option);
-        })
+
+        elem.options.length = 1;
+
+        if (selectIndex !== 0) {
+            this._menuItems[selectIndex - 1].subdirection.forEach((item,index) => {
+                let option = new Option(item, index);
+                option.classList.add('font-italic');
+                elem.appendChild(option);
+            })
+        }
     }
 
     /**

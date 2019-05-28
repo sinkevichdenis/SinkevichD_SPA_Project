@@ -1,31 +1,33 @@
 import * as ValidatorList from './validator-list.service.js';
 
-export function ValidatorElementService(type, id, validators, helper) {
+export function ValidatorElementService(type, id, validators, helper, flag) {
     switch (type) {
         case 'input':
             return new ValidatorInput(id, validators, helper);
         case 'select':
-            //return new ValidatorSelect(id, validators, helper);
+            return new ValidatorInput(id, validators, helper, flag);
         default:
             throw new Error('Invalid form type!');
     }
 }
 
 class ValidatorInput {
-    constructor (id, validators, helper) {
+    constructor (id, validators, helper, flag = undefined) {
         this._id = id;
         this._elem = document.getElementById(id);
         this._validators = new Set(validators);
         this._helper = helper;
         this._validationErrors = new Set();
-        this._isValid = this.getValidation.bind(this)();
+        this._isValid = this.getValidation();
+        this._flag = !!flag;
 
-        this.init();
+        this.init(this._flag);
     }
 
-    init() {
+    init(boolean) {
         const self = this;
-        this._elem.addEventListener('input', this.check.bind(self));
+        boolean ? this._elem.addEventListener('change', this.check.bind(self))
+            : this._elem.addEventListener('input', this.check.bind(self))
     }
 
     check () {
@@ -41,10 +43,9 @@ class ValidatorInput {
         });
 
         errorContainer.innerHTML = text;
-
         if (!this._isValid) {
             classChanger.addClass();
-            errorContainer.style.height = stringCount * 25 + 'px';
+            errorContainer.style.height = stringCount * 23 + 'px';
         } else {
             classChanger.removeClass();
             errorContainer.style.height = '0';
@@ -55,11 +56,11 @@ class ValidatorInput {
      * get validation all form
      */
     getValidation() {
-        let isValid = true;
+        let isValid = [];
 
         this._validators.forEach(item => {
             let validator = new ValidatorList[item]();
-            isValid = this.testValidator.call(this, validator);
+            isValid = this.testValidator(validator);
         });
         return isValid;
     }

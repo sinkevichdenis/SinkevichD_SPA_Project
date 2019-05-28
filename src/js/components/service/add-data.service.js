@@ -51,8 +51,6 @@ export class AddDataService extends EventEmiter {
 
             validateButton.addEventListener('click', (event) => {
                 event.preventDefault();
-
-                console.log('END');
             })
         });
     }
@@ -62,7 +60,6 @@ export class AddDataService extends EventEmiter {
             case 'form-add-product':
                 this._validator.validateProductForm();
                 this._validator.on('validatedForm', isFormValid => {
-                    console.log('ONisFormValid', isFormValid);
                     if (isFormValid) {
                         this.createProductData();
                         this.codeProductImage();

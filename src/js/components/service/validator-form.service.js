@@ -16,20 +16,17 @@ export class ValidatorFormService extends EventEmiter {
 
         this._form.querySelector('button').addEventListener('click', () => {
             this._isValid = this.getStatus();
-            console.log('this._isValid', this._isValid);
             this.emit('changedFormStatus', this._isValid);
+
             if (this._isValid) {
                 classChanger.removeClass();
-                console.log('Data was sent');
                 return true;
             }
 
-            console.log('Form is not valid');
             classChanger.addClass();
             this._formElements.forEach(item => {
                 item.check();
             });
-            console.log('check lost');
         });
 
     }
