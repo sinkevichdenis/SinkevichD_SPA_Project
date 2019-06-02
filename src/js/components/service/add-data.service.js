@@ -32,6 +32,7 @@ export class AddDataService extends EventEmiter {
 		this._ajax = new Ajax(url, eventName, false);
 		this._ajax.post(this._formData);
 		this.emit('renewedData');
+        this.clearForms();
 	}
 
 	/**
@@ -68,19 +69,23 @@ export class AddDataService extends EventEmiter {
 
 		// clear forms when hash changed
 		window.addEventListener('hashchange', () => {
-            this._forms.forEach(item => {
-            	item.querySelectorAll('input').forEach(elem => elem.value = '');
-            	item.querySelectorAll('texarea').forEach(elem => elem.value = '');
-            	item.querySelectorAll('select').forEach(elem => elem.selectedIndex = 0);
-
-            	item.querySelectorAll('.validation-error').forEach(elem => elem.classList.remove('validation-error'));
-                item.classList.remove('validation-error');
-            	item.querySelectorAll('.error-list').forEach(elem => {
-            		elem.style.height = 0;
-            		elem.innerHTML = '';
-                });
-			})
+            this.clearForms();
 		});
+	}
+
+	clearForms() {
+        this._forms.forEach(item => {
+            item.querySelectorAll('input').forEach(elem => elem.value = '');
+            item.querySelectorAll('textarea').forEach(elem => elem.value = '');
+            item.querySelectorAll('select').forEach(elem => elem.selectedIndex = 0);
+
+            item.querySelectorAll('.validation-error').forEach(elem => elem.classList.remove('validation-error'));
+            item.classList.remove('validation-error');
+            item.querySelectorAll('.error-list').forEach(elem => {
+                elem.style.height = 0;
+                elem.innerHTML = '';
+            });
+        })
 	}
 
 	/**
@@ -90,19 +95,42 @@ export class AddDataService extends EventEmiter {
 	addValidator(form) {
 		switch (form.id) {
 		case 'form-add-product':
-            this._validator = new ValidatorView(form.id);
-			this._validator.validateProductForm();
-			this._validator.on('validatedForm', isFormValid => {
+            let validatorProduct = new ValidatorView();
+            validatorProduct.validateProductForm(form.id);
+            validatorProduct.on('validatedForm', isFormValid => {
 				if (isFormValid) {
 					this.createProductData();
 					this.codeProductImage();
 				}
 			});
 			break;
+		case 'user_registration':
+            let validatorReg = new ValidatorView();
+            validatorReg.validateRegForm(form.id);
+            validatorReg.on('validatedForm', isFormValid => {
+                if (isFormValid) {
+					this.createUserData();
+				}
+			});
+			break;
 		}
 	}
 
-	/**
+    createUserData() {
+        this._formData = {
+            'login': this.findId('reg_login').value,
+            'password': this.findId('reg_password').value,
+            'email': this.findId('reg_email').value,
+            'date': Date.now()
+        };
+
+        console.log(this._formData);
+        this.postData(CONFIG.serverJsonUsers, 'postNewUser');
+        this.showSuccessfulPage('Ваше объявление успешно добавлено.');
+    }
+
+
+    /**
      * collect product's data
      */
 	createProductData() {

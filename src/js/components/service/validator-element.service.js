@@ -26,7 +26,7 @@ class ValidatorOfElement {
 
 	init(boolean) {
 		const self = this;
-		boolean ? this._elem.addEventListener('change', this.check.bind(self))
+        boolean ? this._elem.addEventListener('change', this.check.bind(self))
 			: this._elem.addEventListener('input', this.check.bind(self));
 	}
 
@@ -62,7 +62,6 @@ class ValidatorOfElement {
 			let validator = new ValidatorList[item]();
 			isValid.push(this.testValidator(validator));
 		});
-
         return !isValid.some(item => (item === false));
 	}
 

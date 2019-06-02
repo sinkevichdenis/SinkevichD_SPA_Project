@@ -4,16 +4,16 @@ import { ValidatorElementService } from '../service/validator-element.service';
 import { EventEmiter } from '../service/event-emiter.service';
 
 export class ValidatorView extends EventEmiter{
-	constructor(id) {
+	constructor() {
 		super();
-		this._id = id;
+		this._form = null;
 		this._controls = [];
 		this._funcHelper = ValidatorChangerService;
 	}
 
-	validateProductForm() {
-		const form = new ValidatorFormService(this._id, this._funcHelper);
-		form.on('changedFormStatus', status => this.emit('validatedForm', status));
+	validateProductForm(id) {
+        this._form = new ValidatorFormService(id, this._funcHelper);
+        this._form.on('changedFormStatus', status => this.emit('validatedForm', status));
 
         this._controls[0] = new ValidatorElementService('input', 'add_title', ['Required', 'MinLength'], this._funcHelper);
         this._controls[1] = new ValidatorElementService('input', 'add_text', ['MaxLength', 'Required'], this._funcHelper);
@@ -26,9 +26,25 @@ export class ValidatorView extends EventEmiter{
         this._controls[8] = new ValidatorElementService('select', 'add_condition', ['Selected'], this._funcHelper, 'select');
 
         this._controls.forEach(item => {
-        	form.registerElements(item);
+            this._form.registerElements(item);
 		});
 	}
+
+    validateRegForm(id) {
+        this._form = new ValidatorFormService(id, this._funcHelper);
+        this._form.on('changedFormStatus', status => {
+            console.log('status', status);
+            this.emit('validatedForm', status);
+        });
+        this._controls[0] = new ValidatorElementService('input', 'reg_login', ['Required'], this._funcHelper);
+        this._controls[1] = new ValidatorElementService('input', 'reg_password', ['Required', 'MinLength'], this._funcHelper);
+        this._controls[2] = new ValidatorElementService('input', 'reg_password-repeat', ['Required'], this._funcHelper);
+        this._controls[3] = new ValidatorElementService('input', 'reg_email', ['Email'], this._funcHelper);
+
+        this._controls.forEach(item => {
+            this._form. registerElements(item);
+        });
+    }
 
 
 }

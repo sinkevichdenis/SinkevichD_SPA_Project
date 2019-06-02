@@ -265,19 +265,22 @@
             <div class="overlay"></div>
             <div class="user_container">
                 <h1 class="user_title text-uppercase">Вход</h1>
-                <form>
+                <form id="user_enter">
                     <div class="input-group input-group-lg user_field-login">
                         <div class="input-group-prepend">
                             <span class="input-group-text text-center text-uppercase"><span>имя</span></span>
                         </div>
                         <input id="user_login" type="text" class="form-control">
                     </div>
+                    <div id="user_login-error" class="error-list"></div>
+
                     <div class="input-group input-group-lg user_field-password">
                         <div class="input-group-prepend">
                             <span class="input-group-text text-center text-uppercase"><span>Пароль</span></span>
                         </div>
                         <input id="user_password" type="password" class="form-control">
                     </div>
+                    <div id="user_password-error" class="error-list"></div>
 
                     <div class="input-group user_field-buttons">
                         <button id="user_btn-enter" data-href="room" type="button" class="btn btn-success text-uppercase">
@@ -295,34 +298,41 @@
             <div class="overlay"></div>
             <div class="user_container">
                 <h1 class="user_title text-uppercase">Регистрация</h1>
-                <form>
+                <form id="user_registration">
                     <div class="input-group input-group-lg user_field-login">
                         <div class="input-group-prepend">
                             <span class="input-group-text text-center text-uppercase"><span>имя</span></span>
                         </div>
                         <input id="reg_login" type="text" class="form-control">
                     </div>
+                    <div id="reg_login-error" class="error-list"></div>
+
                     <div class="input-group input-group-lg user_field-password">
                         <div class="input-group-prepend">
                             <span class="input-group-text text-center text-uppercase"><span>Пароль</span></span>
                         </div>
-                        <input type="password" class="form-control">
+                        <input id="reg_password" type="password" class="form-control">
                     </div>
+                    <div id="reg_password-error" class="error-list"></div>
+
                     <div class="input-group input-group-lg user_field-password-repeat">
                         <div class="input-group-prepend">
                             <span class="input-group-text text-center text-uppercase"><span> пароль (повтор)</span></span>
                         </div>
-                        <input type="password" class="form-control">
+                        <input  id="reg_password-repeat" type="password" class="form-control">
                     </div>
+                    <div id="reg_password-repeat-error" class="error-list"></div>
+
                     <div class="input-group input-group-lg user_field-password">
                         <div class="input-group-prepend">
                             <span class="input-group-text text-center text-uppercase"><span>E-mail</span></span>
                         </div>
-                        <input type="email" class="form-control">
+                        <input id="reg_email" type="email" class="form-control">
                     </div>
+                    <div id="reg_email-error" class="error-list"></div>
 
                     <div class="input-group user_field-buttons">
-                        <button type="button" id="user_btn-registration-end" data-href="room" class="btn btn-info text-uppercase btn-validate">Закончить регистрацию</button>
+                        <button type="button" id="user_btn-registration-end"  class="btn btn-info text-uppercase btn-validate">Закончить регистрацию</button>
                     </div>
                 </form>
             </div>
