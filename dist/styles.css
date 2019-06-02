@@ -298,7 +298,7 @@ body {
   justify-content: center;
   box-sizing: border-box;
   width: 960px;
-  height: 550px;
+  min-height: 550px;
   position: fixed;
   left: 50%;
   margin-left: -475px;
@@ -315,8 +315,10 @@ body {
     font-family: "Tahoma";
     opacity: .8; }
   .user_container form {
-    height: 300px;
-    margin-top: 15px; }
+    height: 70%;
+    width: 70%;
+    margin: 5px auto;
+    padding: 0 40px; }
     .user_container form div.input-group {
       display: flex;
       justify-content: center;

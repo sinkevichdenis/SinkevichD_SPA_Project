@@ -2,6 +2,7 @@ import { ValidatorFormService } from '../service/validator-form.service';
 import { ValidatorChangerService } from '../service/validator-changer.service';
 import { ValidatorElementService } from '../service/validator-element.service';
 import { EventEmiter } from '../service/event-emiter.service';
+import {Repeated} from "../service/validator-list.service";
 
 export class ValidatorView extends EventEmiter{
 	constructor() {
@@ -38,7 +39,7 @@ export class ValidatorView extends EventEmiter{
         });
         this._controls[0] = new ValidatorElementService('input', 'reg_login', ['Required'], this._funcHelper);
         this._controls[1] = new ValidatorElementService('input', 'reg_password', ['Required', 'MinLength'], this._funcHelper);
-        this._controls[2] = new ValidatorElementService('input', 'reg_password-repeat', ['Required'], this._funcHelper);
+        this._controls[2] = new ValidatorElementService('input', 'reg_password-repeat', ['Required', 'Repeated'], this._funcHelper);
         this._controls[3] = new ValidatorElementService('input', 'reg_email', ['Email'], this._funcHelper);
 
         this._controls.forEach(item => {
