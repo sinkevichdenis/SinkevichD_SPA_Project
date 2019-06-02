@@ -16,20 +16,28 @@ export class ValidatorFormService extends EventEmiter {
 
 		this._form.querySelector('button').addEventListener('click', () => {
 			this._isValid = this.getStatus();
-			this.emit('changedFormStatus', this._isValid);
+            this._formElements.forEach(item => {
+                item.check();
+            });
 
-			if (this._isValid) {
-				classChanger.removeClass();
-				return true;
+			if (!this._isValid) {
+                classChanger.addClass();
+
+				this._form.addEventListener('input', () => {
+                    this._isValid = this.getStatus();
+                   	this._isValid && classChanger.removeClass();
+                });
+
+				this._form.addEventListener('change', () => {
+                    this._isValid = this.getStatus();
+                   	this._isValid && classChanger.removeClass();
+                });
 			}
 
-			classChanger.addClass();
-			this._formElements.forEach(item => {
-				item.check();
-			});
+            this.emit('changedFormStatus', this._isValid);
 		});
-
 	}
+
 
 	registerElements (item) {
 		this._formElements.push(item);
@@ -41,7 +49,6 @@ export class ValidatorFormService extends EventEmiter {
 		this._formElements.forEach(item => {
 			if (!item._isValid) {
 				status = false;
-				return false;
 			}
 		});
 

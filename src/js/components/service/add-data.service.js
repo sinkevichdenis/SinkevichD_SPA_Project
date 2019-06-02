@@ -11,7 +11,6 @@ export class AddDataService extends EventEmiter {
 		this._ajax = null;
 		this._forms = Array.from(this.findAll('form'));
 		this._formData = null;
-		this._validator = new ValidatorView();
 		this.events();
 	}
 
@@ -32,6 +31,7 @@ export class AddDataService extends EventEmiter {
 	postData(url, eventName) {
 		this._ajax = new Ajax(url, eventName, false);
 		this._ajax.post(this._formData);
+		this.emit('renewedData');
 	}
 
 	/**
@@ -49,7 +49,7 @@ export class AddDataService extends EventEmiter {
 	}
 
 	/**
-     * add submit events
+     * add form events
      */
 	events() {
 		this._forms = this._forms.filter(item => {
@@ -65,6 +65,22 @@ export class AddDataService extends EventEmiter {
 				event.preventDefault();
 			});
 		});
+
+		// clear forms when hash changed
+		window.addEventListener('hashchange', () => {
+            this._forms.forEach(item => {
+            	item.querySelectorAll('input').forEach(elem => elem.value = '');
+            	item.querySelectorAll('texarea').forEach(elem => elem.value = '');
+            	item.querySelectorAll('select').forEach(elem => elem.selectedIndex = 0);
+
+            	item.querySelectorAll('.validation-error').forEach(elem => elem.classList.remove('validation-error'));
+                item.classList.remove('validation-error');
+            	item.querySelectorAll('.error-list').forEach(elem => {
+            		elem.style.height = 0;
+            		elem.innerHTML = '';
+                });
+			})
+		});
 	}
 
 	/**
@@ -74,6 +90,7 @@ export class AddDataService extends EventEmiter {
 	addValidator(form) {
 		switch (form.id) {
 		case 'form-add-product':
+            this._validator = new ValidatorView(form.id);
 			this._validator.validateProductForm();
 			this._validator.on('validatedForm', isFormValid => {
 				if (isFormValid) {
@@ -82,21 +99,6 @@ export class AddDataService extends EventEmiter {
 				}
 			});
 			break;
-		}
-	}
-
-	/**
-     * create form data before posting
-     * @param {element} form
-     */
-	createData(form) {
-		switch (form.id) {
-		case 'form-add-product':
-			this.createProductData();
-			this.codeProductImage();
-			break;
-		default:
-			window.location.hash = '#error';
 		}
 	}
 

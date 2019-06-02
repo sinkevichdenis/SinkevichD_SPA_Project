@@ -4,35 +4,30 @@ import { ValidatorElementService } from '../service/validator-element.service';
 import { EventEmiter } from '../service/event-emiter.service';
 
 export class ValidatorView extends EventEmiter{
-	constructor() {
+	constructor(id) {
 		super();
+		this._id = id;
+		this._controls = [];
+		this._funcHelper = ValidatorChangerService;
 	}
 
 	validateProductForm() {
-		const funcHelper = ValidatorChangerService;
-		const form = new ValidatorFormService('form-add-product', funcHelper);
+		const form = new ValidatorFormService(this._id, this._funcHelper);
 		form.on('changedFormStatus', status => this.emit('validatedForm', status));
 
-		const control1 = new ValidatorElementService('input', 'add_title', ['Required', 'MinLength'], funcHelper);
-		const control2 = new ValidatorElementService('input', 'add_text', ['MaxLength', 'RequiredTemp'], funcHelper);
-		const control3 = new ValidatorElementService('input', 'add_place', ['Required'], funcHelper);
-		const control4 = new ValidatorElementService('input', 'add_name', ['Required'], funcHelper);
-		const control5 = new ValidatorElementService('input', 'add_phone', ['MinLength'], funcHelper);
-		const control6 = new ValidatorElementService('input', 'add_price', ['Required'], funcHelper);
-		const control7 = new ValidatorElementService('select', 'add_dir', ['Selected'], funcHelper, 'select');
-		const control8 = new ValidatorElementService('select', 'add_subdir', ['Selected'], funcHelper, 'select');
-		const control9 = new ValidatorElementService('select', 'add_condition', ['Selected'], funcHelper, 'select');
+        this._controls[0] = new ValidatorElementService('input', 'add_title', ['Required', 'MinLength'], this._funcHelper);
+        this._controls[1] = new ValidatorElementService('input', 'add_text', ['MaxLength', 'Required'], this._funcHelper);
+        this._controls[2] = new ValidatorElementService('input', 'add_place', ['Required'], this._funcHelper);
+        this._controls[3] = new ValidatorElementService('input', 'add_name', ['Required'], this._funcHelper);
+        this._controls[4] = new ValidatorElementService('input', 'add_phone', ['MinLength'], this._funcHelper);
+        this._controls[5] = new ValidatorElementService('input', 'add_price', ['Required'], this._funcHelper);
+        this._controls[6] = new ValidatorElementService('select', 'add_dir', ['Selected'], this._funcHelper, 'select');
+        this._controls[7] = new ValidatorElementService('select', 'add_subdir', ['Selected'], this._funcHelper, 'select');
+        this._controls[8] = new ValidatorElementService('select', 'add_condition', ['Selected'], this._funcHelper, 'select');
 
-
-		form.registerElements(control1);
-		form.registerElements(control2);
-		form.registerElements(control3);
-		form.registerElements(control4);
-		form.registerElements(control5);
-		form.registerElements(control6);
-		form.registerElements(control7);
-		form.registerElements(control8);
-		form.registerElements(control9);
+        this._controls.forEach(item => {
+        	form.registerElements(item);
+		});
 	}
 
 

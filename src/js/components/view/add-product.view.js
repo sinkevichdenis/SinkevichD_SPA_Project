@@ -40,7 +40,6 @@ export class AddProductView extends EventEmiter {
      */
 	events() {
 		this.showImageName();
-		this.changeTextarea();
 		this.changeSelect();
 	}
 
@@ -95,28 +94,6 @@ export class AddProductView extends EventEmiter {
 			let imageName = event.target.value.split('\\');
 			imageName = imageName[imageName.length - 1];
 			this.findId('add_image-label').innerHTML = imageName;
-		});
-	}
-
-	/**
-     * change text in textArea
-     */
-	changeTextarea() {
-		const field = this.findId('add_text');
-		let textTemplate = field.value;
-		let text = '';
-
-		field.addEventListener('focus', () => {
-			text = field.value.trim();
-			if (text === textTemplate) {
-				field.value = '';
-			}
-		});
-
-		field.addEventListener('blur', () => {
-			if (field.value.trim() === textTemplate || field.value.trim()  === '') {
-				field.value = textTemplate;
-			}
 		});
 	}
 }

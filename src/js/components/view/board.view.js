@@ -3,6 +3,7 @@ import { Router } from '../service/router.service';
 import { Ajax } from '../service/ajax.service';
 import { renderMixin } from '../mixins/render.mixin';
 import { CONFIG } from '../../config';
+import { AddDataService } from '../service/add-data.service';
 
 export class BoardView extends  EventEmiter {
 	constructor(filterView) {
@@ -12,6 +13,7 @@ export class BoardView extends  EventEmiter {
 		this._filter = filterView;
 		this._filterTemp = null;
 		this._router = new Router();
+        this._addDataService = new AddDataService();
 		this._products = null;
 		this._moment = moment;
 
@@ -29,13 +31,15 @@ export class BoardView extends  EventEmiter {
      */
 	initAjax() {
 		this._ajax.on('getProductsList', data => {
-			this._products = data.reverse();
+            this._products = data.reverse();
 		});
 
 		// get data from json-server and then create event
 		this._ajax.get(() => {
 			window.dispatchEvent(new HashChangeEvent('hashchange'));
 		});
+
+		this._addDataService.on('renewedData', () => this._ajax.get());
 	}
 
 	/**

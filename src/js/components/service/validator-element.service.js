@@ -3,22 +3,22 @@ import * as ValidatorList from './validator-list.service.js';
 export function ValidatorElementService(type, id, validators, helper, flag) {
 	switch (type) {
 	case 'input':
-		return new ValidatorInput(id, validators, helper);
+		return new ValidatorOfElement(id, validators, helper);
 	case 'select':
-		return new ValidatorInput(id, validators, helper, flag);
+		return new ValidatorOfElement(id, validators, helper, flag);
 	default:
 		throw new Error('Invalid form type!');
 	}
 }
 
-class ValidatorInput {
+class ValidatorOfElement {
 	constructor (id, validators, helper, flag = undefined) {
 		this._id = id;
 		this._elem = document.getElementById(id);
 		this._validators = new Set(validators);
 		this._helper = helper;
 		this._validationErrors = new Set();
-		this._isValid = this.getValidation();
+		this._isValid = null;
 		this._flag = !!flag;
 
 		this.init(this._flag);
@@ -31,7 +31,7 @@ class ValidatorInput {
 	}
 
 	check () {
-		let classChanger = new this._helper(this._elem, ['validation-error']);
+        let classChanger = new this._helper(this._elem, ['validation-error']);
 		const errorContainer = document.getElementById(`${this._id}-error`);
 		let text = '';
 		let stringCount = 0;
@@ -42,7 +42,7 @@ class ValidatorInput {
 			stringCount++;
 		});
 
-		errorContainer.innerHTML = text;
+        errorContainer.innerHTML = text;
 		if (!this._isValid) {
 			classChanger.addClass();
 			errorContainer.style.height = stringCount * 23 + 'px';
@@ -53,30 +53,29 @@ class ValidatorInput {
 	}
 
 	/**
-     * get validation all form
+     * get validation all tests from element
      */
 	getValidation() {
 		let isValid = [];
 
-		this._validators.forEach(item => {
+        this._validators.forEach((item) => {
 			let validator = new ValidatorList[item]();
-			isValid = this.testValidator(validator);
+			isValid.push(this.testValidator(validator));
 		});
-		return isValid;
+
+        return !isValid.some(item => (item === false));
 	}
 
 	/**
-     * get validation every item
+     * get validation only one test from element
      */
 	testValidator(validator){
-		let isValid = true;
-
 		if (!(validator.test(this._elem.value))) {
-			isValid = false;
 			this._validationErrors.add(validator.toString());
+			return false;
 		} else {
 			this._validationErrors.delete(validator.toString());
+			return true;
 		}
-		return isValid;
 	}
 }
