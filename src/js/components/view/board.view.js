@@ -18,11 +18,12 @@ export class BoardView extends  EventEmiter {
 		this._moment = moment;
 
 		this._moment.locale('ru');
+
+		this.init();
 		this.initAjax();
 		this.initRoutes();
 
 		this.addMixin();
-
 	}
 
 	/* Service part */
@@ -38,9 +39,14 @@ export class BoardView extends  EventEmiter {
 		this._ajax.get(() => {
 			window.dispatchEvent(new HashChangeEvent('hashchange'));
 		});
-
-		this._addDataService.on('renewedData', () => this._ajax.get());
 	}
+
+    /**
+     * init other subscribe events
+     */
+	init() {
+        this._addDataService.on('renewedData', () => this._ajax.get());
+    }
 
 	/**
      * init routing pathes

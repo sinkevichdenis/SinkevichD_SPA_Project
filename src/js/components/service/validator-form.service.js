@@ -13,10 +13,8 @@ export class ValidatorFormService extends EventEmiter {
 
 	init() {
 		let classChanger = new this._helper(this._form, ['validation-error']);
-        console.log(this._form);
 
         this._form.querySelector('button').addEventListener('click', () => {
-            console.log('button');
             this._formElements.forEach(item => {
                 item.check();
             });
@@ -37,10 +35,6 @@ export class ValidatorFormService extends EventEmiter {
 			}
 
             this.emit('changedFormStatus', this._isValid);
-            console.log('before', this._isValid);
-            this._isValid = false;
-            console.log('after', this._isValid);
-
 		});
 	}
 
@@ -53,7 +47,6 @@ export class ValidatorFormService extends EventEmiter {
 		let status = true;
 
 		this._formElements.forEach(item => {
-            console.log('item', item._isValid);
             if (!item._isValid) {
 				status = false;
 			}

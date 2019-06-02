@@ -2,7 +2,6 @@ import { ValidatorFormService } from '../service/validator-form.service';
 import { ValidatorChangerService } from '../service/validator-changer.service';
 import { ValidatorElementService } from '../service/validator-element.service';
 import { EventEmiter } from '../service/event-emiter.service';
-import {Repeated} from "../service/validator-list.service";
 
 export class ValidatorView extends EventEmiter{
 	constructor() {
@@ -34,7 +33,6 @@ export class ValidatorView extends EventEmiter{
     validateRegForm(id) {
         this._form = new ValidatorFormService(id, this._funcHelper);
         this._form.on('changedFormStatus', status => {
-            console.log('status', status);
             this.emit('validatedForm', status);
         });
         this._controls[0] = new ValidatorElementService('input', 'reg_login', ['Required'], this._funcHelper);
@@ -46,6 +44,5 @@ export class ValidatorView extends EventEmiter{
             this._form. registerElements(item);
         });
     }
-
 
 }

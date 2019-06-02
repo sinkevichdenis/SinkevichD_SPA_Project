@@ -9,9 +9,12 @@ export class AddDataService extends EventEmiter {
 		super();
 		this.addMixin();
 		this._ajax = null;
+		this._users = null;
 		this._forms = Array.from(this.findAll('form'));
 		this._formData = null;
+
 		this.events();
+		this.initAjax();
 	}
 
 	/**
@@ -22,6 +25,19 @@ export class AddDataService extends EventEmiter {
 			AddDataService.prototype[key] = renderMixin[key];
 		}
 	}
+
+	initAjax() {
+		let ajax = new Ajax(CONFIG.serverJsonUsers, 'getUsersList');
+
+		ajax.on('getUsersList', data => {
+            this._users = data;
+        });
+        ajax.get();
+
+        this.on('postNewUser', () => {
+            ajax.get();
+        });
+    }
 
 	/**
      * post data
@@ -39,13 +55,18 @@ export class AddDataService extends EventEmiter {
      * display page about successful send data
      * @param {string} text
      */
-	showSuccessfulPage(text){
+	showSuccessfulPage(text, pageClass = undefined){
 		let page = this.find('.product_loaded');
 		this.findId('title_loaded-page').innerHTML = text;
 		this.show(page);
 
+        pageClass && this.hide(this.find(pageClass));
+
 		setTimeout(() => {
 			this.hide(page);
+			if (window.location.hash === '#registration') {
+                window.history.back();
+			}
 		}, 2500);
 	}
 
@@ -118,15 +139,15 @@ export class AddDataService extends EventEmiter {
 
     createUserData() {
         this._formData = {
-            'login': this.findId('reg_login').value,
+            'login': this.findId('reg_login').value.trim(),
             'password': this.findId('reg_password').value,
-            'email': this.findId('reg_email').value,
+            'email': this.findId('reg_email').value.trim(),
             'date': Date.now()
         };
 
-        console.log(this._formData);
         this.postData(CONFIG.serverJsonUsers, 'postNewUser');
-        this.showSuccessfulPage('Ваше объявление успешно добавлено.');
+        this.emit('postNewUser');
+        this.showSuccessfulPage('Вы успешно зарегистрировались.', '.user_registration');
     }
 
 
@@ -136,16 +157,16 @@ export class AddDataService extends EventEmiter {
 	createProductData() {
 		this._formData = {
 			'userId': null,
-			'userName': this.findId('add_name').value,
-			'userPhone': this.findId('add_phone').value,
+			'userName': this.findId('add_name').value.trim(),
+			'userPhone': this.findId('add_phone').value.trim(),
 			'direction': this.findId('add_dir').options[this.findId('add_dir').selectedIndex].value,
 			'subdirection': this.findId('add_subdir').options[this.findId('add_subdir').selectedIndex].value,
 			'images': null,
-			'title': this.findId('add_title').value,
-			'text': this.findId('add_text').value,
+			'title': this.findId('add_title').value.trim(),
+			'text': this.findId('add_text').value.trim(),
 			'condition': this.findId('add_condition').options[this.findId('add_condition').selectedIndex].value,
 			'price': this.findId('add_price').value + ' p',
-			'place': this.findId('add_place').value,
+			'place': this.findId('add_place').value.trim(),
 			'date': Date.now(),
 		};
 	}

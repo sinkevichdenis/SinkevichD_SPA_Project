@@ -62,4 +62,3 @@ export class Selected extends ValidatorList {
 		return index >= 0 || index === 'new' || index === 'used';
 	}
 }
-
