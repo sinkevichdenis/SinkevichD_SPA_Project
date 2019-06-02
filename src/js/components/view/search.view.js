@@ -15,7 +15,7 @@ export class SearchView{
 			event.preventDefault();
 			timerId && clearInterval(timerId);
 			timerId = setTimeout(() => {
-				window.location.hash = `#search/${this._input.value}`;
+				window.location.hash = `#search/${this._input.value.trim()}`;
 			}, 500);
 		});
 	}
