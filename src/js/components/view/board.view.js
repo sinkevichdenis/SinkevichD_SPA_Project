@@ -100,7 +100,7 @@ export class BoardView extends  EventEmiter {
 		let filterProducts = [...this._products];
 		if (localStorage.getItem(CONFIG.storageUserKey)) {
 			let userId = localStorage.getItem(CONFIG.storageUserKey);
-			filterProducts = filterProducts.filter(item => item.userId === userId);
+			filterProducts = filterProducts.filter(item => item.user === userId);
 		}
 		this.renderProductsList(filterProducts);
 
@@ -143,6 +143,7 @@ export class BoardView extends  EventEmiter {
 		button.addEventListener('click', (event) => {
 			event.preventDefault();
 			event.stopPropagation();
+
 			this.emit('deleteItem', element.dataset.href);
 		});
 	}

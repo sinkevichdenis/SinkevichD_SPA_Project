@@ -205,7 +205,7 @@
   "products": [
     {
       "id": "aaa",
-      "userId": null,
+      "user": "",
       "userName": "Николай",
       "userPhone": "+375 29 5868080",
       "direction": "0",
@@ -220,7 +220,7 @@
     },
     {
       "id": "bbb",
-      "userId": null,
+      "user": "",
       "userName": "Вася",
       "userPhone": "+375 29 0000000",
       "direction": "0",
@@ -235,7 +235,7 @@
     },
     {
       "id": "ccc",
-      "userId": null,
+      "user": "",
       "userName": "Дима",
       "userPhone": "+375 29 55555553",
       "direction": "0",
@@ -249,7 +249,7 @@
       "date": 1558236960232
     },
     {
-      "userId": null,
+      "user": "",
       "userName": "Костя",
       "userPhone": "+375 29 55555553",
       "direction": "0",
@@ -264,7 +264,7 @@
       "id": "DPMeIgR"
     },
     {
-      "userId": null,
+      "user": "",
       "userName": "Вадик",
       "userPhone": "+375 29 55775553",
       "direction": "1",
@@ -279,7 +279,7 @@
       "id": "Cwe8wX3"
     },
     {
-      "userId": "V5jpXuZ",
+      "user": "V5jpXuZ",
       "userName": "Катя",
       "userPhone": "+375 29 55002553",
       "direction": "1",
@@ -294,7 +294,7 @@
       "id": "BWXHUNN11"
     },
     {
-      "userId": null,
+      "user": "",
       "userName": "Сергей",
       "userPhone": "+375 29 77700553",
       "direction": "1",
@@ -309,7 +309,7 @@
       "id": "BWXHN"
     },
     {
-      "userId": "V5jpXuZ",
+      "user": "V5jpXuZ",
       "userName": "Никодим",
       "userPhone": "+375 29 22000553",
       "direction": "2",
@@ -324,7 +324,7 @@
       "id": "BWX00HUNN"
     },
     {
-      "userId": null,
+      "user": "",
       "userName": "Ася",
       "userPhone": "+375 29 11000553",
       "direction": "2",
@@ -339,7 +339,7 @@
       "id": "BWXH55UNN"
     },
     {
-      "userId": null,
+      "user": "",
       "userName": "3333",
       "userPhone": "3333333",
       "direction": "1",
@@ -354,7 +354,7 @@
       "id": "xtuAiTc"
     },
     {
-      "userId": "V5jpXuZ",
+      "user": "V5jpXuZ",
       "userName": "55",
       "userPhone": "5555555",
       "direction": "1",

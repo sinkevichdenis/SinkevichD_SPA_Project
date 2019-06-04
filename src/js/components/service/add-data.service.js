@@ -189,13 +189,13 @@ export class AddDataService extends EventEmiter {
      * collect product's data
      */
 	createProductData() {
-		let userId = null;
+		let userId = 'unknown';
 		if (localStorage.getItem(CONFIG.storageUserKey)) {
 			userId = localStorage.getItem(CONFIG.storageUserKey);
 		}
 
 		this._formData = {
-			'userId': userId,
+			'user': userId,
 			'userName': this.findId('add_name').value.trim(),
 			'userPhone': this.findId('add_phone').value.trim(),
 			'direction': this.findId('add_dir').options[this.findId('add_dir').selectedIndex].value,

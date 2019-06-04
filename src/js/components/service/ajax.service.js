@@ -75,8 +75,7 @@ export class Ajax extends  EventEmiter {
      */
 	delete(id) {
 		fetch(`${this._url}/${id}`, {
-			method: 'DELETE',
-			headers : { 'Content-Type': 'text/html' }
+			method: 'DELETE'
 		})
 			.then(response => response.json())
 			.catch(error => console.error(error));
