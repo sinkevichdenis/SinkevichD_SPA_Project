@@ -20,8 +20,23 @@
     width: 250px
     height: 100px
 
-  &-buttons button
-    margin: 10px 0
+  &-buttons
+    text-align: center
+
+    & button
+      margin: 10px 0
+
+    &>.btn-light
+      display: none
+
+      &.visible
+        display: inline-block
+
+  &_room-buttons
+    display: none
+
+    &.visible
+      display: inline-block
 
   &-search .form-control
     width: 200px

@@ -63,8 +63,18 @@ body {
   .navbar-brand img {
     width: 250px;
     height: 100px; }
-  .navbar-buttons button {
-    margin: 10px 0; }
+  .navbar-buttons {
+    text-align: center; }
+    .navbar-buttons button {
+      margin: 10px 0; }
+    .navbar-buttons > .btn-light {
+      display: none; }
+      .navbar-buttons > .btn-light.visible {
+        display: inline-block; }
+  .navbar_room-buttons {
+    display: none; }
+    .navbar_room-buttons.visible {
+      display: inline-block; }
   .navbar-search .form-control {
     width: 200px; }
 

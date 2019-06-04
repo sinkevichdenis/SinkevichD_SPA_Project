@@ -309,7 +309,7 @@
       "id": "BWXHN"
     },
     {
-      "userId": null,
+      "userId": "V5jpXuZ",
       "userName": "Никодим",
       "userPhone": "+375 29 22000553",
       "direction": "2",
@@ -324,7 +324,7 @@
       "id": "BWX00HUNN"
     },
     {
-      "userId": null,
+      "userId": "V5jpXuZ",
       "userName": "Ася",
       "userPhone": "+375 29 11000553",
       "direction": "2",
@@ -341,16 +341,18 @@
   ],
   "users": [
     {
-      "id": "0",
-      "login": "admin",
-      "password": "admin",
-      "name": "admin"
+      "login": "11",
+      "password": "1111111",
+      "email": "11@ff.yy",
+      "date": 1559494723917,
+      "id": "toVHR3F"
     },
     {
-      "id": "1",
-      "login": "test",
-      "password": "test",
-      "name": "Вася"
+      "login": "admin",
+      "password": "admin11",
+      "email": "admin@tut.by",
+      "date": 1559592000074,
+      "id": "V5jpXuZ"
     }
   ]
 }

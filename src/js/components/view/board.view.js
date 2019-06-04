@@ -4,6 +4,7 @@ import { Ajax } from '../service/ajax.service';
 import { renderMixin } from '../mixins/render.mixin';
 import { CONFIG } from '../../config';
 import { AddDataService } from '../service/add-data.service';
+import {UserRoomView} from "./user-room.view";
 
 export class BoardView extends  EventEmiter {
 	constructor(filterView) {
@@ -14,6 +15,7 @@ export class BoardView extends  EventEmiter {
 		this._filterTemp = null;
 		this._router = new Router();
         this._addDataService = new AddDataService();
+        this._userRoom = new UserRoomView();
 		this._products = null;
 		this._moment = moment;
 
@@ -46,6 +48,7 @@ export class BoardView extends  EventEmiter {
      */
 	init() {
         this._addDataService.on('renewedData', () => this._ajax.get());
+        this._addDataService.on('enterUser', user => this.enterUser(user));
     }
 
 	/**
@@ -60,7 +63,7 @@ export class BoardView extends  EventEmiter {
 		this._router.addRoute('#registration', () => this.renderOtherPage('.user_registration'), 'TopPage');
 		this._router.addRoute('#empty', () => this.renderOtherPage('.board_empty'));
 		this._router.addRoute('#add', () => this.renderOtherPage('.board_add-product'));
-		this._router.addRoute('#room', () => this.renderErrorPage());
+		this._router.addRoute('#room', () => this.renderUserPage());
 		this._router.addRoute('#product', (id) => this.renderSinglePage(id), 'TopPage');
 	}
 
@@ -74,13 +77,30 @@ export class BoardView extends  EventEmiter {
 	}
 
 	/* Render pages part */
-	/**
+
+    /**
+	 * user entered into private room after login
+     */
+	enterUser(user) {
+        this._userRoom.setUser(user);
+        this._userRoom.openRoom();
+        window.location.hash = '#room';
+	}
+
+    /**
+     * render user page
+     */
+    renderUserPage() {
+        this.renderProductsList(this._products);
+    }
+
+    /**
      * render error page
      */
-	renderErrorPage() {
-		this.show(this.find('.error'));
-		this.hide(this.findId('main-container'));
-	}
+    renderErrorPage() {
+        this.show(this.find('.error'));
+        this.hide(this.findId('main-container'));
+    }
 
 	/**
      * render template page

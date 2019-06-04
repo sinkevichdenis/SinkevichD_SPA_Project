@@ -13,8 +13,8 @@ export class AddDataService extends EventEmiter {
 		this._forms = Array.from(this.findAll('form'));
 		this._formData = null;
 
-		this.events();
 		this.initAjax();
+		this.events();
 	}
 
 	/**
@@ -31,12 +31,14 @@ export class AddDataService extends EventEmiter {
 
 		ajax.on('getUsersList', data => {
             this._users = data;
+            this.emit('getUsersData');
         });
-        ajax.get();
 
         this.on('postNewUser', () => {
             ajax.get();
         });
+
+        ajax.get();
     }
 
 	/**
@@ -81,7 +83,7 @@ export class AddDataService extends EventEmiter {
 
 		this._forms.forEach(item => {
 			let validateButton = item.getElementsByClassName('btn-validate')[0];
-			this.addValidator(item);
+            this.addValidator(item);
 
 			validateButton.addEventListener('click', (event) => {
 				event.preventDefault();
@@ -134,8 +136,40 @@ export class AddDataService extends EventEmiter {
 				}
 			});
 			break;
+		case 'user_enter':
+            let validatorEnter = null;
+			this.on('getUsersData', () => {
+			    let user = null;
+			    // make singleton to don't call validation events twice
+			    if (validatorEnter === null) {
+                    validatorEnter = new ValidatorView();
+                    validatorEnter.validateEnterForm(this.getEnterFormData(), this._users);
+                    validatorEnter.on('getUserData', data => {
+                        user = data;
+                    });
+                    validatorEnter.on('validatedForm', isFormValid => {
+                        if (isFormValid) {
+                            this.emit('enterUser', user);
+                        }
+                    });
+
+				} else {
+                    validatorEnter.setUsers(this._users);
+				}
+			});
+			break;
 		}
 	}
+
+	getEnterFormData() {
+        return {
+            'login': this.findId('user_login'),
+            'loginErr': this.findId('user_login-error'),
+            'password': this.findId('user_password'),
+            'passwordErr': this.findId('user_password-error'),
+            'button': this.findId('user_btn-enter')
+        };
+    }
 
     createUserData() {
         this._formData = {

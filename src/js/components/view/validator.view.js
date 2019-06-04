@@ -7,13 +7,16 @@ export class ValidatorView extends EventEmiter{
 	constructor() {
 		super();
 		this._form = null;
+		this._users = null;
 		this._controls = [];
 		this._funcHelper = ValidatorChangerService;
 	}
 
 	validateProductForm(id) {
         this._form = new ValidatorFormService(id, this._funcHelper);
-        this._form.on('changedFormStatus', status => this.emit('validatedForm', status));
+        this._form.on('changedFormStatus', status => {
+        	this.emit('validatedForm', status)
+        });
 
         this._controls[0] = new ValidatorElementService('input', 'add_title', ['Required', 'MinLength'], this._funcHelper);
         this._controls[1] = new ValidatorElementService('input', 'add_text', ['MaxLength', 'Required'], this._funcHelper);
@@ -35,14 +38,52 @@ export class ValidatorView extends EventEmiter{
         this._form.on('changedFormStatus', status => {
             this.emit('validatedForm', status);
         });
+
         this._controls[0] = new ValidatorElementService('input', 'reg_login', ['Required'], this._funcHelper);
         this._controls[1] = new ValidatorElementService('input', 'reg_password', ['Required', 'MinLength'], this._funcHelper);
         this._controls[2] = new ValidatorElementService('input', 'reg_password-repeat', ['Required', 'Repeated'], this._funcHelper);
         this._controls[3] = new ValidatorElementService('input', 'reg_email', ['Email'], this._funcHelper);
 
         this._controls.forEach(item => {
-            this._form. registerElements(item);
+            this._form.registerElements(item);
         });
+    }
+
+    validateEnterForm(form, users) {
+	    this._users = [...users];
+        form.button.addEventListener('click', () => {
+            let user = this._users.filter(item => item.login === form.login.value);
+
+			if (user.length === 0) {
+				form.loginErr.innerHTML = `<div> Неверный логин </div>`;
+				form.loginErr.style.height = '23px';
+
+				setTimeout(() => {
+                    form.loginErr.innerHTML = ``;
+                    form.loginErr.style.height = '0';
+				}, 2000);
+				return false;
+			}
+
+			if (user[0].password !== form.password.value) {
+                form.passwordErr.innerHTML = `<div> Неверный пароль </div>`;
+                form.passwordErr.style.height = '23px';
+
+                setTimeout(() => {
+                    form.passwordErr.innerHTML = ``;
+                    form.passwordErr.style.height = '0';
+                }, 2000);
+                return false;
+			}
+
+            this.emit('getUserData', user[0]);
+			this.emit('validatedForm', true);
+			return true;
+		})
+	}
+
+	setUsers(users) {
+        this._users = [...users];
     }
 
 }

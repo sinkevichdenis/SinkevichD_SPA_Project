@@ -29,12 +29,20 @@
                 </div>
             </div>
             <div class="navbar-buttons">
-               <button id="navbar_btn-add-product" data-href="add" type="button" class="btn btn-success">
-                   + Подать объявление
-               </button>
-               <button id="navbar_btn-login" data-href="login" type="button" class="btn btn-light">
-                   Вход
-               </button>
+                <button id="navbar_btn-add-product" data-href="add" type="button" class="btn btn-success">
+                    + Подать объявление
+                </button>
+                <button id="navbar_btn-login" data-href="login" type="button" class="btn btn-light visible">
+                    Вход
+                </button>
+                <div class="navbar_room-buttons" >
+                    <button id="navbar_room" data-href="room" type="button" class="btn btn-info">
+                        Личный кабинет
+                    </button>
+                    <button id="navbar_room-exit" data-href="#" type="button" class="btn btn-light">
+                        Выйти из кабинет
+                    </button>
+                </div>
             </div>
         </nav>
     </div>
@@ -283,7 +291,7 @@
                     <div id="user_password-error" class="error-list"></div>
 
                     <div class="input-group user_field-buttons">
-                        <button id="user_btn-enter" data-href="room" type="button" class="btn btn-success text-uppercase">
+                        <button id="user_btn-enter" type="button" class="btn btn-success btn-validate text-uppercase ">
                             Войти
                         </button>
                         <button id="user_btn-registration" data-href="registration" type="button" class="btn btn-info text-uppercase">
