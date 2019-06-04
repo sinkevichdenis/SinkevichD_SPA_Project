@@ -1,11 +1,12 @@
 import { EventEmiter } from '../service/event-emiter.service';
 import { renderMixin } from '../mixins/render.mixin';
+import { CONFIG } from '../../config';
 
 export class UserRoomView extends EventEmiter {
     constructor() {
         super();
         this.userId = null;
-        this.key = 'user';
+        this.key = CONFIG.storageUserKey;
 
         this.addMixin();
         this.init();

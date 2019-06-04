@@ -4,7 +4,7 @@ import { Ajax } from '../service/ajax.service';
 import { renderMixin } from '../mixins/render.mixin';
 import { CONFIG } from '../../config';
 import { AddDataService } from '../service/add-data.service';
-import {UserRoomView} from "./user-room.view";
+import { UserRoomView } from './user-room.view';
 
 export class BoardView extends  EventEmiter {
 	constructor(filterView) {
@@ -91,7 +91,55 @@ export class BoardView extends  EventEmiter {
      * render user page
      */
     renderUserPage() {
-        this.renderProductsList(this._products);
+        // create list of private announcements
+        let filterProducts = [...this._products];
+        if (localStorage.getItem(CONFIG.storageUserKey)) {
+            let userId = localStorage.getItem(CONFIG.storageUserKey);
+            filterProducts = filterProducts.filter(item => item.userId === userId);
+        }
+        this.renderProductsList(filterProducts);
+
+        // add title
+        let parentElementClass = (filterProducts.length) ? '.board_list' : '.board_empty';
+        this.createUserPageTitle(this.find(parentElementClass));
+
+        //add delete button
+        this.findAll('.board_product').forEach(item => this.addDeleteOpportunity(item));
+    }
+
+    /**
+     * create list's title
+     * @param {object} element - parent DOM element
+     */
+    createUserPageTitle(element) {
+        let title  = document.createElement('h1');
+        title.classList.add('board_list-title');
+        title.innerHTML = 'Ваши объявления:'.toUpperCase();
+
+        if (!element.contains(this.find('.board_list-title'))) {
+            element.insertAdjacentElement('afterbegin', title);
+        }
+    }
+
+    /**
+     * add button to delete announcement
+     * @param {object} element - parent DOM element
+     */
+    addDeleteOpportunity(element) {
+        let button = document.createElement('button');
+        button.setAttribute('class', 'btn btn-danger board_product-delete');
+
+        let img = document.createElement('img');
+        img.setAttribute('src', CONFIG.deleteButtonIcon);
+        button.appendChild(img);
+
+        element.querySelector('.board_footer').insertAdjacentElement('beforeend', button);
+
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            console.log(element.dataset.href);
+        });
     }
 
     /**

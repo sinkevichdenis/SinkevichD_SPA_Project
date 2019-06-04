@@ -118,6 +118,10 @@ body {
   @media (max-width: 1000px) {
     .board {
       width: calc(100% - 200px); } }
+  .board_list-title {
+    text-align: center;
+    margin: 10px 0 20px;
+    opacity: .8; }
   .board_product {
     display: flex;
     flex-direction: column;
@@ -130,6 +134,14 @@ body {
     @media (max-width: 768px) {
       .board_product {
         height: 250px; } }
+    .board_product-delete {
+      width: 30px;
+      height: 30px;
+      margin-left: 10px;
+      padding: 3px; }
+      .board_product-delete img {
+        height: 100%;
+        vertical-align: top; }
   .board_header {
     display: flex;
     justify-content: space-around;

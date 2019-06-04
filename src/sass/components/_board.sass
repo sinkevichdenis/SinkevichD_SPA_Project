@@ -7,6 +7,11 @@
   @media(max-width: 1000px)
     width: calc(100% - 200px)
 
+  &_list-title
+    text-align: center
+    margin: 10px 0 20px
+    opacity: .8
+
   &_product
     display: flex
     flex-direction: column
@@ -21,6 +26,16 @@
 
     @media(max-width: 768px)
       height: 250px
+
+    &-delete
+      width: 30px
+      height: 30px
+      margin-left: 10px
+      padding: 3px
+
+      & img
+        height: 100%
+        vertical-align: top
 
   &_header
     display: flex

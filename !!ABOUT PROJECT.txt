@@ -1,0 +1,20 @@
+Hello,
+My name is Denis Sinkevich. This is my exam project of JavaScript course.
+
+You can start this SPA with help some commands - 'npm run start' and 'npm run j',
+because you need to use http and json servers to display site.  
+
+SPA opportunities:
+  * Message board:
+	- add new anonymous announcement (without registration);
+	- add new private announcement (with registration);
+	- see list of all buying products
+	- see product's definition on single-product page
+	- look at announcements with help search panel
+	- filter all announcements with help sidebar panel
+
+  * Users:
+	- registrate new user
+	- login as registrated user
+	- see own private announcements
+	- delete private announcement 
