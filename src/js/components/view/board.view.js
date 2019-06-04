@@ -41,6 +41,12 @@ export class BoardView extends  EventEmiter {
 		this._ajax.get(() => {
 			window.dispatchEvent(new HashChangeEvent('hashchange'));
 		});
+
+		this.on('deleteItem', (id) => {
+		    this._ajax.delete(id);
+            console.log('reboot');
+            window.dispatchEvent(new HashChangeEvent('hashchange'));
+        });
 	}
 
     /**
@@ -138,7 +144,7 @@ export class BoardView extends  EventEmiter {
         button.addEventListener('click', (event) => {
             event.preventDefault();
             event.stopPropagation();
-            console.log(element.dataset.href);
+            this.emit('deleteItem', element.dataset.href);
         });
     }
 

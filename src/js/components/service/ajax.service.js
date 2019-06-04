@@ -42,9 +42,9 @@ export class Ajax extends  EventEmiter {
      * @param {undefined, function} func - add addition function
      */
 	get(func = undefined) {
-		fetch(this._url, { headers: {
-			'Content-Type': 'application/json'
-		} })
+		fetch(this._url, {
+			headers: { 'Content-Type': 'application/json' }
+		})
 			.then(response => response.json())
 			.then(data => {
 				this._items = data;
@@ -69,5 +69,17 @@ export class Ajax extends  EventEmiter {
 			.catch(error => console.error(error));
 	}
 
+    /**
+	 * delete data from server
+     * @param {string} id - id
+     */
+	delete(id) {
+		fetch(`${this._url}/${id}`, {
+			method: 'DELETE',
+			headers : { 'Content-Type': 'text/html' }
+		})
+			.then(response => console.log(`${id} item deleted`))
+			.catch(error => console.error(error));
+	}
 
 }
