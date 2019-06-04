@@ -22,6 +22,9 @@ export class UserRoomView extends EventEmiter {
 		}
 	}
 
+	/**
+	 * check if user has just logined
+     */
 	init() {
 		let id = localStorage.getItem(this.key);
 
@@ -31,6 +34,9 @@ export class UserRoomView extends EventEmiter {
 		}
 	}
 
+	/**
+	 * add events
+     */
 	events() {
 		window.addEventListener('hashchange', () => {
 			if (localStorage.getItem(this.key) === null) {
@@ -51,21 +57,34 @@ export class UserRoomView extends EventEmiter {
 
 	}
 
+	/**
+	 * show user room
+     */
 	openRoom() {
 		this.hide(this.findId('navbar_btn-login'));
 		this.show(this.find('.navbar_room-buttons'));
 	}
 
+	/**
+     * hide user room
+     */
 	closeRoom() {
 		this.show(this.findId('navbar_btn-login'));
 		this.hide(this.find('.navbar_room-buttons'));
 	}
 
+	/**
+	 * save login data
+     * @param {string} user - user id
+     */
 	setUser(user) {
 		this.userId = user.id;
 		localStorage.setItem(this.key, this.userId);
 	}
 
+	/**
+     * remove login data
+     */
 	clearUser() {
 		this.userId = '';
 		localStorage.removeItem(this.key);

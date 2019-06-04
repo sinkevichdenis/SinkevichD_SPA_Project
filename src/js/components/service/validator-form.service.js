@@ -11,6 +11,9 @@ export class ValidatorFormService extends EventEmiter {
 		this.init();
 	}
 
+	/**
+	 * form validation in general
+     */
 	init() {
 		let classChanger = new this._helper(this._form, ['validation-error']);
 
@@ -39,10 +42,18 @@ export class ValidatorFormService extends EventEmiter {
 	}
 
 
+	/**
+	 * add new elements to testing
+     * @param item
+     */
 	registerElements (item) {
 		this._formElements.push(item);
 	}
 
+	/**
+	 * get validation status
+     * @returns {boolean}
+     */
 	getStatus() {
 		let status = true;
 

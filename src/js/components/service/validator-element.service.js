@@ -24,12 +24,19 @@ class ValidatorOfElement {
 		this.init(this._flag);
 	}
 
+	/**
+	 *  choice type of events
+     * @param boolean
+     */
 	init(boolean) {
 		const self = this;
 		boolean ? this._elem.addEventListener('change', this.check.bind(self))
 			: this._elem.addEventListener('input', this.check.bind(self));
 	}
 
+	/**
+	 * test input with template
+     */
 	check () {
 		let classChanger = new this._helper(this._elem, ['validation-error']);
 		const errorContainer = document.getElementById(`${this._id}-error`);

@@ -337,36 +337,6 @@
       "place": "Гомель",
       "date": 1558936960232,
       "id": "BWXH55UNN"
-    },
-    {
-      "user": "",
-      "userName": "3333",
-      "userPhone": "3333333",
-      "direction": "1",
-      "subdirection": "1",
-      "images": "./src/assets/product_images/no_photo.png",
-      "title": "2222222",
-      "text": "333",
-      "condition": "new",
-      "price": "33 p",
-      "place": "33333",
-      "date": 1559634074313,
-      "id": "xtuAiTc"
-    },
-    {
-      "user": "V5jpXuZ",
-      "userName": "55",
-      "userPhone": "5555555",
-      "direction": "1",
-      "subdirection": "0",
-      "images": "./src/assets/product_images/no_photo.png",
-      "title": "5555555",
-      "text": "555",
-      "condition": "new",
-      "price": "55 p",
-      "place": "55",
-      "date": 1559642737410,
-      "id": "NjCTPf_"
     }
   ],
   "users": [

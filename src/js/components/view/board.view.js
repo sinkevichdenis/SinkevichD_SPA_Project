@@ -44,7 +44,9 @@ export class BoardView extends  EventEmiter {
 
 		this.on('deleteItem', (id) => {
 			this._ajax.delete(id);
-			window.dispatchEvent(new HashChangeEvent('hashchange'));
+			this._ajax.get(() => {
+				window.dispatchEvent(new HashChangeEvent('hashchange'));
+			});
 		});
 	}
 

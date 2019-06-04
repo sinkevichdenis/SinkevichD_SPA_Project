@@ -12,6 +12,10 @@ export class ValidatorView extends EventEmiter{
 		this._funcHelper = ValidatorChangerService;
 	}
 
+	/**
+	 * validate add-product form
+     * @param {string} id - form's id
+     */
 	validateProductForm(id) {
 		this._form = new ValidatorFormService(id, this._funcHelper);
 		this._form.on('changedFormStatus', status => {
@@ -33,6 +37,10 @@ export class ValidatorView extends EventEmiter{
 		});
 	}
 
+	/**
+     * validate registration form
+     * @param {string} id - form's id
+     */
 	validateRegForm(id) {
 		this._form = new ValidatorFormService(id, this._funcHelper);
 		this._form.on('changedFormStatus', status => {
@@ -49,6 +57,11 @@ export class ValidatorView extends EventEmiter{
 		});
 	}
 
+	/**
+	 * validate enter form
+     * @param {element} form - enter form
+     * @param {array} users - list of all users
+     */
 	validateEnterForm(form, users) {
 		this._users = [...users];
 		form.button.addEventListener('click', () => {
@@ -82,6 +95,10 @@ export class ValidatorView extends EventEmiter{
 		});
 	}
 
+	/**
+	 * set list of users
+     * @param {array} users - list of all users
+     */
 	setUsers(users) {
 		this._users = [...users];
 	}

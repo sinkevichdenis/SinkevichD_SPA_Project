@@ -26,6 +26,9 @@ export class AddDataService extends EventEmiter {
 		}
 	}
 
+	/**
+	 * init ajax processes
+     */
 	initAjax() {
 		let ajax = new Ajax(CONFIG.serverJsonUsers, 'getUsersList');
 
@@ -96,6 +99,9 @@ export class AddDataService extends EventEmiter {
 		});
 	}
 
+	/**
+	 * clear all forms
+     */
 	clearForms() {
 		this._forms.forEach(item => {
 			item.querySelectorAll('input').forEach(elem => elem.value = '');
@@ -161,6 +167,10 @@ export class AddDataService extends EventEmiter {
 		}
 	}
 
+	/**
+	 * get data from enter form
+     * @returns {{login: *, loginErr: *, password: *, passwordErr: *, button: *}}
+     */
 	getEnterFormData() {
 		return {
 			'login': this.findId('user_login'),
@@ -171,6 +181,9 @@ export class AddDataService extends EventEmiter {
 		};
 	}
 
+	/**
+	 * create data from registration form
+     */
 	createUserData() {
 		this._formData = {
 			'login': this.findId('reg_login').value.trim(),

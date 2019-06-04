@@ -4,6 +4,9 @@ export class ValidatorChangerService {
 		this._classes = classes;
 	}
 
+	/**
+	 * add error class
+     */
 	addClass() {
 		let classList = this._element.classList;
 
@@ -15,6 +18,9 @@ export class ValidatorChangerService {
 		});
 	}
 
+	/**
+     * remove error class
+     */
 	removeClass() {
 		let classList = this._element.classList;
 
