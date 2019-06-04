@@ -14,8 +14,8 @@ export class BoardView extends  EventEmiter {
 		this._filter = filterView;
 		this._filterTemp = null;
 		this._router = new Router();
-        this._addDataService = new AddDataService();
-        this._userRoom = new UserRoomView();
+		this._addDataService = new AddDataService();
+		this._userRoom = new UserRoomView();
 		this._products = null;
 		this._moment = moment;
 
@@ -34,7 +34,7 @@ export class BoardView extends  EventEmiter {
      */
 	initAjax() {
 		this._ajax.on('getProductsList', data => {
-            this._products = data.reverse();
+			this._products = data.reverse();
 		});
 
 		// get data from json-server and then create event
@@ -43,19 +43,18 @@ export class BoardView extends  EventEmiter {
 		});
 
 		this.on('deleteItem', (id) => {
-		    this._ajax.delete(id);
-            console.log('reboot');
-            window.dispatchEvent(new HashChangeEvent('hashchange'));
-        });
+			this._ajax.delete(id);
+			window.dispatchEvent(new HashChangeEvent('hashchange'));
+		});
 	}
 
-    /**
+	/**
      * init other subscribe events
      */
 	init() {
-        this._addDataService.on('renewedData', () => this._ajax.get());
-        this._addDataService.on('enterUser', user => this.enterUser(user));
-    }
+		this._addDataService.on('renewedData', () => this._ajax.get());
+		this._addDataService.on('enterUser', user => this.enterUser(user));
+	}
 
 	/**
      * init routing pathes
@@ -84,77 +83,77 @@ export class BoardView extends  EventEmiter {
 
 	/* Render pages part */
 
-    /**
+	/**
 	 * user entered into private room after login
      */
 	enterUser(user) {
-        this._userRoom.setUser(user);
-        this._userRoom.openRoom();
-        window.location.hash = '#room';
+		this._userRoom.setUser(user);
+		this._userRoom.openRoom();
+		window.location.hash = '#room';
 	}
 
-    /**
+	/**
      * render user page
      */
-    renderUserPage() {
-        // create list of private announcements
-        let filterProducts = [...this._products];
-        if (localStorage.getItem(CONFIG.storageUserKey)) {
-            let userId = localStorage.getItem(CONFIG.storageUserKey);
-            filterProducts = filterProducts.filter(item => item.userId === userId);
-        }
-        this.renderProductsList(filterProducts);
+	renderUserPage() {
+		// create list of private announcements
+		let filterProducts = [...this._products];
+		if (localStorage.getItem(CONFIG.storageUserKey)) {
+			let userId = localStorage.getItem(CONFIG.storageUserKey);
+			filterProducts = filterProducts.filter(item => item.userId === userId);
+		}
+		this.renderProductsList(filterProducts);
 
-        // add title
-        let parentElementClass = (filterProducts.length) ? '.board_list' : '.board_empty';
-        this.createUserPageTitle(this.find(parentElementClass));
+		// add title
+		let parentElementClass = (filterProducts.length) ? '.board_list' : '.board_empty';
+		this.createUserPageTitle(this.find(parentElementClass));
 
-        //add delete button
-        this.findAll('.board_product').forEach(item => this.addDeleteOpportunity(item));
-    }
+		//add delete button
+		this.findAll('.board_product').forEach(item => this.addDeleteOpportunity(item));
+	}
 
-    /**
+	/**
      * create list's title
      * @param {object} element - parent DOM element
      */
-    createUserPageTitle(element) {
-        let title  = document.createElement('h1');
-        title.classList.add('board_list-title');
-        title.innerHTML = 'Ваши объявления:'.toUpperCase();
+	createUserPageTitle(element) {
+		let title  = document.createElement('h1');
+		title.classList.add('board_list-title');
+		title.innerHTML = 'Ваши объявления:'.toUpperCase();
 
-        if (!element.contains(this.find('.board_list-title'))) {
-            element.insertAdjacentElement('afterbegin', title);
-        }
-    }
+		if (!element.contains(this.find('.board_list-title'))) {
+			element.insertAdjacentElement('afterbegin', title);
+		}
+	}
 
-    /**
+	/**
      * add button to delete announcement
      * @param {object} element - parent DOM element
      */
-    addDeleteOpportunity(element) {
-        let button = document.createElement('button');
-        button.setAttribute('class', 'btn btn-danger board_product-delete');
+	addDeleteOpportunity(element) {
+		let button = document.createElement('button');
+		button.setAttribute('class', 'btn btn-danger board_product-delete');
 
-        let img = document.createElement('img');
-        img.setAttribute('src', CONFIG.deleteButtonIcon);
-        button.appendChild(img);
+		let img = document.createElement('img');
+		img.setAttribute('src', CONFIG.deleteButtonIcon);
+		button.appendChild(img);
 
-        element.querySelector('.board_footer').insertAdjacentElement('beforeend', button);
+		element.querySelector('.board_footer').insertAdjacentElement('beforeend', button);
 
-        button.addEventListener('click', (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            this.emit('deleteItem', element.dataset.href);
-        });
-    }
+		button.addEventListener('click', (event) => {
+			event.preventDefault();
+			event.stopPropagation();
+			this.emit('deleteItem', element.dataset.href);
+		});
+	}
 
-    /**
+	/**
      * render error page
      */
-    renderErrorPage() {
-        this.show(this.find('.error'));
-        this.hide(this.findId('main-container'));
-    }
+	renderErrorPage() {
+		this.show(this.find('.error'));
+		this.hide(this.findId('main-container'));
+	}
 
 	/**
      * render template page

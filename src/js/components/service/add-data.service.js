@@ -30,16 +30,16 @@ export class AddDataService extends EventEmiter {
 		let ajax = new Ajax(CONFIG.serverJsonUsers, 'getUsersList');
 
 		ajax.on('getUsersList', data => {
-            this._users = data;
-            this.emit('getUsersData');
-        });
+			this._users = data;
+			this.emit('getUsersData');
+		});
 
-        this.on('postNewUser', () => {
-            ajax.get();
-        });
+		this.on('postNewUser', () => {
+			ajax.get();
+		});
 
-        ajax.get();
-    }
+		ajax.get();
+	}
 
 	/**
      * post data
@@ -50,7 +50,7 @@ export class AddDataService extends EventEmiter {
 		this._ajax = new Ajax(url, eventName, false);
 		this._ajax.post(this._formData);
 		this.emit('renewedData');
-        this.clearForms();
+		this.clearForms();
 	}
 
 	/**
@@ -62,12 +62,12 @@ export class AddDataService extends EventEmiter {
 		this.findId('title_loaded-page').innerHTML = text;
 		this.show(page);
 
-        pageClass && this.hide(this.find(pageClass));
+		pageClass && this.hide(this.find(pageClass));
 
 		setTimeout(() => {
 			this.hide(page);
 			if (window.location.hash === '#registration') {
-                window.history.back();
+				window.history.back();
 			}
 		}, 2500);
 	}
@@ -83,7 +83,7 @@ export class AddDataService extends EventEmiter {
 
 		this._forms.forEach(item => {
 			let validateButton = item.getElementsByClassName('btn-validate')[0];
-            this.addValidator(item);
+			this.addValidator(item);
 
 			validateButton.addEventListener('click', (event) => {
 				event.preventDefault();
@@ -92,23 +92,23 @@ export class AddDataService extends EventEmiter {
 
 		// clear forms when hash changed
 		window.addEventListener('hashchange', () => {
-            this.clearForms();
+			this.clearForms();
 		});
 	}
 
 	clearForms() {
-        this._forms.forEach(item => {
-            item.querySelectorAll('input').forEach(elem => elem.value = '');
-            item.querySelectorAll('textarea').forEach(elem => elem.value = '');
-            item.querySelectorAll('select').forEach(elem => elem.selectedIndex = 0);
+		this._forms.forEach(item => {
+			item.querySelectorAll('input').forEach(elem => elem.value = '');
+			item.querySelectorAll('textarea').forEach(elem => elem.value = '');
+			item.querySelectorAll('select').forEach(elem => elem.selectedIndex = 0);
 
-            item.querySelectorAll('.validation-error').forEach(elem => elem.classList.remove('validation-error'));
-            item.classList.remove('validation-error');
-            item.querySelectorAll('.error-list').forEach(elem => {
-                elem.style.height = 0;
-                elem.innerHTML = '';
-            });
-        })
+			item.querySelectorAll('.validation-error').forEach(elem => elem.classList.remove('validation-error'));
+			item.classList.remove('validation-error');
+			item.querySelectorAll('.error-list').forEach(elem => {
+				elem.style.height = 0;
+				elem.innerHTML = '';
+			});
+		});
 	}
 
 	/**
@@ -118,9 +118,9 @@ export class AddDataService extends EventEmiter {
 	addValidator(form) {
 		switch (form.id) {
 		case 'form-add-product':
-            let validatorProduct = new ValidatorView();
-            validatorProduct.validateProductForm(form.id);
-            validatorProduct.on('validatedForm', isFormValid => {
+			let validatorProduct = new ValidatorView();
+			validatorProduct.validateProductForm(form.id);
+			validatorProduct.on('validatedForm', isFormValid => {
 				if (isFormValid) {
 					this.createProductData();
 					this.codeProductImage();
@@ -128,33 +128,33 @@ export class AddDataService extends EventEmiter {
 			});
 			break;
 		case 'user_registration':
-            let validatorReg = new ValidatorView();
-            validatorReg.validateRegForm(form.id);
-            validatorReg.on('validatedForm', isFormValid => {
-                if (isFormValid) {
+			let validatorReg = new ValidatorView();
+			validatorReg.validateRegForm(form.id);
+			validatorReg.on('validatedForm', isFormValid => {
+				if (isFormValid) {
 					this.createUserData();
 				}
 			});
 			break;
 		case 'user_enter':
-            let validatorEnter = null;
+			let validatorEnter = null;
 			this.on('getUsersData', () => {
-			    let user = null;
-			    // make singleton to don't call validation events twice
-			    if (validatorEnter === null) {
-                    validatorEnter = new ValidatorView();
-                    validatorEnter.validateEnterForm(this.getEnterFormData(), this._users);
-                    validatorEnter.on('getUserData', data => {
-                        user = data;
-                    });
-                    validatorEnter.on('validatedForm', isFormValid => {
-                        if (isFormValid) {
-                            this.emit('enterUser', user);
-                        }
-                    });
+				let user = null;
+				// make singleton to don't call validation events twice
+				if (validatorEnter === null) {
+					validatorEnter = new ValidatorView();
+					validatorEnter.validateEnterForm(this.getEnterFormData(), this._users);
+					validatorEnter.on('getUserData', data => {
+						user = data;
+					});
+					validatorEnter.on('validatedForm', isFormValid => {
+						if (isFormValid) {
+							this.emit('enterUser', user);
+						}
+					});
 
 				} else {
-                    validatorEnter.setUsers(this._users);
+					validatorEnter.setUsers(this._users);
 				}
 			});
 			break;
@@ -162,36 +162,36 @@ export class AddDataService extends EventEmiter {
 	}
 
 	getEnterFormData() {
-        return {
-            'login': this.findId('user_login'),
-            'loginErr': this.findId('user_login-error'),
-            'password': this.findId('user_password'),
-            'passwordErr': this.findId('user_password-error'),
-            'button': this.findId('user_btn-enter')
-        };
-    }
+		return {
+			'login': this.findId('user_login'),
+			'loginErr': this.findId('user_login-error'),
+			'password': this.findId('user_password'),
+			'passwordErr': this.findId('user_password-error'),
+			'button': this.findId('user_btn-enter')
+		};
+	}
 
-    createUserData() {
-        this._formData = {
-            'login': this.findId('reg_login').value.trim(),
-            'password': this.findId('reg_password').value,
-            'email': this.findId('reg_email').value.trim(),
-            'date': Date.now()
-        };
+	createUserData() {
+		this._formData = {
+			'login': this.findId('reg_login').value.trim(),
+			'password': this.findId('reg_password').value,
+			'email': this.findId('reg_email').value.trim(),
+			'date': Date.now()
+		};
 
-        this.postData(CONFIG.serverJsonUsers, 'postNewUser');
-        this.emit('postNewUser');
-        this.showSuccessfulPage('Вы успешно зарегистрировались.', '.user_registration');
-    }
+		this.postData(CONFIG.serverJsonUsers, 'postNewUser');
+		this.emit('postNewUser');
+		this.showSuccessfulPage('Вы успешно зарегистрировались.', '.user_registration');
+	}
 
 
-    /**
+	/**
      * collect product's data
      */
 	createProductData() {
 		let userId = null;
-        if (localStorage.getItem(CONFIG.storageUserKey)) {
-            userId = localStorage.getItem(CONFIG.storageUserKey);
+		if (localStorage.getItem(CONFIG.storageUserKey)) {
+			userId = localStorage.getItem(CONFIG.storageUserKey);
 		}
 
 		this._formData = {

@@ -17,12 +17,12 @@ export class Required extends ValidatorList {
 }
 
 export class Repeated extends ValidatorList {
-    constructor () {
-        super('Пароль не совпадает');
-    }
-    test(value) {
-        return value === document.getElementById('reg_password').value;
-    }
+	constructor () {
+		super('Пароль не совпадает');
+	}
+	test(value) {
+		return value === document.getElementById('reg_password').value;
+	}
 }
 
 export class MinLength extends ValidatorList {

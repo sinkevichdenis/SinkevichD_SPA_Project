@@ -69,7 +69,7 @@ export class Ajax extends  EventEmiter {
 			.catch(error => console.error(error));
 	}
 
-    /**
+	/**
 	 * delete data from server
      * @param {string} id - id
      */
@@ -78,7 +78,7 @@ export class Ajax extends  EventEmiter {
 			method: 'DELETE',
 			headers : { 'Content-Type': 'text/html' }
 		})
-			.then(response => console.log(`${id} item deleted`))
+			.then(response => response.json())
 			.catch(error => console.error(error));
 	}
 

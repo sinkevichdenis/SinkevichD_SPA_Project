@@ -26,12 +26,12 @@ class ValidatorOfElement {
 
 	init(boolean) {
 		const self = this;
-        boolean ? this._elem.addEventListener('change', this.check.bind(self))
+		boolean ? this._elem.addEventListener('change', this.check.bind(self))
 			: this._elem.addEventListener('input', this.check.bind(self));
 	}
 
 	check () {
-        let classChanger = new this._helper(this._elem, ['validation-error']);
+		let classChanger = new this._helper(this._elem, ['validation-error']);
 		const errorContainer = document.getElementById(`${this._id}-error`);
 		let text = '';
 		let stringCount = 0;
@@ -42,7 +42,7 @@ class ValidatorOfElement {
 			stringCount++;
 		});
 
-        errorContainer.innerHTML = text;
+		errorContainer.innerHTML = text;
 		if (!this._isValid) {
 			classChanger.addClass();
 			errorContainer.style.height = stringCount * 23 + 'px';
@@ -58,11 +58,11 @@ class ValidatorOfElement {
 	getValidation() {
 		let isValid = [];
 
-        this._validators.forEach((item) => {
+		this._validators.forEach((item) => {
 			let validator = new ValidatorList[item]();
 			isValid.push(this.testValidator(validator));
 		});
-        return !isValid.some(item => (item === false));
+		return !isValid.some(item => (item === false));
 	}
 
 	/**
