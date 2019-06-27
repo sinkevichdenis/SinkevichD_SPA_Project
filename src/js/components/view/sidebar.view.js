@@ -36,10 +36,9 @@ export class SidebarView extends  EventEmiter {
 			filter.onlyImage = this._filterForm.onlyImage.checked;
 			filter.onlyNew = this._filterForm.onlyNew.checked;
 		});
-        console.log(this._filterForm.elements[5]);
+
         this._filterForm.elements[5].addEventListener('click', () => {
 			this._filter.emit('usedFilter', filter);
-            console.log(window.location.hash);
 			if (window.location.hash === '#add') {
                 window.location.hash = '';
             } else {

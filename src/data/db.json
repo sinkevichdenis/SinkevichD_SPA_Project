@@ -216,7 +216,7 @@
       "condition": "used",
       "price": "14500 p",
       "place": "Минск",
-      "date": 1558036960232
+      "date": 1560628960232
     },
     {
       "id": "bbb",
@@ -231,7 +231,7 @@
       "condition": "new",
       "price": "25500 p",
       "place": "Брест",
-      "date": 1558136960232
+      "date": 1560728960232
     },
     {
       "id": "ccc",
@@ -246,7 +246,7 @@
       "condition": "new",
       "price": "10700 p",
       "place": "Гродно",
-      "date": 1558236960232
+      "date": 1560828960232
     },
     {
       "user": "",
@@ -260,7 +260,7 @@
       "condition": "used",
       "price": "45000 p",
       "place": "Борисов",
-      "date": 1558336960232,
+      "date": 1560928960232,
       "id": "DPMeIgR"
     },
     {
@@ -275,7 +275,7 @@
       "condition": "used",
       "price": "2000 p",
       "place": "Минск",
-      "date": 1558436960232,
+      "date": 1561128960232,
       "id": "Cwe8wX3"
     },
     {
@@ -290,7 +290,7 @@
       "condition": "new",
       "price": "10000 p",
       "place": "Гродно",
-      "date": 1558836960232,
+      "date": 1561128960232,
       "id": "BWXHUNN11"
     },
     {
@@ -305,7 +305,7 @@
       "condition": "used",
       "price": "35110 p",
       "place": "Брест",
-      "date": 1558936960232,
+      "date": 1561328960232,
       "id": "BWXHN"
     },
     {
@@ -320,7 +320,7 @@
       "condition": "used",
       "price": "10 p",
       "place": "Щучин",
-      "date": 1558936960232,
+      "date": 1561528960232,
       "id": "BWX00HUNN"
     },
     {
@@ -335,7 +335,7 @@
       "condition": "new",
       "price": "1134 p",
       "place": "Гомель",
-      "date": 1558936960232,
+      "date": 1561928960232,
       "id": "BWXH55UNN"
     }
   ],
