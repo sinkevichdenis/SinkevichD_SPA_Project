@@ -36,10 +36,15 @@ export class SidebarView extends  EventEmiter {
 			filter.onlyImage = this._filterForm.onlyImage.checked;
 			filter.onlyNew = this._filterForm.onlyNew.checked;
 		});
-
-		this._filterForm.elements[5].addEventListener('click', () => {
+        console.log(this._filterForm.elements[5]);
+        this._filterForm.elements[5].addEventListener('click', () => {
 			this._filter.emit('usedFilter', filter);
-			window.dispatchEvent(new HashChangeEvent('hashchange'));
+            console.log(window.location.hash);
+			if (window.location.hash === '#add') {
+                window.location.hash = '';
+            } else {
+                window.dispatchEvent(new HashChangeEvent('hashchange'));
+            }
 		});
 
 		this._filterForm.elements[6].addEventListener('click', () => {
