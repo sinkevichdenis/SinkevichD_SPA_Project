@@ -28,9 +28,9 @@ export class ValidatorView extends EventEmiter{
 		this._controls[3] = new ValidatorElementService('input', 'add_name', ['Required'], this._funcHelper);
 		this._controls[4] = new ValidatorElementService('input', 'add_phone', ['MinLength'], this._funcHelper);
 		this._controls[5] = new ValidatorElementService('input', 'add_price', ['Required'], this._funcHelper);
-		this._controls[6] = new ValidatorElementService('select', 'add_dir', ['Selected'], this._funcHelper, 'select');
-		this._controls[7] = new ValidatorElementService('select', 'add_subdir', ['Selected'], this._funcHelper, 'select');
-		this._controls[8] = new ValidatorElementService('select', 'add_condition', ['Selected'], this._funcHelper, 'select');
+		this._controls[6] = new ValidatorElementService('select', 'add_dir', ['Selected'], this._funcHelper);
+		this._controls[7] = new ValidatorElementService('select', 'add_subdir', ['Selected'], this._funcHelper);
+		this._controls[8] = new ValidatorElementService('select', 'add_condition', ['Selected'], this._funcHelper);
 
 		this._controls.forEach(item => {
 			this._form.registerElements(item);

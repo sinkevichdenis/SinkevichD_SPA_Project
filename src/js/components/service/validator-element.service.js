@@ -1,11 +1,11 @@
 import * as ValidatorList from './validator-list.service.js';
 
-export function ValidatorElementService(type, id, validators, helper, flag) {
+export function ValidatorElementService(type, id, validators, helper) {
 	switch (type) {
 	case 'input':
 		return new ValidatorOfElement(id, validators, helper);
 	case 'select':
-		return new ValidatorOfElement(id, validators, helper, flag);
+		return new ValidatorOfElement(id, validators, helper, type);
 	default:
 		throw new Error('Invalid form type!');
 	}

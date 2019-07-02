@@ -39,7 +39,9 @@ export class SidebarView extends  EventEmiter {
 
         this._filterForm.elements[5].addEventListener('click', () => {
 			this._filter.emit('usedFilter', filter);
-			if (window.location.hash === '#add') {
+			if (window.location.hash === '#add'
+				|| window.location.hash === '#room'
+				|| window.location.hash.includes('#search')) {
                 window.location.hash = '';
             } else {
                 window.dispatchEvent(new HashChangeEvent('hashchange'));
